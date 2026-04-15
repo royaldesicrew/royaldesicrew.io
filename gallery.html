@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Gallery - Royal Desi Crew</title>
+    <link rel="stylesheet" href="static/styles.css">
+    <link rel="stylesheet" href="static/gallery-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+    <!-- End Google Analytics -->
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="header">
+        <div class="container">
+            <div class="back-button">
+                <a href="index.html" title="Back to Home">
+                    <i class="fas fa-arrow-left"></i> Back
+                </a>
+            </div>
+            <div class="logo">
+                <i class="fas fa-star"></i> Royal Desi Crew
+            </div>
+            <nav class="nav" id="nav-menu">
+                <a href="index.html#services">Services</a>
+                <a href="gallery.html" class="active">Our Work</a>
+                <a href="index.html#packages">Pricing</a>
+                <a href="index.html#about">About</a>
+                <a href="index.html#contact">Contact</a>
+                <button class="nav-book-btn" onclick="window.location.href='index.html'; setTimeout(() => openBookingModal(), 500);">Book Now</button>
+            </nav>
+            <!-- Hamburger Menu -->
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Gallery Hero Section -->
+    <section class="gallery-hero">
+        <div class="gallery-hero-content">
+            <h1>Our Event <span class="gold">Photo Gallery</span></h1>
+            <p>Capturing magical moments from our premium events and celebrations</p>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="gallery-filter-section">
+        <div class="container">
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All Photos</button>
+                <button class="filter-btn" data-filter="wedding">Weddings</button>
+                <button class="filter-btn" data-filter="corporate">Corporate</button>
+                <button class="filter-btn" data-filter="birthday">Birthdays</button>
+                <button class="filter-btn" data-filter="celebration">Celebrations</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Gallery Grid -->
+    <section class="gallery-main">
+        <div class="container">
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- Photos will be loaded dynamically here -->
+                <div class="loading-spinner">
+                    <i class="fas fa-spinner"></i>
+                    <p>Loading photos...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox-modal">
+        <button class="lightbox-close" id="closeLightbox">&times;</button>
+        <button class="lightbox-prev" id="prevPhoto">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <div class="lightbox-image-container">
+            <img id="lightboxImage" src="" alt="Full size image">
+        </div>
+        <button class="lightbox-next" id="nextPhoto">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        <div class="lightbox-info">
+            <p id="lightboxCaption"></p>
+            <span id="lightboxCounter"></span>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Royal Desi Crew</h3>
+                    <p>Premium event management and entertainment services for all occasions.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#services">Services</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Phone: +91 9614028424</p>
+                    <p>Email: Royaldesicrewevent2017@gmail.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Royal Desi Crew. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="static/photos-loader.js"></script>
+    <script src="static/gallery-script.js"></script>
+</body>
+</html>

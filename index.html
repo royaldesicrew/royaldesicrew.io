@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royal Desi Crew - Premium Event Management</title>
+    <link rel="stylesheet" href="static/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Montserrat:wght@300;400;500;600&family=Prata&display=swap" rel="stylesheet">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+    <!-- End Google Analytics -->
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="header">
+        <div class="container">
+            <div class="logo-section">
+                <div class="logo">
+                    <img src="static/Images/logo.png" alt="Royal Desi Crew Logo" class="logo-img">
+                </div>
+            </div>
+            <nav class="nav" id="nav-menu">
+                <a href="#services">Services</a>
+                <a href="#gallery">Our Work</a>
+                <a href="#packages">Pricing</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+                <button class="nav-book-btn" onclick="openBookingModal()">Book Now</button>
+            </nav>
+            <!-- Hamburger Menu -->
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home" data-bg-index="0">
+        <!-- Background carousel container -->
+        <div class="hero-bg-carousel">
+            <div class="hero-bg-slide" style="background-image: url('static/Images/Background.png');"></div>
+            <div class="hero-bg-slide" style="background-image: url('static/Images/background%20image%202.jpg');"></div>
+            <div class="hero-bg-slide" style="background-image: url('static/Images/background%203.jpg');"></div>
+            <div class="hero-bg-slide" style="background-image: url('static/Images/corporate%20event1.jpeg');"></div>
+            <div class="hero-bg-slide" style="background-image: url('static/Images/Wedding.png');"></div>
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">India's Premier Luxury Event Experience Creators for <span class="gold">Bespoke Weddings & Brands</span></h1>
+            <p class="hero-subtitle">Curating experiences for elite clientele, with 500+ signature events delivered to perfection.</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" onclick="openConsultationModal()">
+                    <i class="far fa-calendar"></i> Get a free consultation
+                </button>
+                <button class="btn btn-secondary" onclick="window.open('https://wa.me/919614028424')">
+                    <i class="fab fa-whatsapp"></i> WhatsApp Us
+                </button>
+            </div>
+
+            <!-- Trust Signals -->
+            <div class="hero-trust-section">
+                <div class="trust-stats">
+                    <div class="stat-item">
+                        <span class="stat-icon">⭐</span>
+                        <span class="stat-text"><strong>4.9 Rating</strong></span>
+                    </div>
+                    <div class="stat-divider">|</div>
+                    <div class="stat-item">
+                        <span class="stat-text"><strong>500+ Events</strong> Delivered</span>
+                    </div>
+                </div>
+
+                <!-- Experience Badge -->
+                <div class="experience-badge">
+                    <span class="exp-icon">🏆</span>
+                    <span class="exp-text">8+ Years of Experience</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Modal -->
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeBookingModal()">×</span>
+            <div class="modal-form-wrapper">
+                <form class="contact-form" id="modalContactForm">
+                    <h2>Book Your Event</h2>
+                    <input type="text" name="name" placeholder="Your Name" required>
+                    <input type="email" name="email" placeholder="Your Email" required>
+                    <input type="tel" name="phone" placeholder="Phone Number" required>
+                    <select name="event_type" required>
+                        <option value="">Select Event Type</option>
+                        <option value="Wedding">Wedding</option>
+                        <option value="Corporate Event">Corporate Event</option>
+                        <option value="Birthday Party">Birthday Party</option>
+                        <option value="Anniversary">Anniversary</option>
+                        <option value="Baby Shower">Baby Shower</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <select name="package" required>
+                        <option value="">Select Package</option>
+                        <option value="Silver Package – Basic Planning">Silver Package – Basic Planning</option>
+                        <option value="Gold Package – Full Planning + Decor">Gold Package – Full Planning + Decor</option>
+                        <option value="Platinum Package – Luxury Experience">Platinum Package – Luxury Experience</option>
+                        <option value="Custom Package">Custom Package</option>
+                    </select>
+                    <textarea name="message" placeholder="Tell us about your event..." rows="5" required></textarea>
+                    <button type="submit" class="btn btn-primary">Send Inquiry</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Free Consultation Modal -->
+    <div id="consultationModal" class="modal consultation-modal">
+        <div class="modal-content consultation-content">
+            <span class="modal-close" onclick="closeConsultationModal()">×</span>
+            <div class="modal-form-wrapper">
+                <form class="consultation-form" id="consultationForm">
+                    <h2>Get Your Free Consultation</h2>
+                    <p class="form-subtitle">Let's discuss your event vision</p>
+                    <input type="text" name="name" placeholder="Your Full Name" required>
+                    <input type="email" name="email" placeholder="Your Email" required>
+                    <input type="tel" name="phone" placeholder="Phone Number" required>
+                    <select name="event_type" required>
+                        <option value="">What type of event?</option>
+                        <option value="Wedding">Wedding</option>
+                        <option value="Corporate Event">Corporate Event</option>
+                        <option value="Birthday Party">Birthday Party</option>
+                        <option value="Anniversary">Anniversary</option>
+                        <option value="Baby Shower">Baby Shower</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <textarea name="message" placeholder="Tell us about your event vision..." rows="4" required></textarea>
+                    <button type="submit" class="btn btn-consultation">Schedule Consultation</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Notification Modal -->
+    <div id="successModal" class="modal success-modal">
+        <div class="modal-content success-content">
+            <div class="success-icon">✓</div>
+            <h2 id="successTitle">Success!</h2>
+            <p id="successMessage">Thank you for your submission. We will contact you shortly.</p>
+            <button class="btn btn-primary" onclick="closeSuccessModal()">Okay</button>
+        </div>
+    </div>
+
+    <!-- Event Planning Questionnaire Modal -->
+    <div id="questionnaireModal" class="modal questionnaire-modal">
+        <div class="modal-content questionnaire-content">
+            <span class="modal-close" onclick="closeQuestionnaire()">×</span>
+            
+            <!-- Step 1: Guest Count and Details -->
+            <div id="step1" class="questionnaire-step active">
+                <h2>Let's Plan Your Perfect Event!</h2>
+                <p class="form-subtitle">Help us understand your vision</p>
+                
+                <div class="questionnaire-section">
+                    <label>How many guests are you planning for?</label>
+                    <div class="guest-options">
+                        <button class="guest-btn" onclick="selectGuests(50)">
+                            <span class="guest-icon">👥</span>
+                            <span>Up to 50</span>
+                        </button>
+                        <button class="guest-btn" onclick="selectGuests(100)">
+                            <span class="guest-icon">👥👥</span>
+                            <span>50-100</span>
+                        </button>
+                        <button class="guest-btn" onclick="selectGuests(250)">
+                            <span class="guest-icon">👥👥👥</span>
+                            <span>100-250</span>
+                        </button>
+                        <button class="guest-btn" onclick="selectGuests(500)">
+                            <span class="guest-icon">🎉</span>
+                            <span>250+</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="questionnaire-section">
+                    <label>What's important to you? (Select all that apply)</label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="preferences" value="Décor & Design"> Décor & Design</label>
+                        <label><input type="checkbox" name="preferences" value="Photography"> Photography & Videography</label>
+                        <label><input type="checkbox" name="preferences" value="Catering"> Catering</label>
+                        <label><input type="checkbox" name="preferences" value="Entertainment"> Entertainment</label>
+                        <label><input type="checkbox" name="preferences" value="Guest Management"> Guest Management</label>
+                        <label><input type="checkbox" name="preferences" value="Venue Coordination"> Venue Coordination</label>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary" onclick="goToStep(2)" style="width: 100%; margin-top: 20px;">Next →</button>
+            </div>
+
+            <!-- Step 2: Budget Selection -->
+            <div id="step2" class="questionnaire-step">
+                <h2>Budget Range</h2>
+                <p class="form-subtitle">Which budget range works best for you?</p>
+
+                <div class="budget-options">
+                    <button class="budget-btn" onclick="selectBudget('5-7')">
+                        <span class="budget-icon">💷</span>
+                        <h4>Standard</h4>
+                        <p>₹5 to ₹7 Lakhs</p>
+                        <small>Great for intimate gatherings</small>
+                    </button>
+                    <button class="budget-btn" onclick="selectBudget('12-15')">
+                        <span class="budget-icon">💎</span>
+                        <h4>Premium</h4>
+                        <p>₹12 to ₹15 Lakhs</p>
+                        <small>Full-featured events</small>
+                    </button>
+                    <button class="budget-btn" onclick="selectBudget('20-35')">
+                        <span class="budget-icon">👑</span>
+                        <h4>Luxury</h4>
+                        <p>₹20 to ₹35 Lakhs</p>
+                        <small>Exclusive & bespoke</small>
+                    </button>
+                </div>
+
+                <div style="display: flex; gap: 10px; margin-top: 20px;">
+                    <button class="btn btn-secondary" onclick="goToStep(1)" style="flex: 1;">← Back</button>
+                    <button class="btn btn-primary" onclick="goToStep(3)" style="flex: 1;">Next →</button>
+                </div>
+            </div>
+
+            <!-- Step 3: Package Recommendation -->
+            <div id="step3" class="questionnaire-step">
+                <h2>Your Perfect Package</h2>
+                <p class="form-subtitle" id="recommendationText">Based on your budget, we recommend:</p>
+
+                <div class="recommended-package" id="recommendedPackage">
+                    <div class="package-badge">✨ RECOMMENDED FOR YOU ✨</div>
+                    <h3 id="packageName">Loading...</h3>
+                    <p id="packageDesc">Loading...</p>
+                    <ul id="packageFeatures"></ul>
+                    <div class="package-price" id="packagePrice">Loading...</div>
+                </div>
+
+                <div style="margin-top: 30px; text-align: center;">
+                    <p style="margin-bottom: 20px; color: var(--light-gray);">Ready to move forward?</p>
+                    <button class="btn btn-primary whatsapp-connect" onclick="connectViaWhatsApp()" style="width: 100%; padding: 15px;">
+                        <i class="fab fa-whatsapp"></i> Connect with Us via WhatsApp
+                    </button>
+                </div>
+
+                <div style="display: flex; gap: 10px; margin-top: 15px;">
+                    <button class="btn btn-secondary" onclick="goToStep(2)" style="flex: 1;">← Back</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-header">
+                <h2><span class="gold">What We</span> Create</h2>
+                <p>From intimate celebrations to grand productions, we bring every vision to life</p>
+            </div>
+            <div class="services-grid">
+                <!-- Service 1 -->
+                <div class="service-card">
+                    <div class="service-image" style="background-image: url('static/Images/COllection/wedding-couple.jpeg'); background-size: cover; background-position: center;"></div>
+                    <h3>💍 Luxury Wedding Experiences</h3>
+                    <p>From haldi to reception, we design and execute breathtaking weddings that reflect your story and leave a lasting impression on every guest.</p>
+                    <button class="btn-outline" onclick="openQuestionnaire('Luxury Wedding')">Plan Your Wedding</button>
+                    <div class="service-trust-line">500+ Events Delivered | Trusted Since 2017 | Customized Packages Available</div>
+                </div>
+                <!-- Service 2 -->
+                <div class="service-card">
+                    <div class="service-image service-image-2" style="background-image: url('static/Images/corporate%20event1.jpeg'); background-size: cover; background-position: center;"></div>
+                    <h3>🏢 Corporate Event Experiences</h3>
+                    <p>Make your brand stand out with seamless, high-impact corporate events designed to impress clients, teams, and stakeholders.</p>
+                    <button class="btn-outline" onclick="openQuestionnaire('Corporate Event')">Get Corporate Quote</button>
+                    <div class="service-trust-line">500+ Events Delivered | Trusted Since 2017 | Customized Packages Available</div>
+                </div>
+                <!-- Service 3 -->
+                <div class="service-card">
+                    <div class="service-image service-image-3" style="background-image: url('static/Images/birthday%20party%20.png'); background-size: cover; background-position: center;"></div>
+                    <h3>🎉 Private Celebrations & Parties</h3>
+                    <p>From birthdays to anniversaries, we turn your special moments into unforgettable celebrations filled with style, energy, and joy.</p>
+                    <button class="btn-outline" onclick="openQuestionnaire('Private Celebration')">Start Planning</button>
+                    <div class="service-trust-line">500+ Events Delivered | Trusted Since 2017 | Customized Packages Available</div>
+                </div>
+                <!-- Service 4 -->
+                <div class="service-card">
+                    <div class="service-image service-image-4" style="background-image: url('static/Images/theam%20based%20party.png'); background-size: cover; background-position: center;"></div>
+                    <h3>🎨 Theme-Based Event Design</h3>
+                    <p>We create electrifying live experiences with professional production, artist coordination, and crowd-engaging performances.</p>
+                    <button class="btn-outline" onclick="openQuestionnaire('Theme-Based Event')">Book Your Show</button>
+                    <div class="service-trust-line">500+ Events Delivered | Trusted Since 2017 | Customized Packages Available</div>
+                </div>
+                <!-- Service 5 -->
+                <div class="service-card">
+                    <div class="service-image service-image-5" style="background-image: url('static/Images/kids%20birthday%20party%20.png'); background-size: cover; background-position: center;"></div>
+                    <h3>🧒 Kids Birthday Experiences</h3>
+                    <p>Bring star power to your event with access to top artists, performers, and celebrity appearances managed end-to-end.</p>
+                    <button class="btn-outline" onclick="openQuestionnaire('Kids Birthday')">Book an Artist</button>
+                    <div class="service-trust-line">500+ Events Delivered | Trusted Since 2017 | Customized Packages Available</div>
+                </div>
+                <!-- Service 6 -->
+                <div class="service-card">
+                    <div class="service-image service-image-6" style="background-image: url('static/Images/baby%20shower.png'); background-size: cover; background-position: center;"></div>
+                    <h3>👶 Elegant Baby Shower Celebrations</h3>
+                    <p>From stage design to lighting and sound, we handle every technical detail to deliver a flawless and visually stunning event.</p>
+                    <button class="btn-outline" onclick="openQuestionnaire('Baby Shower')">Explore Production</button>
+                    <div class="service-trust-line">500+ Events Delivered | Trusted Since 2017 | Customized Packages Available</div>
+                </div>
+                <!-- Service 7 -->
+                <div class="service-card">
+                    <div class="service-image service-image-7" style="background-image: url('static/Images/anniversary%20.png'); background-size: cover; background-position: center;"></div>
+                    <h3>❤️ Anniversary Celebrations</h3>
+                    <p>From stage design to lighting and sound, we handle every technical detail to deliver a flawless and visually stunning event.</p>
+                    <button class="btn-outline" onclick="openQuestionnaire('Anniversary Celebration')">Explore Production</button>
+                    <div class="service-trust-line">500+ Events Delivered | Trusted Since 2017 | Customized Packages Available</div>
+                </div>
+                <!-- Service 8 -->
+                <div class="service-card">
+                    <div class="service-image service-image-8" style="background-image: url('static/Images/school%20event%20management%20.png'); background-size: cover; background-position: center;"></div>
+                    <h3>🎓 School & Institutional Events</h3>
+                    <p>From stage design to lighting and sound, we handle every technical detail to deliver a flawless and visually stunning event.</p>
+                    <button class="btn-outline" onclick="openQuestionnaire('School Event')">Explore Production</button>
+                    <div class="service-trust-line">500+ Events Delivered | Trusted Since 2017 | Customized Packages Available</div>
+                </div>
+                <!-- Service 9 -->
+                <div class="service-card">
+                    <div class="service-image service-image-9" style="background-image: url('static/Images/retirement%20.png'); background-size: cover; background-position: center;"></div>
+                    <h3>🎖️ Retirement & Milestone Celebrations</h3>
+                    <p>From stage design to lighting and sound, we handle every technical detail to deliver a flawless and visually stunning event.</p>
+                    <button class="btn-outline" onclick="openQuestionnaire('Retirement Celebration')">Explore Production</button>
+                    <div class="service-trust-line">500+ Events Delivered | Trusted Since 2017 | Customized Packages Available</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="why-choose-us" id="why-choose">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Choose <span class="gold">Royal Desi Crew</span>?</h2>
+                <p>We're not just an event company. We're your vision's biggest champion.</p>
+            </div>
+            <div class="why-choose-grid">
+                <!-- Reason 1 -->
+                <div class="why-card">
+                    <div class="why-icon">🎯</div>
+                    <h3>Obsessive Attention to Detail</h3>
+                    <p>Every element, from lighting to catering, is curated to create a cohesive, unforgettable experience.</p>
+                </div>
+                <!-- Reason 2 -->
+                <div class="why-card">
+                    <div class="why-icon">⭐</div>
+                    <h3>Proven Track Record</h3>
+                    <p>500+ successfully executed events with a 4.9★ rating. Your event is in elite hands.</p>
+                </div>
+                <!-- Reason 3 -->
+                <div class="why-card">
+                    <div class="why-icon">🤝</div>
+                    <h3>Dedicated Event Architect</h3>
+                    <p>You get a personal event manager who understands your vision and brings it to life seamlessly.</p>
+                </div>
+                <!-- Reason 4 -->
+                <div class="why-card">
+                    <div class="why-icon">✨</div>
+                    <h3>Luxury Execution, Smart Pricing</h3>
+                    <p>Premium quality without premium costs. Customized packages fit your vision and budget.</p>
+                </div>
+                <!-- Reason 5 -->
+                <div class="why-card">
+                    <div class="why-icon">🚀</div>
+                    <h3>End-to-End Management</h3>
+                    <p>From concept to execution to post-event follow-up. We handle everything so you can celebrate.</p>
+                </div>
+                <!-- Reason 6 -->
+                <div class="why-card">
+                    <div class="why-icon">💎</div>
+                    <h3>Signature Style</h3>
+                    <p>Your event will have our signature luxury touch. It will be unmistakably exceptional.</p>
+                </div>
+            </div>
+            <div class="why-cta">
+                <p>Get a free consultation and customized event plan within 24 hours.</p>
+                <button class="btn btn-primary" onclick="openConsultationModal()">
+                    <i class="far fa-calendar"></i> Get a free consultation
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <!-- Our Signature Moments Section -->
+    <section class="signature-moments" id="gallery">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our <span class="gold">Signature Moments</span></h2>
+                <p>Explore our curated collection of exceptional events across diverse categories</p>
+            </div>
+            <div class="moments-grid">
+                <!-- Wedding Moments -->
+                <div class="moment-card wedding-card">
+                    <div class="moment-image" style="background-image: url('static/Images/COllection/wedding-couple.jpeg'); background-size: cover; background-position: center;"></div>
+                    <div class="moment-overlay">
+                        <div class="moment-content">
+                            <h3>💍 Luxury Weddings</h3>
+                            <p>Stunning wedding events crafted to perfection</p>
+                            <button class="btn btn-primary" onclick="goToGalleryFilter('weddings')">View Gallery →</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Corporate Moments -->
+                <div class="moment-card corporate-card">
+                    <div class="moment-image" style="background-image: url('static/Images/corporate%20event1.jpeg'); background-size: cover; background-position: center;"></div>
+                    <div class="moment-overlay">
+                        <div class="moment-content">
+                            <h3>🏢 Corporate Events</h3>
+                            <p>Professional events that impress</p>
+                            <button class="btn btn-primary" onclick="goToGalleryFilter('corporate')">View Gallery →</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Birthday Moments -->
+                <div class="moment-card birthday-card">
+                    <div class="moment-image" style="background-image: url('static/Images/birthday%20party%20.png'); background-size: cover; background-position: center;"></div>
+                    <div class="moment-overlay">
+                        <div class="moment-content">
+                            <h3>🎉 Birthday Celebrations</h3>
+                            <p>Joyful celebrations full of energy</p>
+                            <button class="btn btn-primary" onclick="goToGalleryFilter('birthdays')">View Gallery →</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Decor Moments -->
+                <div class="moment-card decor-card">
+                    <div class="moment-image" style="background-image: url('static/Images/theam%20based%20party.png'); background-size: cover; background-position: center;"></div>
+                    <div class="moment-overlay">
+                        <div class="moment-content">
+                            <h3>🎨 Decor & Design</h3>
+                            <p>Artistic designs and stunning visuals</p>
+                            <button class="btn btn-primary" onclick="goToGalleryFilter('decor')">View Gallery →</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="packages" id="packages">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our <span class="gold">Packages</span></h2>
+                <p>Choose the perfect package for your special event</p>
+            </div>
+            <div class="packages-grid">
+                <!-- Basic Package -->
+                <div class="package-card">
+                    <div class="package-header">
+                        <h3>Basic Package</h3>
+                        <p class="package-badge">Starter Option</p>
+                    </div>
+                    <ul class="package-features">
+                        <li><i class="fas fa-check"></i> Event Concept</li>
+                        <li><i class="fas fa-check"></i> Basic Planning</li>
+                        <li><i class="fas fa-check"></i> Vendor Contacts</li>
+                        <li><i class="fas fa-check"></i> Simple Setup</li>
+                        <li><i class="fas fa-check"></i> Event Coordination</li>
+                    </ul>
+                    <button class="btn-outline" onclick="openWhatsAppPackage('Basic Package – Starter Option')">Select Package</button>
+                </div>
+
+                <!-- Silver Package -->
+                <div class="package-card">
+                    <div class="package-header">
+                        <h3>Silver Package</h3>
+                        <p class="package-badge">Basic Planning</p>
+                    </div>
+                    <ul class="package-features">
+                        <li><i class="fas fa-check"></i> Event Concept & Planning</li>
+                        <li><i class="fas fa-check"></i> Vendor Coordination</li>
+                        <li><i class="fas fa-check"></i> Timeline Management</li>
+                        <li><i class="fas fa-check"></i> Basic Decoration Setup</li>
+                        <li><i class="fas fa-check"></i> Day-of Coordination</li>
+                    </ul>
+                    <button class="btn-outline" onclick="openWhatsAppPackage('Silver Package – Basic Planning')">Select Package</button>
+                </div>
+
+                <!-- Gold Package -->
+                <div class="package-card featured">
+                    <div class="package-badge-top">Most Popular</div>
+                    <div class="package-header">
+                        <h3>Gold Package</h3>
+                        <p class="package-badge">Full Planning + Decor</p>
+                    </div>
+                    <ul class="package-features">
+                        <li><i class="fas fa-check"></i> Complete Event Planning</li>
+                        <li><i class="fas fa-check"></i> Premium Decoration & Themes</li>
+                        <li><i class="fas fa-check"></i> Entertainment Coordination</li>
+                        <li><i class="fas fa-check"></i> Catering Management</li>
+                        <li><i class="fas fa-check"></i> Photography Coordination</li>
+                        <li><i class="fas fa-check"></i> Professional Day-of Management</li>
+                    </ul>
+                    <button class="btn-outline" onclick="openWhatsAppPackage('Gold Package – Full Planning + Decor')">Select Package</button>
+                </div>
+
+                <!-- Platinum Package -->
+                <div class="package-card">
+                    <div class="package-header">
+                        <h3>Platinum Package</h3>
+                        <p class="package-badge">Luxury Experience</p>
+                    </div>
+                    <ul class="package-features">
+                        <li><i class="fas fa-check"></i> Exclusive Luxury Planning</li>
+                        <li><i class="fas fa-check"></i> Custom Theme & Styling</li>
+                        <li><i class="fas fa-check"></i> Premium Entertainment</li>
+                        <li><i class="fas fa-check"></i> Gourmet Catering</li>
+                        <li><i class="fas fa-check"></i> Professional Photography & Videography</li>
+                        <li><i class="fas fa-check"></i> Dedicated Event Manager</li>
+                        <li><i class="fas fa-check"></i> Premium Post-Event Services</li>
+                    </ul>
+                    <button class="btn-outline" onclick="openWhatsAppPackage('Platinum Package – Luxury Experience')">Select Package</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>About <span class="gold">Royal Desi Crew</span></h2>
+                    <p>Royal Desi Crew is India's premier luxury event experience brand, specializing in curated, bespoke celebrations that transcend ordinary gatherings. We are elite event architects who transform your vision into signature moments of pure elegance.</p>
+                    <p>Our signature approach combines meticulous planning, luxury curation, and artistic execution. From intimate bespoke gatherings to grand celebrations, our team of elite professionals ensures every detail reflects our commitment to luxury and excellence.</p>
+                    <div class="about-stats">
+                        <div class="stat">
+                            <i class="fas fa-trophy"></i>
+                            <div class="stat-content">
+                                <div class="stat-number">500+</div>
+                                <div class="stat-label">Events</div>
+                            </div>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-users"></i>
+                            <div class="stat-content">
+                                <div class="stat-number">1000+</div>
+                                <div class="stat-label">Happy Clients</div>
+                            </div>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-star"></i>
+                            <div class="stat-content">
+                                <div class="stat-number">4.9</div>
+                                <div class="stat-label">Rating</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image" style="background-image: url('static/Images/about-couple.jpeg'); background-size: cover; background-position: center;"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>Trusted by Elite <span class="gold">Clientele</span></h2>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Royal Desi Crew made our wedding day absolutely magical! Every detail was perfect."</p>
+                    <div class="testimonial-author">
+                        <strong>Priya & Rahul</strong>
+                        <span>Wedding</span>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Professional, creative, and extremely organized. They handled our corporate event flawlessly."</p>
+                    <div class="testimonial-author">
+                        <strong>Amit Sharma</strong>
+                        <span>Corporate Event</span>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Best birthday party ever! The team went above and beyond to make it special."</p>
+                    <div class="testimonial-author">
+                        <strong>Neha Kapoor</strong>
+                        <span>Birthday Party</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2>Get In <span class="gold">Touch</span></h2>
+                <p>Let's discuss how we can make your event extraordinary</p>
+            </div>
+            <div class="contact-content">
+                <form class="contact-form" id="contactForm">
+                    <h2>Book Your Event</h2>
+                    <input type="text" name="user_name" placeholder="Your Name" required>
+                    <input type="email" name="user_email" placeholder="Your Email" required>
+                    <input type="tel" name="user_phone" placeholder="Phone Number" required>
+                    <select name="event_type" required>
+                        <option value="">Select Event Type</option>
+                        <option value="Wedding">Wedding</option>
+                        <option value="Corporate Event">Corporate Event</option>
+                        <option value="Birthday Party">Birthday Party</option>
+                        <option value="Anniversary">Anniversary</option>
+                        <option value="Baby Shower">Baby Shower</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <select name="package" required>
+                        <option value="">Select Package</option>
+                        <option value="Silver Package – Basic Planning">Silver Package – Basic Planning</option>
+                        <option value="Gold Package – Full Planning + Decor">Gold Package – Full Planning + Decor</option>
+                        <option value="Platinum Package – Luxury Experience">Platinum Package – Luxury Experience</option>
+                    </select>
+                    <textarea name="message" placeholder="Tell us about your event..." rows="5" required></textarea>
+                    <button type="submit" class="btn btn-primary">Send Inquiry</button>
+                </form>
+                <div class="contact-info">
+                    <div class="info-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h3>Phone</h3>
+                            <p>+91 9614028424</p>
+                            <p>+91 8170886015</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h3>Email</h3>
+                            <p>Royaldesicrewevent2017@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h3>Location</h3>
+                            <p><a href="https://maps.app.goo.gl/6CvvTQZbetufAb8t9?g_st=ac" target="_blank">View on Google Maps</a></p>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <h3>Follow Us</h3>
+                        <div class="social-icons">
+                            <a href="https://www.facebook.com/share/18Wf7t6mSo/" class="social-icon" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://www.instagram.com/invites/contact/?utm_source=ig_contact_invite&utm_medium=copy_link&utm_content=qsk0zbe" class="social-icon" target="_blank"><i class="fab fa-instagram"></i></a>
+                            <a href="https://youtube.com/@royaldesicrewevent2.0?si=U-kKXlX4Vs75ptSL" class="social-icon" target="_blank"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2017 Royal Desi Crew. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/919614028424?text=Hello%20Royal%20Desi%20Crew" class="whatsapp-btn" target="_blank">
+        <div class="cute-robot">
+            <div class="robot-message">
+                <div class="message-box">
+                    <p class="message-text">Chat with Event Expert</p>
+                </div>
+            </div>
+            
+            <!-- WhatsApp Badge -->
+            <div class="whatsapp-badge-cute">
+                <i class="fab fa-whatsapp"></i>
+            </div>
+        </div>
+    </a>
+
+    <!-- Gallery Modal - Positioned at end to not interfere with layout -->
+    <div id="galleryModal" class="modal gallery-modal">
+        <div class="modal-content gallery-modal-content">
+            <span class="modal-close" onclick="closeGalleryModal()">×</span>
+
+            <!-- Wedding Gallery Content -->
+            <div id="wedding-gallery-content" class="gallery-tab-content active">
+                <div class="section-header">
+                    <h2><span class="gold">Wedding</span> Gallery</h2>
+                    <p>Explore our finest luxury wedding moments</p>
+                </div>
+                <div class="gallery-grid" id="mainGallery">
+                <div class="gallery-item large" data-category="weddings" style="background-image: url('static/Images/COllection/wedding-couple.jpeg'); background-size: cover; background-position: center;">
+                    <div class="gallery-overlay"><div class="overlay-content"><p class="overlay-text">Wedding Moment</p></div></div>
+                </div>
+                <div class="gallery-item" data-category="weddings" style="background-image: url('static/Images/COllection/WhatsApp%20Image%202026-04-06%20at%205.47.58%20PM.jpeg'); background-size: cover; background-position: center;">
+                    <div class="gallery-overlay"><div class="overlay-content"><p class="overlay-text">Wedding Moment</p></div></div>
+                </div>
+                <div class="gallery-item" data-category="weddings" style="background-image: url('static/Images/COllection/WhatsApp%20Image%202026-04-06%20at%205.49.01%20PM.jpeg'); background-size: cover; background-position: center;">
+                    <div class="gallery-overlay"><div class="overlay-content"><p class="overlay-text">Wedding Moment</p></div></div>
+                </div>
+                <div class="gallery-item large" data-category="weddings" style="background-image: url('static/Images/COllection/WhatsApp%20Image%202026-04-06%20at%205.49.17%20PM.jpeg'); background-size: cover; background-position: center;">
+                    <div class="gallery-overlay"><div class="overlay-content"><p class="overlay-text">Wedding Moment</p></div></div>
+                </div>
+                <div class="gallery-item" data-category="weddings" style="background-image: url('static/Images/COllection/WhatsApp%20Image%202026-04-06%20at%205.50.02%20PM.jpeg'); background-size: cover; background-position: center;">
+                    <div class="gallery-overlay"><div class="overlay-content"><p class="overlay-text">Wedding Moment</p></div></div>
+                </div>
+                <div class="gallery-item large" data-category="weddings" style="background-image: url('static/Images/COllection/WhatsApp%20Image%202026-04-06%20at%205.50.04%20PM.jpeg'); background-size: cover; background-position: center;">
+                    <div class="gallery-overlay"><div class="overlay-content"><p class="overlay-text">Wedding Moment</p></div></div>
+                </div>
+                <div class="gallery-item" data-category="weddings" style="background-image: url('static/Images/COllection/WhatsApp%20Image%202026-04-06%20at%205.50.08%20PM.jpeg'); background-size: cover; background-position: center;">
+                    <div class="gallery-overlay"><div class="overlay-content"><p class="overlay-text">Wedding Moment</p></div></div>
+                </div>
+                <div class="gallery-item" data-category="weddings" style="background-image: url('static/Images/COllection/WhatsApp%20Image%202026-04-06%20at%205.50.09%20PM.jpeg'); background-size: cover; background-position: center;">
+                    <div class="gallery-overlay"><div class="overlay-content"><p class="overlay-text">Wedding Moment</p></div></div>
+                </div>
+                <div class="gallery-item large" data-category="weddings" style="background-image: url('static/Images/COllection/WhatsApp%20Image%202026-04-06%20at%205.50.15%20PM.jpeg'); background-size: cover; background-position: center;">
+                    <div class="gallery-overlay"><div class="overlay-content"><p class="overlay-text">Wedding Moment</p></div></div>
+                </div>
+                <div class="gallery-item" data-category="weddings" style="background-image: url('static/Images/COllection/WhatsApp%20Image%202026-04-06%20at%205.51.30%20PM.jpeg'); background-size: cover; background-position: center;">
+                    <div class="gallery-overlay"><div class="overlay-content"><p class="overlay-text">Wedding Moment</p></div></div>
+                </div>
+                <div class="gallery-item" data-category="weddings" style="background-image: url('static/Images/COllection/WhatsApp%20Image%202026-04-06%20at%205.53.15%20PM.jpeg'); background-size: cover; background-position: center;">
+                    <div class="gallery-overlay"><div class="overlay-content"><p class="overlay-text">Wedding Moment</p></div></div>
+                </div>
+                <div class="gallery-item large" data-category="weddings" style="background-image: url('static/Images/COllection/WhatsApp%20Image%202026-04-06%20at%205.53.18%20PM.jpeg'); background-size: cover; background-position: center;">
+                    <div class="gallery-overlay"><div class="overlay-content"><p class="overlay-text">Wedding Moment</p></div></div>
+                </div>
+                <div class="gallery-item" data-category="weddings" style="background-image: url('static/Images/COllection/WhatsApp%20Image%202026-04-06%20at%205.55.31%20PM.jpeg'); background-size: cover; background-position: center;">
+                    <div class="gallery-overlay"><div class="overlay-content"><p class="overlay-text">Wedding Moment</p></div></div>
+                </div>
+                <div class="gallery-item" data-category="weddings" style="background-image: url('static/Images/COllection/WhatsApp%20Image%202026-04-06%20at%205.55.36%20PM.jpeg'); background-size: cover; background-position: center;">
+                    <div class="gallery-overlay"><div class="overlay-content"><p class="overlay-text">Wedding Moment</p></div></div>
+                </div>
+                <div class="gallery-item large" data-category="weddings" style="background-image: url('static/Images/COllection/WhatsApp%20Image%202026-04-06%20at%205.55.38%20PM.jpeg'); background-size: cover; background-position: center;">
+                    <div class="gallery-overlay"><div class="overlay-content"><p class="overlay-text">Wedding Moment</p></div></div>
+                </div>
+                <div class="gallery-item" data-category="weddings" style="background-image: url('static/Images/COllection/WhatsApp%20Image%202026-04-06%20at%205.56.35%20PM.jpeg'); background-size: cover; background-position: center;">
+                    <div class="gallery-overlay"><div class="overlay-content"><p class="overlay-text">Wedding Moment</p></div></div>
+                </div>
+                </div>
+            </div>
+
+            <!-- Corporate Gallery Tab -->
+            <div id="corporate-gallery-content" class="gallery-tab-content">
+                <div class="empty-content">
+                    <i class="fas fa-building"></i>
+                    <h3>Coming Soon</h3>
+                    <p>Corporate event photos will be coming soon. Stay tuned!</p>
+                </div>
+            </div>
+
+            <!-- Birthday Gallery Tab -->
+            <div id="birthday-gallery-content" class="gallery-tab-content">
+                <div class="empty-content">
+                    <i class="fas fa-birthday-cake"></i>
+                    <h3>Coming Soon</h3>
+                    <p>Birthday celebration photos will be coming soon. Stay tuned!</p>
+                </div>
+            </div>
+
+            <!-- Decor Gallery Tab -->
+            <div id="decor-gallery-content" class="gallery-tab-content">
+                <div class="empty-content">
+                    <i class="fas fa-palette"></i>
+                    <h3>Coming Soon</h3>
+                    <p>Décor & design photos will be coming soon. Stay tuned!</p>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 40px;">
+                <button class="btn btn-secondary" onclick="closeGalleryModal()">← Back to Categories</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- EmailJS API is called directly from JavaScript, no library needed -->
+    <script src="static/script.js"></script>
+</body>
+</html>
