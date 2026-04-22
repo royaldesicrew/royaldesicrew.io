@@ -6,7 +6,7 @@
     <title>Royal Desi Crew - Premium Event Management</title>
     <link rel="stylesheet" href="static/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Montserrat:wght@300;400;500;600&family=Prata&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Bodoni+Moda:wght@700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
@@ -21,18 +21,21 @@
 <body>
     <!-- Header Navigation -->
     <header class="header">
-        <div class="container">
+        <div class="container container-logo">
             <div class="logo-section">
                 <div class="logo">
                     <img src="static/Images/logo.png" alt="Royal Desi Crew Logo" class="logo-img">
                 </div>
             </div>
+        </div>
+        <div class="container container-nav">
             <nav class="nav" id="nav-menu">
+                <a href="#home">Home</a>
                 <a href="#services">Services</a>
                 <a href="#gallery">Our Work</a>
                 <a href="#packages">Pricing</a>
                 <a href="#about">About</a>
-                <a href="#contact">Contact</a>
+                <a href="blog.html" target="_blank">Blog</a>
                 <button class="nav-book-btn" onclick="openBookingModal()">Book Now</button>
             </nav>
             <!-- Hamburger Menu -->
@@ -83,7 +86,7 @@
                 <!-- Experience Badge -->
                 <div class="experience-badge">
                     <span class="exp-icon">🏆</span>
-                    <span class="exp-text">8+ Years of Experience</span>
+                    <span class="exp-text">9+ Years of Experience</span>
                 </div>
             </div>
         </div>
@@ -172,21 +175,21 @@
                 <div class="questionnaire-section">
                     <label>How many guests are you planning for?</label>
                     <div class="guest-options">
-                        <button class="guest-btn" onclick="selectGuests(50)">
-                            <span class="guest-icon">👥</span>
-                            <span>Up to 50</span>
-                        </button>
                         <button class="guest-btn" onclick="selectGuests(100)">
-                            <span class="guest-icon">👥👥</span>
-                            <span>50-100</span>
+                            <span class="guest-icon">👥</span>
+                            <span>Up to 100</span>
                         </button>
                         <button class="guest-btn" onclick="selectGuests(250)">
-                            <span class="guest-icon">👥👥👥</span>
+                            <span class="guest-icon">👥👥</span>
                             <span>100-250</span>
                         </button>
                         <button class="guest-btn" onclick="selectGuests(500)">
+                            <span class="guest-icon">👥👥👥</span>
+                            <span>500</span>
+                        </button>
+                        <button class="guest-btn" onclick="selectGuests(1000)">
                             <span class="guest-icon">🎉</span>
-                            <span>250+</span>
+                            <span>500+</span>
                         </button>
                     </div>
                 </div>
@@ -194,7 +197,8 @@
                 <div class="questionnaire-section">
                     <label>What's important to you? (Select all that apply)</label>
                     <div class="checkbox-group">
-                        <label><input type="checkbox" name="preferences" value="Décor & Design"> Décor & Design</label>
+                        <label class="select-all-label"><input type="checkbox" id="selectAllPreferences" class="select-all-checkbox"> Select All</label>
+                        <label><input type="checkbox" name="preferences" value="Decor & Design"> Decor & Design</label>
                         <label><input type="checkbox" name="preferences" value="Photography"> Photography & Videography</label>
                         <label><input type="checkbox" name="preferences" value="Catering"> Catering</label>
                         <label><input type="checkbox" name="preferences" value="Entertainment"> Entertainment</label>
@@ -203,52 +207,30 @@
                     </div>
                 </div>
 
-                <button class="btn btn-primary" onclick="goToStep(2)" style="width: 100%; margin-top: 20px;">Next →</button>
-            </div>
-
-            <!-- Step 2: Budget Selection -->
-            <div id="step2" class="questionnaire-step">
-                <h2>Budget Range</h2>
-                <p class="form-subtitle">Which budget range works best for you?</p>
-
-                <div class="budget-options">
-                    <button class="budget-btn" onclick="selectBudget('5-7')">
-                        <span class="budget-icon">💷</span>
-                        <h4>Standard</h4>
-                        <p>₹5 to ₹7 Lakhs</p>
-                        <small>Great for intimate gatherings</small>
-                    </button>
-                    <button class="budget-btn" onclick="selectBudget('12-15')">
-                        <span class="budget-icon">💎</span>
-                        <h4>Premium</h4>
-                        <p>₹12 to ₹15 Lakhs</p>
-                        <small>Full-featured events</small>
-                    </button>
-                    <button class="budget-btn" onclick="selectBudget('20-35')">
-                        <span class="budget-icon">👑</span>
-                        <h4>Luxury</h4>
-                        <p>₹20 to ₹35 Lakhs</p>
-                        <small>Exclusive & bespoke</small>
-                    </button>
+                <div class="questionnaire-section">
+                    <label>What's your budget range?</label>
+                    <div class="budget-range-container">
+                        <input type="range" id="budgetSlider" min="2" max="50" value="15" class="budget-slider" oninput="updateBudgetDisplay()">
+                        <div class="budget-display">
+                            <span class="budget-label">₹<span id="budgetValue">15</span> <span id="budgetUnit">Lakhs</span></span>
+                        </div>
+                        <div class="budget-scale">
+                            <span id="budgetMin">₹2L</span>
+                            <span id="budgetMax">₹50L</span>
+                        </div>
+                    </div>
                 </div>
 
-                <div style="display: flex; gap: 10px; margin-top: 20px;">
-                    <button class="btn btn-secondary" onclick="goToStep(1)" style="flex: 1;">← Back</button>
-                    <button class="btn btn-primary" onclick="goToStep(3)" style="flex: 1;">Next →</button>
-                </div>
+                <button class="btn btn-primary" onclick="goToStep(3)" style="width: 100%; margin-top: 20px;">Next →</button>
             </div>
 
             <!-- Step 3: Package Recommendation -->
             <div id="step3" class="questionnaire-step">
                 <h2>Your Perfect Package</h2>
-                <p class="form-subtitle" id="recommendationText">Based on your budget, we recommend:</p>
+                <p class="form-subtitle" id="recommendationText">Based on your budget, we recommend the Gold Package.</p>
 
-                <div class="recommended-package" id="recommendedPackage">
-                    <div class="package-badge">✨ RECOMMENDED FOR YOU ✨</div>
-                    <h3 id="packageName">Loading...</h3>
-                    <p id="packageDesc">Loading...</p>
-                    <ul id="packageFeatures"></ul>
-                    <div class="package-price" id="packagePrice">Loading...</div>
+                <div class="packages-grid" id="packagesGrid">
+                    <!-- Packages will be populated by JavaScript -->
                 </div>
 
                 <div style="margin-top: 30px; text-align: center;">
@@ -259,7 +241,7 @@
                 </div>
 
                 <div style="display: flex; gap: 10px; margin-top: 15px;">
-                    <button class="btn btn-secondary" onclick="goToStep(2)" style="flex: 1;">← Back</button>
+                    <button class="btn btn-secondary" onclick="goToStep(1)" style="flex: 1;">← Back</button>
                 </div>
             </div>
         </div>
@@ -278,7 +260,7 @@
                     <div class="service-image" style="background-image: url('static/Images/COllection/wedding-couple.jpeg'); background-size: cover; background-position: center;"></div>
                     <h3>💍 Luxury Wedding Experiences</h3>
                     <p>From haldi to reception, we design and execute breathtaking weddings that reflect your story and leave a lasting impression on every guest.</p>
-                    <button class="btn-outline" onclick="openQuestionnaire('Luxury Wedding')">Plan Your Wedding</button>
+                    <button type="button" class="btn-outline" onclick="openQuestionnaire('Luxury Wedding')">Plan Your Wedding</button>
                     <div class="service-trust-line">500+ Events Delivered | Trusted Since 2017 | Customized Packages Available</div>
                 </div>
                 <!-- Service 2 -->
@@ -286,7 +268,7 @@
                     <div class="service-image service-image-2" style="background-image: url('static/Images/corporate%20event1.jpeg'); background-size: cover; background-position: center;"></div>
                     <h3>🏢 Corporate Event Experiences</h3>
                     <p>Make your brand stand out with seamless, high-impact corporate events designed to impress clients, teams, and stakeholders.</p>
-                    <button class="btn-outline" onclick="openQuestionnaire('Corporate Event')">Get Corporate Quote</button>
+                    <button type="button" class="btn-outline" onclick="openQuestionnaire('Corporate Event')">Get Corporate Quote</button>
                     <div class="service-trust-line">500+ Events Delivered | Trusted Since 2017 | Customized Packages Available</div>
                 </div>
                 <!-- Service 3 -->
@@ -294,7 +276,7 @@
                     <div class="service-image service-image-3" style="background-image: url('static/Images/birthday%20party%20.png'); background-size: cover; background-position: center;"></div>
                     <h3>🎉 Private Celebrations & Parties</h3>
                     <p>From birthdays to anniversaries, we turn your special moments into unforgettable celebrations filled with style, energy, and joy.</p>
-                    <button class="btn-outline" onclick="openQuestionnaire('Private Celebration')">Start Planning</button>
+                    <button type="button" class="btn-outline" onclick="openQuestionnaire('Private Celebration')">Start Planning</button>
                     <div class="service-trust-line">500+ Events Delivered | Trusted Since 2017 | Customized Packages Available</div>
                 </div>
                 <!-- Service 4 -->
@@ -302,7 +284,7 @@
                     <div class="service-image service-image-4" style="background-image: url('static/Images/theam%20based%20party.png'); background-size: cover; background-position: center;"></div>
                     <h3>🎨 Theme-Based Event Design</h3>
                     <p>We create electrifying live experiences with professional production, artist coordination, and crowd-engaging performances.</p>
-                    <button class="btn-outline" onclick="openQuestionnaire('Theme-Based Event')">Book Your Show</button>
+                    <button type="button" class="btn-outline" onclick="openQuestionnaire('Theme-Based Event')">Book Your Show</button>
                     <div class="service-trust-line">500+ Events Delivered | Trusted Since 2017 | Customized Packages Available</div>
                 </div>
                 <!-- Service 5 -->
@@ -310,7 +292,7 @@
                     <div class="service-image service-image-5" style="background-image: url('static/Images/kids%20birthday%20party%20.png'); background-size: cover; background-position: center;"></div>
                     <h3>🧒 Kids Birthday Experiences</h3>
                     <p>Bring star power to your event with access to top artists, performers, and celebrity appearances managed end-to-end.</p>
-                    <button class="btn-outline" onclick="openQuestionnaire('Kids Birthday')">Book an Artist</button>
+                    <button type="button" class="btn-outline" onclick="openQuestionnaire('Kids Birthday')">Book an Artist</button>
                     <div class="service-trust-line">500+ Events Delivered | Trusted Since 2017 | Customized Packages Available</div>
                 </div>
                 <!-- Service 6 -->
@@ -318,7 +300,7 @@
                     <div class="service-image service-image-6" style="background-image: url('static/Images/baby%20shower.png'); background-size: cover; background-position: center;"></div>
                     <h3>👶 Elegant Baby Shower Celebrations</h3>
                     <p>From stage design to lighting and sound, we handle every technical detail to deliver a flawless and visually stunning event.</p>
-                    <button class="btn-outline" onclick="openQuestionnaire('Baby Shower')">Explore Production</button>
+                    <button type="button" class="btn-outline" onclick="openQuestionnaire('Baby Shower')">Explore Production</button>
                     <div class="service-trust-line">500+ Events Delivered | Trusted Since 2017 | Customized Packages Available</div>
                 </div>
                 <!-- Service 7 -->
@@ -326,7 +308,7 @@
                     <div class="service-image service-image-7" style="background-image: url('static/Images/anniversary%20.png'); background-size: cover; background-position: center;"></div>
                     <h3>❤️ Anniversary Celebrations</h3>
                     <p>From stage design to lighting and sound, we handle every technical detail to deliver a flawless and visually stunning event.</p>
-                    <button class="btn-outline" onclick="openQuestionnaire('Anniversary Celebration')">Explore Production</button>
+                    <button type="button" class="btn-outline" onclick="openQuestionnaire('Anniversary Celebration')">Explore Production</button>
                     <div class="service-trust-line">500+ Events Delivered | Trusted Since 2017 | Customized Packages Available</div>
                 </div>
                 <!-- Service 8 -->
@@ -334,7 +316,7 @@
                     <div class="service-image service-image-8" style="background-image: url('static/Images/school%20event%20management%20.png'); background-size: cover; background-position: center;"></div>
                     <h3>🎓 School & Institutional Events</h3>
                     <p>From stage design to lighting and sound, we handle every technical detail to deliver a flawless and visually stunning event.</p>
-                    <button class="btn-outline" onclick="openQuestionnaire('School Event')">Explore Production</button>
+                    <button type="button" class="btn-outline" onclick="openQuestionnaire('School Event')">Explore Production</button>
                     <div class="service-trust-line">500+ Events Delivered | Trusted Since 2017 | Customized Packages Available</div>
                 </div>
                 <!-- Service 9 -->
@@ -342,7 +324,7 @@
                     <div class="service-image service-image-9" style="background-image: url('static/Images/retirement%20.png'); background-size: cover; background-position: center;"></div>
                     <h3>🎖️ Retirement & Milestone Celebrations</h3>
                     <p>From stage design to lighting and sound, we handle every technical detail to deliver a flawless and visually stunning event.</p>
-                    <button class="btn-outline" onclick="openQuestionnaire('Retirement Celebration')">Explore Production</button>
+                    <button type="button" class="btn-outline" onclick="openQuestionnaire('Retirement Celebration')">Explore Production</button>
                     <div class="service-trust-line">500+ Events Delivered | Trusted Since 2017 | Customized Packages Available</div>
                 </div>
             </div>
@@ -475,6 +457,7 @@
                     <div class="package-header">
                         <h3>Basic Package</h3>
                         <p class="package-badge">Starter Option</p>
+                        <p class="package-price">Below ₹5 Lakhs</p>
                     </div>
                     <ul class="package-features">
                         <li><i class="fas fa-check"></i> Event Concept</li>
@@ -491,6 +474,7 @@
                     <div class="package-header">
                         <h3>Silver Package</h3>
                         <p class="package-badge">Basic Planning</p>
+                        <p class="package-price">Upto ₹10 Lakhs</p>
                     </div>
                     <ul class="package-features">
                         <li><i class="fas fa-check"></i> Event Concept & Planning</li>
@@ -504,10 +488,10 @@
 
                 <!-- Gold Package -->
                 <div class="package-card featured">
-                    <div class="package-badge-top">Most Popular</div>
                     <div class="package-header">
                         <h3>Gold Package</h3>
                         <p class="package-badge">Full Planning + Decor</p>
+                        <p class="package-price">Upto ₹15 Lakhs</p>
                     </div>
                     <ul class="package-features">
                         <li><i class="fas fa-check"></i> Complete Event Planning</li>
@@ -525,6 +509,7 @@
                     <div class="package-header">
                         <h3>Platinum Package</h3>
                         <p class="package-badge">Luxury Experience</p>
+                        <p class="package-price">Upto ₹30 Lakhs</p>
                     </div>
                     <ul class="package-features">
                         <li><i class="fas fa-check"></i> Exclusive Luxury Planning</li>
@@ -666,7 +651,6 @@
                         <div>
                             <h3>Phone</h3>
                             <p>+91 9614028424</p>
-                            <p>+91 8170886015</p>
                         </div>
                     </div>
                     <div class="info-item">
@@ -805,7 +789,7 @@
                 <div class="empty-content">
                     <i class="fas fa-palette"></i>
                     <h3>Coming Soon</h3>
-                    <p>Décor & design photos will be coming soon. Stay tuned!</p>
+                    <p>Decor & design photos will be coming soon. Stay tuned!</p>
                 </div>
             </div>
 
