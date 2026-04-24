@@ -7,6 +7,9 @@ document.addEventListener('DOMContentLoaded', async function() {
     // Load photos
     await photosLoader.loadPhotos();
     
+    // Update Signature Moments cards with first photo from each category
+    updateSignatureMomentsCards();
+    
     // Render initial gallery
     renderGallery();
     
@@ -32,6 +35,33 @@ document.addEventListener('DOMContentLoaded', async function() {
         });
     }
 });
+
+// Update signature moments cards with first photo from each category
+function updateSignatureMomentsCards() {
+    const categories = [
+        { key: 'weddings', card: '.wedding-card' },
+        { key: 'corporate', card: '.corporate-card' },
+        { key: 'birthdays', card: '.birthday-card' },
+        { key: 'decor', card: '.decor-card' }
+    ];
+
+    categories.forEach(cat => {
+        const photos = photosLoader.filterByCategory(cat.key);
+        if (photos.length > 0) {
+            const firstPhoto = photos[0];
+            const card = document.querySelector(cat.card);
+            if (card) {
+                const momentImage = card.querySelector('.moment-image');
+                if (momentImage) {
+                    momentImage.style.backgroundImage = `url('${firstPhoto.url}')`;
+                }
+            }
+        }
+    });
+
+    // Reset filter to show all
+    photosLoader.filterByCategory('all');
+}
 
 // Render gallery grid
 function renderGallery() {

@@ -4,10 +4,35 @@ class PhotosLoader {
         this.photos = [];
         this.filteredPhotos = [];
         this.currentFilter = 'all';
-    }
-
-    // Load photos from JSON file
+        this.baseUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+            ? 'http://localhost:5000'
+            : 'https://backend-six-theta-99.vercel.app';
+    // Load photos from API (MongoDB), fallback to JSON
     async loadPhotos() {
+        try {
+            const photos = await PhotosAPI.getAll();
+            if (photos && photos.length > 0) {
+                // If it's from API, map it
+                if (photos[0]._id || photos[0].url.startsWith('http')) {
+                    this.photos = photos.map(photo => ({
+                        id: photo._id || photo.id,
+                        title: photo.title || photo.caption,
+                        url: photo.url,
+                        description: photo.description,
+                        category: this.normalizeCategory(photo.category),
+                        views: photo.views || 0,
+                        uploadedAt: photo.createdAt
+                    }));
+                    this.filteredPhotos = this.photos;
+                    console.log('✅ Loaded photos via PhotosAPI', this.photos);
+                    return this.photos;
+                }
+            }
+        } catch (error) {
+            console.warn('API unavailable, falling back to static photos:', error);
+        }
+
+        // Fallback to static JSON file
         try {
             const response = await fetch('static/photos.json');
             if (!response.ok) {
@@ -16,11 +41,23 @@ class PhotosLoader {
             const data = await response.json();
             this.photos = data.photos;
             this.filteredPhotos = this.photos;
+            console.log('✅ Loaded photos from static JSON');
             return this.photos;
         } catch (error) {
             console.error('Error loading photos:', error);
             return [];
         }
+    }
+
+    // Normalize category names for filtering
+    normalizeCategory(category) {
+        const categoryMap = {
+            'Luxury Weddings': 'weddings',
+            'Corporate Events': 'corporate',
+            'Birthday Celebrations': 'birthdays',
+            'Decor and Design': 'decor'
+        };
+        return categoryMap[category] || category;
     }
 
     // Get all photos
