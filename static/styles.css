@@ -1144,25 +1144,6 @@ section {
     transform: scale(1.08);
 }
 
-.birthday-collage {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-    gap: 2px;
-    overflow: hidden;
-}
-
-.birthday-collage-item {
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    min-height: 0;
-}
-
-.birthday-card:hover .birthday-collage {
-    transform: scale(1.03);
-}
-
 .moment-overlay {
     position: absolute;
     top: 0;
@@ -4192,12 +4173,12 @@ section {
 /* Packages Grid Responsiveness */
 @media (max-width: 1024px) {
     .packages-grid {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media (max-width: 600px) {
     .packages-grid {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: 1fr;
     }
 }
