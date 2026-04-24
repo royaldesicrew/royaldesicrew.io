@@ -1,23 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Royal Desi Crew - Premium Event Management</title>
     <link rel="stylesheet" href="static/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Bodoni+Moda:wght@700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Bodoni+Moda:wght@700;800&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-939YXDY4JB"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-939YXDY4JB');
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-939YXDY4JB');
     </script>
     <!-- End Google Analytics -->
 </head>
+
 <body>
     <!-- Header Navigation -->
     <header class="header">
@@ -59,8 +63,10 @@
         </div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
-            <h1 class="hero-title">India's Premier Luxury Event Experience Creators for <span class="gold">Bespoke Weddings & Brands</span></h1>
-            <p class="hero-subtitle">Curating experiences for elite clientele, with 500+ signature events delivered to perfection.</p>
+            <h1 class="hero-title">India's Premier Luxury Event Experience Creators for <span class="gold">Bespoke
+                    Weddings & Brands</span></h1>
+            <p class="hero-subtitle">Curating experiences for elite clientele, with 500+ signature events delivered to
+                perfection.</p>
             <div class="hero-buttons">
                 <button class="btn btn-primary" onclick="openConsultationModal()">
                     <i class="far fa-calendar"></i> Get a free consultation
@@ -114,8 +120,10 @@
                     <select name="package" required>
                         <option value="">Select Package</option>
                         <option value="Silver Package – Basic Planning">Silver Package – Basic Planning</option>
-                        <option value="Gold Package – Full Planning + Decor">Gold Package – Full Planning + Decor</option>
-                        <option value="Platinum Package – Luxury Experience">Platinum Package – Luxury Experience</option>
+                        <option value="Gold Package – Full Planning + Decor">Gold Package – Full Planning + Decor
+                        </option>
+                        <option value="Platinum Package – Luxury Experience">Platinum Package – Luxury Experience
+                        </option>
                         <option value="Custom Package">Custom Package</option>
                     </select>
                     <textarea name="message" placeholder="Tell us about your event..." rows="5" required></textarea>
@@ -145,7 +153,8 @@
                         <option value="Baby Shower">Baby Shower</option>
                         <option value="Other">Other</option>
                     </select>
-                    <textarea name="message" placeholder="Tell us about your event vision..." rows="4" required></textarea>
+                    <textarea name="message" placeholder="Tell us about your event vision..." rows="4"
+                        required></textarea>
                     <button type="submit" class="btn btn-consultation">Schedule Consultation</button>
                 </form>
             </div>
@@ -166,12 +175,12 @@
     <div id="questionnaireModal" class="modal questionnaire-modal">
         <div class="modal-content questionnaire-content">
             <span class="modal-close" onclick="closeQuestionnaire()">×</span>
-            
+
             <!-- Step 1: Guest Count and Details -->
             <div id="step1" class="questionnaire-step active">
                 <h2>Let's Plan Your Perfect Event!</h2>
                 <p class="form-subtitle">Help us understand your vision</p>
-                
+
                 <div class="questionnaire-section">
                     <label>How many guests are you planning for?</label>
                     <div class="guest-options">
@@ -197,22 +206,28 @@
                 <div class="questionnaire-section">
                     <label>What's important to you? (Select all that apply)</label>
                     <div class="checkbox-group">
-                        <label class="select-all-label"><input type="checkbox" id="selectAllPreferences" class="select-all-checkbox"> Select All</label>
+                        <label class="select-all-label"><input type="checkbox" id="selectAllPreferences"
+                                class="select-all-checkbox"> Select All</label>
                         <label><input type="checkbox" name="preferences" value="Decor & Design"> Decor & Design</label>
-                        <label><input type="checkbox" name="preferences" value="Photography"> Photography & Videography</label>
+                        <label><input type="checkbox" name="preferences" value="Photography"> Photography &
+                            Videography</label>
                         <label><input type="checkbox" name="preferences" value="Catering"> Catering</label>
                         <label><input type="checkbox" name="preferences" value="Entertainment"> Entertainment</label>
-                        <label><input type="checkbox" name="preferences" value="Guest Management"> Guest Management</label>
-                        <label><input type="checkbox" name="preferences" value="Venue Coordination"> Venue Coordination</label>
+                        <label><input type="checkbox" name="preferences" value="Guest Management"> Guest
+                            Management</label>
+                        <label><input type="checkbox" name="preferences" value="Venue Coordination"> Venue
+                            Coordination</label>
                     </div>
                 </div>
 
                 <div class="questionnaire-section">
                     <label>What's your budget range?</label>
                     <div class="budget-range-container">
-                        <input type="range" id="budgetSlider" min="2" max="50" value="15" class="budget-slider" oninput="updateBudgetDisplay()">
+                        <input type="range" id="budgetSlider" min="2" max="50" value="15" class="budget-slider"
+                            oninput="updateBudgetDisplay()">
                         <div class="budget-display">
-                            <span class="budget-label">₹<span id="budgetValue">15</span> <span id="budgetUnit">Lakhs</span></span>
+                            <span class="budget-label">₹<span id="budgetValue">15</span> <span
+                                    id="budgetUnit">Lakhs</span></span>
                         </div>
                         <div class="budget-scale">
                             <span id="budgetMin">₹2L</span>
@@ -221,13 +236,15 @@
                     </div>
                 </div>
 
-                <button class="btn btn-primary" onclick="goToStep(3)" style="width: 100%; margin-top: 20px;">Next →</button>
+                <button class="btn btn-primary" onclick="goToStep(3)" style="width: 100%; margin-top: 20px;">Next
+                    →</button>
             </div>
 
             <!-- Step 3: Package Recommendation -->
             <div id="step3" class="questionnaire-step">
                 <h2>Your Perfect Package</h2>
-                <p class="form-subtitle" id="recommendationText">Based on your budget, we recommend the Gold Package.</p>
+                <p class="form-subtitle" id="recommendationText">Based on your budget, we recommend the Gold Package.
+                </p>
 
                 <div class="packages-grid" id="packagesGrid">
                     <!-- Packages will be populated by JavaScript -->
@@ -235,7 +252,8 @@
 
                 <div style="margin-top: 30px; text-align: center;">
                     <p style="margin-bottom: 20px; color: var(--light-gray);">Ready to move forward?</p>
-                    <button class="btn btn-primary whatsapp-connect" onclick="connectViaWhatsApp()" style="width: 100%; padding: 15px;">
+                    <button class="btn btn-primary whatsapp-connect" onclick="connectViaWhatsApp()"
+                        style="width: 100%; padding: 15px;">
                         <i class="fab fa-whatsapp"></i> Connect with Us via WhatsApp
                     </button>
                 </div>
@@ -257,75 +275,120 @@
             <div class="services-grid">
                 <!-- Service 1 -->
                 <div class="service-card">
-                    <div class="service-image" style="background-image: url('static/Images/COllection/wedding-couple.jpeg'); background-size: cover; background-position: center;"></div>
+                    <div class="service-image"
+                        style="background-image: url('static/Images/Wedding/wedding-couple.jpeg'); background-size: cover; background-position: center;">
+                    </div>
                     <h3>💍 Luxury Wedding Experiences</h3>
-                    <p>From haldi to reception, we design and execute breathtaking weddings that reflect your story and leave a lasting impression on every guest.</p>
-                    <button type="button" class="btn-outline" onclick="openQuestionnaire('Luxury Wedding')">Plan Your Wedding</button>
-                    <div class="service-trust-line">500+ Events Delivered | Trusted Since 2017 | Customized Packages Available</div>
+                    <p>From haldi to reception, we design and execute breathtaking weddings that reflect your story and
+                        leave a lasting impression on every guest.</p>
+                    <button type="button" class="btn-outline" onclick="openQuestionnaire('Luxury Wedding')">Plan Your
+                        Wedding</button>
+                    <div class="service-trust-line">500+ Events Delivered | Trusted Since 2017 | Customized Packages
+                        Available</div>
                 </div>
                 <!-- Service 2 -->
                 <div class="service-card">
-                    <div class="service-image service-image-2" style="background-image: url('static/Images/corporate%20event1.jpeg'); background-size: cover; background-position: center;"></div>
+                    <div class="service-image service-image-2"
+                        style="background-image: url('static/Images/corporate%20event1.jpeg'); background-size: cover; background-position: center;">
+                    </div>
                     <h3>🏢 Corporate Event Experiences</h3>
-                    <p>Make your brand stand out with seamless, high-impact corporate events designed to impress clients, teams, and stakeholders.</p>
-                    <button type="button" class="btn-outline" onclick="openQuestionnaire('Corporate Event')">Get Corporate Quote</button>
-                    <div class="service-trust-line">500+ Events Delivered | Trusted Since 2017 | Customized Packages Available</div>
+                    <p>Make your brand stand out with seamless, high-impact corporate events designed to impress
+                        clients, teams, and stakeholders.</p>
+                    <button type="button" class="btn-outline" onclick="openQuestionnaire('Corporate Event')">Get
+                        Corporate Quote</button>
+                    <div class="service-trust-line">500+ Events Delivered | Trusted Since 2017 | Customized Packages
+                        Available</div>
                 </div>
                 <!-- Service 3 -->
                 <div class="service-card">
-                    <div class="service-image service-image-3" style="background-image: url('static/Images/birthday%20party%20.png'); background-size: cover; background-position: center;"></div>
+                    <div class="service-image service-image-3"
+                        style="background-image: url('static/Images/birthday%20party%20.png'); background-size: cover; background-position: center;">
+                    </div>
                     <h3>🎉 Private Celebrations & Parties</h3>
-                    <p>From birthdays to anniversaries, we turn your special moments into unforgettable celebrations filled with style, energy, and joy.</p>
-                    <button type="button" class="btn-outline" onclick="openQuestionnaire('Private Celebration')">Start Planning</button>
-                    <div class="service-trust-line">500+ Events Delivered | Trusted Since 2017 | Customized Packages Available</div>
+                    <p>From birthdays to anniversaries, we turn your special moments into unforgettable celebrations
+                        filled with style, energy, and joy.</p>
+                    <button type="button" class="btn-outline" onclick="openQuestionnaire('Private Celebration')">Start
+                        Planning</button>
+                    <div class="service-trust-line">500+ Events Delivered | Trusted Since 2017 | Customized Packages
+                        Available</div>
                 </div>
                 <!-- Service 4 -->
                 <div class="service-card">
-                    <div class="service-image service-image-4" style="background-image: url('static/Images/theam%20based%20party.png'); background-size: cover; background-position: center;"></div>
+                    <div class="service-image service-image-4"
+                        style="background-image: url('static/Images/theam%20based%20party.png'); background-size: cover; background-position: center;">
+                    </div>
                     <h3>🎨 Theme-Based Event Design</h3>
-                    <p>We create electrifying live experiences with professional production, artist coordination, and crowd-engaging performances.</p>
-                    <button type="button" class="btn-outline" onclick="openQuestionnaire('Theme-Based Event')">Book Your Show</button>
-                    <div class="service-trust-line">500+ Events Delivered | Trusted Since 2017 | Customized Packages Available</div>
+                    <p>We create electrifying live experiences with professional production, artist coordination, and
+                        crowd-engaging performances.</p>
+                    <button type="button" class="btn-outline" onclick="openQuestionnaire('Theme-Based Event')">Book Your
+                        Show</button>
+                    <div class="service-trust-line">500+ Events Delivered | Trusted Since 2017 | Customized Packages
+                        Available</div>
                 </div>
                 <!-- Service 5 -->
                 <div class="service-card">
-                    <div class="service-image service-image-5" style="background-image: url('static/Images/kids%20birthday%20party%20.png'); background-size: cover; background-position: center;"></div>
+                    <div class="service-image service-image-5"
+                        style="background-image: url('static/Images/kids%20birthday%20party%20.png'); background-size: cover; background-position: center;">
+                    </div>
                     <h3>🧒 Kids Birthday Experiences</h3>
-                    <p>Bring star power to your event with access to top artists, performers, and celebrity appearances managed end-to-end.</p>
-                    <button type="button" class="btn-outline" onclick="openQuestionnaire('Kids Birthday')">Book an Artist</button>
-                    <div class="service-trust-line">500+ Events Delivered | Trusted Since 2017 | Customized Packages Available</div>
+                    <p>Bring star power to your event with access to top artists, performers, and celebrity appearances
+                        managed end-to-end.</p>
+                    <button type="button" class="btn-outline" onclick="openQuestionnaire('Kids Birthday')">Book an
+                        Artist</button>
+                    <div class="service-trust-line">500+ Events Delivered | Trusted Since 2017 | Customized Packages
+                        Available</div>
                 </div>
                 <!-- Service 6 -->
                 <div class="service-card">
-                    <div class="service-image service-image-6" style="background-image: url('static/Images/baby%20shower.png'); background-size: cover; background-position: center;"></div>
+                    <div class="service-image service-image-6"
+                        style="background-image: url('static/Images/baby%20shower.png'); background-size: cover; background-position: center;">
+                    </div>
                     <h3>👶 Elegant Baby Shower Celebrations</h3>
-                    <p>From stage design to lighting and sound, we handle every technical detail to deliver a flawless and visually stunning event.</p>
-                    <button type="button" class="btn-outline" onclick="openQuestionnaire('Baby Shower')">Explore Production</button>
-                    <div class="service-trust-line">500+ Events Delivered | Trusted Since 2017 | Customized Packages Available</div>
+                    <p>From stage design to lighting and sound, we handle every technical detail to deliver a flawless
+                        and visually stunning event.</p>
+                    <button type="button" class="btn-outline" onclick="openQuestionnaire('Baby Shower')">Explore
+                        Production</button>
+                    <div class="service-trust-line">500+ Events Delivered | Trusted Since 2017 | Customized Packages
+                        Available</div>
                 </div>
                 <!-- Service 7 -->
                 <div class="service-card">
-                    <div class="service-image service-image-7" style="background-image: url('static/Images/anniversary%20.png'); background-size: cover; background-position: center;"></div>
+                    <div class="service-image service-image-7"
+                        style="background-image: url('static/Images/anniversary%20.png'); background-size: cover; background-position: center;">
+                    </div>
                     <h3>❤️ Anniversary Celebrations</h3>
-                    <p>From stage design to lighting and sound, we handle every technical detail to deliver a flawless and visually stunning event.</p>
-                    <button type="button" class="btn-outline" onclick="openQuestionnaire('Anniversary Celebration')">Explore Production</button>
-                    <div class="service-trust-line">500+ Events Delivered | Trusted Since 2017 | Customized Packages Available</div>
+                    <p>From stage design to lighting and sound, we handle every technical detail to deliver a flawless
+                        and visually stunning event.</p>
+                    <button type="button" class="btn-outline"
+                        onclick="openQuestionnaire('Anniversary Celebration')">Explore Production</button>
+                    <div class="service-trust-line">500+ Events Delivered | Trusted Since 2017 | Customized Packages
+                        Available</div>
                 </div>
                 <!-- Service 8 -->
                 <div class="service-card">
-                    <div class="service-image service-image-8" style="background-image: url('static/Images/school%20event%20management%20.png'); background-size: cover; background-position: center;"></div>
+                    <div class="service-image service-image-8"
+                        style="background-image: url('static/Images/school%20event%20management%20.png'); background-size: cover; background-position: center;">
+                    </div>
                     <h3>🎓 School & Institutional Events</h3>
-                    <p>From stage design to lighting and sound, we handle every technical detail to deliver a flawless and visually stunning event.</p>
-                    <button type="button" class="btn-outline" onclick="openQuestionnaire('School Event')">Explore Production</button>
-                    <div class="service-trust-line">500+ Events Delivered | Trusted Since 2017 | Customized Packages Available</div>
+                    <p>From stage design to lighting and sound, we handle every technical detail to deliver a flawless
+                        and visually stunning event.</p>
+                    <button type="button" class="btn-outline" onclick="openQuestionnaire('School Event')">Explore
+                        Production</button>
+                    <div class="service-trust-line">500+ Events Delivered | Trusted Since 2017 | Customized Packages
+                        Available</div>
                 </div>
                 <!-- Service 9 -->
                 <div class="service-card">
-                    <div class="service-image service-image-9" style="background-image: url('static/Images/retirement%20.png'); background-size: cover; background-position: center;"></div>
+                    <div class="service-image service-image-9"
+                        style="background-image: url('static/Images/retirement%20.png'); background-size: cover; background-position: center;">
+                    </div>
                     <h3>🎖️ Retirement & Milestone Celebrations</h3>
-                    <p>From stage design to lighting and sound, we handle every technical detail to deliver a flawless and visually stunning event.</p>
-                    <button type="button" class="btn-outline" onclick="openQuestionnaire('Retirement Celebration')">Explore Production</button>
-                    <div class="service-trust-line">500+ Events Delivered | Trusted Since 2017 | Customized Packages Available</div>
+                    <p>From stage design to lighting and sound, we handle every technical detail to deliver a flawless
+                        and visually stunning event.</p>
+                    <button type="button" class="btn-outline"
+                        onclick="openQuestionnaire('Retirement Celebration')">Explore Production</button>
+                    <div class="service-trust-line">500+ Events Delivered | Trusted Since 2017 | Customized Packages
+                        Available</div>
                 </div>
             </div>
         </div>
@@ -343,7 +406,8 @@
                 <div class="why-card">
                     <div class="why-icon">🎯</div>
                     <h3>Obsessive Attention to Detail</h3>
-                    <p>Every element, from lighting to catering, is curated to create a cohesive, unforgettable experience.</p>
+                    <p>Every element, from lighting to catering, is curated to create a cohesive, unforgettable
+                        experience.</p>
                 </div>
                 <!-- Reason 2 -->
                 <div class="why-card">
@@ -355,7 +419,8 @@
                 <div class="why-card">
                     <div class="why-icon">🤝</div>
                     <h3>Dedicated Event Architect</h3>
-                    <p>You get a personal event manager who understands your vision and brings it to life seamlessly.</p>
+                    <p>You get a personal event manager who understands your vision and brings it to life seamlessly.
+                    </p>
                 </div>
                 <!-- Reason 4 -->
                 <div class="why-card">
@@ -396,43 +461,53 @@
             <div class="moments-grid">
                 <!-- Wedding Moments -->
                 <div class="moment-card wedding-card">
-                    <div class="moment-image" style="background-image: url('static/Images/COllection/wedding-couple.jpeg'); background-size: cover; background-position: center;"></div>
+                    <div class="moment-image"
+                        style="background-image: url('static/Images/Wedding/wedding-couple.jpeg'); background-size: cover; background-position: center;">
+                    </div>
                     <div class="moment-overlay">
                         <div class="moment-content">
                             <h3>💍 Luxury Weddings</h3>
                             <p>Stunning wedding events crafted to perfection</p>
-                            <button class="btn btn-primary" onclick="goToGalleryFilter('weddings')">View Gallery →</button>
+                            <button class="btn btn-primary" onclick="goToGalleryFilter('weddings')">View Gallery
+                                →</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Corporate Moments -->
                 <div class="moment-card corporate-card">
-                    <div class="moment-image" style="background-image: url('static/Images/corporate%20event1.jpeg'); background-size: cover; background-position: center;"></div>
+                    <div class="moment-image"
+                        style="background-image: url('static/Images/Corporate%20Events/corporate%20event1.jpeg'); background-size: cover; background-position: center;">
+                    </div>
                     <div class="moment-overlay">
                         <div class="moment-content">
                             <h3>🏢 Corporate Events</h3>
                             <p>Professional events that impress</p>
-                            <button class="btn btn-primary" onclick="goToGalleryFilter('corporate')">View Gallery →</button>
+                            <button class="btn btn-primary" onclick="goToGalleryFilter('corporate')">View Gallery
+                                →</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Birthday Moments -->
                 <div class="moment-card birthday-card">
-                    <div class="moment-image" style="background-image: url('static/Images/birthday%20party%20.png'); background-size: cover; background-position: center;"></div>
+                    <div class="moment-image"
+                        style="background-image: url('static/Images/Birthday/enhanced_5.jpg'); background-size: cover; background-position: center;">
+                    </div>
                     <div class="moment-overlay">
                         <div class="moment-content">
                             <h3>🎉 Birthday Celebrations</h3>
                             <p>Joyful celebrations full of energy</p>
-                            <button class="btn btn-primary" onclick="goToGalleryFilter('birthdays')">View Gallery →</button>
+                            <button class="btn btn-primary" onclick="goToGalleryFilter('birthdays')">View Gallery
+                                →</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Decor Moments -->
                 <div class="moment-card decor-card">
-                    <div class="moment-image" style="background-image: url('static/Images/theam%20based%20party.png'); background-size: cover; background-position: center;"></div>
+                    <div class="moment-image"
+                        style="background-image: url('static/Images/Decor%20&%20Design/20211122_164932.jpg'); background-size: cover; background-position: center;">
+                    </div>
                     <div class="moment-overlay">
                         <div class="moment-content">
                             <h3>🎨 Decor & Design</h3>
@@ -466,7 +541,8 @@
                         <li><i class="fas fa-check"></i> Simple Setup</li>
                         <li><i class="fas fa-check"></i> Event Coordination</li>
                     </ul>
-                    <button class="btn-outline" onclick="openWhatsAppPackage('Basic Package – Starter Option')">Select Package</button>
+                    <button class="btn-outline" onclick="openWhatsAppPackage('Basic Package – Starter Option')">Select
+                        Package</button>
                 </div>
 
                 <!-- Silver Package -->
@@ -483,7 +559,8 @@
                         <li><i class="fas fa-check"></i> Basic Decoration Setup</li>
                         <li><i class="fas fa-check"></i> Day-of Coordination</li>
                     </ul>
-                    <button class="btn-outline" onclick="openWhatsAppPackage('Silver Package – Basic Planning')">Select Package</button>
+                    <button class="btn-outline" onclick="openWhatsAppPackage('Silver Package – Basic Planning')">Select
+                        Package</button>
                 </div>
 
                 <!-- Gold Package -->
@@ -501,7 +578,8 @@
                         <li><i class="fas fa-check"></i> Photography Coordination</li>
                         <li><i class="fas fa-check"></i> Professional Day-of Management</li>
                     </ul>
-                    <button class="btn-outline" onclick="openWhatsAppPackage('Gold Package – Full Planning + Decor')">Select Package</button>
+                    <button class="btn-outline"
+                        onclick="openWhatsAppPackage('Gold Package – Full Planning + Decor')">Select Package</button>
                 </div>
 
                 <!-- Platinum Package -->
@@ -520,7 +598,8 @@
                         <li><i class="fas fa-check"></i> Dedicated Event Manager</li>
                         <li><i class="fas fa-check"></i> Premium Post-Event Services</li>
                     </ul>
-                    <button class="btn-outline" onclick="openWhatsAppPackage('Platinum Package – Luxury Experience')">Select Package</button>
+                    <button class="btn-outline"
+                        onclick="openWhatsAppPackage('Platinum Package – Luxury Experience')">Select Package</button>
                 </div>
             </div>
         </div>
@@ -530,8 +609,12 @@
             <div class="about-content">
                 <div class="about-text">
                     <h2>About <span class="gold">Royal Desi Crew</span></h2>
-                    <p>Royal Desi Crew is India's premier luxury event experience brand, specializing in curated, bespoke celebrations that transcend ordinary gatherings. We are elite event architects who transform your vision into signature moments of pure elegance.</p>
-                    <p>Our signature approach combines meticulous planning, luxury curation, and artistic execution. From intimate bespoke gatherings to grand celebrations, our team of elite professionals ensures every detail reflects our commitment to luxury and excellence.</p>
+                    <p>Royal Desi Crew is India's premier luxury event experience brand, specializing in curated,
+                        bespoke celebrations that transcend ordinary gatherings. We are elite event architects who
+                        transform your vision into signature moments of pure elegance.</p>
+                    <p>Our signature approach combines meticulous planning, luxury curation, and artistic execution.
+                        From intimate bespoke gatherings to grand celebrations, our team of elite professionals ensures
+                        every detail reflects our commitment to luxury and excellence.</p>
                     <div class="about-stats">
                         <div class="stat">
                             <i class="fas fa-trophy"></i>
@@ -556,7 +639,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="about-image" style="background-image: url('static/Images/about-couple.jpeg'); background-size: cover; background-position: center;"></div>
+                <div class="about-image"
+                    style="background-image: url('static/Images/about-couple.jpeg'); background-size: cover; background-position: center;">
+                </div>
             </div>
         </div>
     </section>
@@ -576,7 +661,8 @@
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
-                    <p class="testimonial-text">"Royal Desi Crew made our wedding day absolutely magical! Every detail was perfect."</p>
+                    <p class="testimonial-text">"Royal Desi Crew made our wedding day absolutely magical! Every detail
+                        was perfect."</p>
                     <div class="testimonial-author">
                         <strong>Priya & Rahul</strong>
                         <span>Wedding</span>
@@ -590,7 +676,8 @@
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
-                    <p class="testimonial-text">"Professional, creative, and extremely organized. They handled our corporate event flawlessly."</p>
+                    <p class="testimonial-text">"Professional, creative, and extremely organized. They handled our
+                        corporate event flawlessly."</p>
                     <div class="testimonial-author">
                         <strong>Amit Sharma</strong>
                         <span>Corporate Event</span>
@@ -604,7 +691,8 @@
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
-                    <p class="testimonial-text">"Best birthday party ever! The team went above and beyond to make it special."</p>
+                    <p class="testimonial-text">"Best birthday party ever! The team went above and beyond to make it
+                        special."</p>
                     <div class="testimonial-author">
                         <strong>Neha Kapoor</strong>
                         <span>Birthday Party</span>
@@ -639,8 +727,10 @@
                     <select name="package" required>
                         <option value="">Select Package</option>
                         <option value="Silver Package – Basic Planning">Silver Package – Basic Planning</option>
-                        <option value="Gold Package – Full Planning + Decor">Gold Package – Full Planning + Decor</option>
-                        <option value="Platinum Package – Luxury Experience">Platinum Package – Luxury Experience</option>
+                        <option value="Gold Package – Full Planning + Decor">Gold Package – Full Planning + Decor
+                        </option>
+                        <option value="Platinum Package – Luxury Experience">Platinum Package – Luxury Experience
+                        </option>
                     </select>
                     <textarea name="message" placeholder="Tell us about your event..." rows="5" required></textarea>
                     <button type="submit" class="btn btn-primary">Send Inquiry</button>
@@ -664,15 +754,19 @@
                         <i class="fas fa-map-marker-alt"></i>
                         <div>
                             <h3>Location</h3>
-                            <p><a href="https://maps.app.goo.gl/6CvvTQZbetufAb8t9?g_st=ac" target="_blank">View on Google Maps</a></p>
+                            <p><a href="https://maps.app.goo.gl/6CvvTQZbetufAb8t9?g_st=ac" target="_blank">View on
+                                    Google Maps</a></p>
                         </div>
                     </div>
                     <div class="social-links">
                         <h3>Follow Us</h3>
                         <div class="social-icons">
-                            <a href="https://www.facebook.com/share/18Wf7t6mSo/" class="social-icon" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                            <a href="https://www.instagram.com/invites/contact/?utm_source=ig_contact_invite&utm_medium=copy_link&utm_content=qsk0zbe" class="social-icon" target="_blank"><i class="fab fa-instagram"></i></a>
-                            <a href="https://youtube.com/@royaldesicrewevent2.0?si=U-kKXlX4Vs75ptSL" class="social-icon" target="_blank"><i class="fab fa-youtube"></i></a>
+                            <a href="https://www.facebook.com/share/18Wf7t6mSo/" class="social-icon" target="_blank"><i
+                                    class="fab fa-facebook-f"></i></a>
+                            <a href="https://www.instagram.com/invites/contact/?utm_source=ig_contact_invite&utm_medium=copy_link&utm_content=qsk0zbe"
+                                class="social-icon" target="_blank"><i class="fab fa-instagram"></i></a>
+                            <a href="https://youtube.com/@royaldesicrewevent2.0?si=U-kKXlX4Vs75ptSL" class="social-icon"
+                                target="_blank"><i class="fab fa-youtube"></i></a>
                         </div>
                     </div>
                 </div>
@@ -695,7 +789,7 @@
                     <p class="message-text">Chat with Event Expert</p>
                 </div>
             </div>
-            
+
             <!-- WhatsApp Badge -->
             <div class="whatsapp-badge-cute">
                 <i class="fab fa-whatsapp"></i>
@@ -715,81 +809,368 @@
                     <p>Explore our finest luxury wedding moments</p>
                 </div>
                 <div class="gallery-grid" id="mainGallery">
-                <div class="gallery-item" data-category="weddings" style="background-image: url('static/Images/COllection/WhatsApp%20Image%202026-04-06%20at%205.55.38%20PM.jpeg'); background-size: cover; background-position: center;">
-                    <div class="gallery-overlay"><div class="overlay-content"><p class="overlay-text">Wedding Moment</p></div></div>
-                </div>
-                <div class="gallery-item" data-category="weddings" style="background-image: url('static/Images/COllection/WhatsApp%20Image%202026-04-06%20at%205.56.35%20PM.jpeg'); background-size: cover; background-position: center;">
-                    <div class="gallery-overlay"><div class="overlay-content"><p class="overlay-text">Wedding Moment</p></div></div>
-                </div>
-                <div class="gallery-item" data-category="weddings" style="background-image: url('static/Images/COllection/wedding-couple.jpeg'); background-size: cover; background-position: center;">
-                    <div class="gallery-overlay"><div class="overlay-content"><p class="overlay-text">Wedding Moment</p></div></div>
-                </div>
-                <div class="gallery-item" data-category="weddings" style="background-image: url('static/Images/COllection/WhatsApp%20Image%202026-04-06%20at%205.47.58%20PM.jpeg'); background-size: cover; background-position: center;">
-                    <div class="gallery-overlay"><div class="overlay-content"><p class="overlay-text">Wedding Moment</p></div></div>
-                </div>
-                <div class="gallery-item" data-category="weddings" style="background-image: url('static/Images/COllection/WhatsApp%20Image%202026-04-06%20at%205.49.01%20PM.jpeg'); background-size: cover; background-position: center;">
-                    <div class="gallery-overlay"><div class="overlay-content"><p class="overlay-text">Wedding Moment</p></div></div>
-                </div>
-                <div class="gallery-item" data-category="weddings" style="background-image: url('static/Images/COllection/WhatsApp%20Image%202026-04-06%20at%205.49.17%20PM.jpeg'); background-size: cover; background-position: center;">
-                    <div class="gallery-overlay"><div class="overlay-content"><p class="overlay-text">Wedding Moment</p></div></div>
-                </div>
-                <div class="gallery-item" data-category="weddings" style="background-image: url('static/Images/COllection/WhatsApp%20Image%202026-04-06%20at%205.50.02%20PM.jpeg'); background-size: cover; background-position: center;">
-                    <div class="gallery-overlay"><div class="overlay-content"><p class="overlay-text">Wedding Moment</p></div></div>
-                </div>
-                <div class="gallery-item" data-category="weddings" style="background-image: url('static/Images/COllection/WhatsApp%20Image%202026-04-06%20at%205.50.04%20PM.jpeg'); background-size: cover; background-position: center;">
-                    <div class="gallery-overlay"><div class="overlay-content"><p class="overlay-text">Wedding Moment</p></div></div>
-                </div>
-                <div class="gallery-item" data-category="weddings" style="background-image: url('static/Images/COllection/WhatsApp%20Image%202026-04-06%20at%205.50.08%20PM.jpeg'); background-size: cover; background-position: center;">
-                    <div class="gallery-overlay"><div class="overlay-content"><p class="overlay-text">Wedding Moment</p></div></div>
-                </div>
-                <div class="gallery-item" data-category="weddings" style="background-image: url('static/Images/COllection/WhatsApp%20Image%202026-04-06%20at%205.50.09%20PM.jpeg'); background-size: cover; background-position: center;">
-                    <div class="gallery-overlay"><div class="overlay-content"><p class="overlay-text">Wedding Moment</p></div></div>
-                </div>
-                <div class="gallery-item" data-category="weddings" style="background-image: url('static/Images/COllection/WhatsApp%20Image%202026-04-06%20at%205.50.15%20PM.jpeg'); background-size: cover; background-position: center;">
-                    <div class="gallery-overlay"><div class="overlay-content"><p class="overlay-text">Wedding Moment</p></div></div>
-                </div>
-                <div class="gallery-item" data-category="weddings" style="background-image: url('static/Images/COllection/WhatsApp%20Image%202026-04-06%20at%205.51.30%20PM.jpeg'); background-size: cover; background-position: center;">
-                    <div class="gallery-overlay"><div class="overlay-content"><p class="overlay-text">Wedding Moment</p></div></div>
-                </div>
-                <div class="gallery-item" data-category="weddings" style="background-image: url('static/Images/COllection/WhatsApp%20Image%202026-04-06%20at%205.53.15%20PM.jpeg'); background-size: cover; background-position: center;">
-                    <div class="gallery-overlay"><div class="overlay-content"><p class="overlay-text">Wedding Moment</p></div></div>
-                </div>
-                <div class="gallery-item" data-category="weddings" style="background-image: url('static/Images/COllection/WhatsApp%20Image%202026-04-06%20at%205.53.18%20PM.jpeg'); background-size: cover; background-position: center;">
-                    <div class="gallery-overlay"><div class="overlay-content"><p class="overlay-text">Wedding Moment</p></div></div>
-                </div>
-                <div class="gallery-item" data-category="weddings" style="background-image: url('static/Images/COllection/WhatsApp%20Image%202026-04-06%20at%205.55.31%20PM.jpeg'); background-size: cover; background-position: center;">
-                    <div class="gallery-overlay"><div class="overlay-content"><p class="overlay-text">Wedding Moment</p></div></div>
-                </div>
-                <div class="gallery-item" data-category="weddings" style="background-image: url('static/Images/COllection/WhatsApp%20Image%202026-04-06%20at%205.55.36%20PM.jpeg'); background-size: cover; background-position: center;">
-                    <div class="gallery-overlay"><div class="overlay-content"><p class="overlay-text">Wedding Moment</p></div></div>
-                </div>
+                    <div class="gallery-item" data-category="weddings"
+                        style="background-image: url('static/Images/Wedding/WhatsApp%20Image%202026-04-06%20at%205.55.38%20PM.jpeg'); background-size: cover; background-position: center;">
+                        <div class="gallery-overlay">
+                            <div class="overlay-content">
+                                <p class="overlay-text">Wedding Moment</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="weddings"
+                        style="background-image: url('static/Images/Wedding/WhatsApp%20Image%202026-04-06%20at%205.56.35%20PM.jpeg'); background-size: cover; background-position: center;">
+                        <div class="gallery-overlay">
+                            <div class="overlay-content">
+                                <p class="overlay-text">Wedding Moment</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="weddings"
+                        style="background-image: url('static/Images/Wedding/wedding-couple.jpeg'); background-size: cover; background-position: center;">
+                        <div class="gallery-overlay">
+                            <div class="overlay-content">
+                                <p class="overlay-text">Wedding Moment</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="weddings"
+                        style="background-image: url('static/Images/Wedding/WhatsApp%20Image%202026-04-06%20at%205.47.58%20PM.jpeg'); background-size: cover; background-position: center;">
+                        <div class="gallery-overlay">
+                            <div class="overlay-content">
+                                <p class="overlay-text">Wedding Moment</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="weddings"
+                        style="background-image: url('static/Images/Wedding/WhatsApp%20Image%202026-04-06%20at%205.49.01%20PM.jpeg'); background-size: cover; background-position: center;">
+                        <div class="gallery-overlay">
+                            <div class="overlay-content">
+                                <p class="overlay-text">Wedding Moment</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="weddings"
+                        style="background-image: url('static/Images/Wedding/WhatsApp%20Image%202026-04-06%20at%205.49.17%20PM.jpeg'); background-size: cover; background-position: center;">
+                        <div class="gallery-overlay">
+                            <div class="overlay-content">
+                                <p class="overlay-text">Wedding Moment</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="weddings"
+                        style="background-image: url('static/Images/Wedding/WhatsApp%20Image%202026-04-06%20at%205.50.02%20PM.jpeg'); background-size: cover; background-position: center;">
+                        <div class="gallery-overlay">
+                            <div class="overlay-content">
+                                <p class="overlay-text">Wedding Moment</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="weddings"
+                        style="background-image: url('static/Images/Wedding/WhatsApp%20Image%202026-04-06%20at%205.50.04%20PM.jpeg'); background-size: cover; background-position: center;">
+                        <div class="gallery-overlay">
+                            <div class="overlay-content">
+                                <p class="overlay-text">Wedding Moment</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="weddings"
+                        style="background-image: url('static/Images/Wedding/WhatsApp%20Image%202026-04-06%20at%205.50.08%20PM.jpeg'); background-size: cover; background-position: center;">
+                        <div class="gallery-overlay">
+                            <div class="overlay-content">
+                                <p class="overlay-text">Wedding Moment</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="weddings"
+                        style="background-image: url('static/Images/Wedding/WhatsApp%20Image%202026-04-06%20at%205.50.09%20PM.jpeg'); background-size: cover; background-position: center;">
+                        <div class="gallery-overlay">
+                            <div class="overlay-content">
+                                <p class="overlay-text">Wedding Moment</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="weddings"
+                        style="background-image: url('static/Images/Wedding/WhatsApp%20Image%202026-04-06%20at%205.50.15%20PM.jpeg'); background-size: cover; background-position: center;">
+                        <div class="gallery-overlay">
+                            <div class="overlay-content">
+                                <p class="overlay-text">Wedding Moment</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="weddings"
+                        style="background-image: url('static/Images/Wedding/WhatsApp%20Image%202026-04-06%20at%205.51.30%20PM.jpeg'); background-size: cover; background-position: center;">
+                        <div class="gallery-overlay">
+                            <div class="overlay-content">
+                                <p class="overlay-text">Wedding Moment</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="weddings"
+                        style="background-image: url('static/Images/Wedding/WhatsApp%20Image%202026-04-06%20at%205.53.15%20PM.jpeg'); background-size: cover; background-position: center;">
+                        <div class="gallery-overlay">
+                            <div class="overlay-content">
+                                <p class="overlay-text">Wedding Moment</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="weddings"
+                        style="background-image: url('static/Images/Wedding/WhatsApp%20Image%202026-04-06%20at%205.53.18%20PM.jpeg'); background-size: cover; background-position: center;">
+                        <div class="gallery-overlay">
+                            <div class="overlay-content">
+                                <p class="overlay-text">Wedding Moment</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="weddings"
+                        style="background-image: url('static/Images/Wedding/WhatsApp%20Image%202026-04-06%20at%205.55.31%20PM.jpeg'); background-size: cover; background-position: center;">
+                        <div class="gallery-overlay">
+                            <div class="overlay-content">
+                                <p class="overlay-text">Wedding Moment</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="weddings"
+                        style="background-image: url('static/Images/Wedding/WhatsApp%20Image%202026-04-06%20at%205.55.36%20PM.jpeg'); background-size: cover; background-position: center;">
+                        <div class="gallery-overlay">
+                            <div class="overlay-content">
+                                <p class="overlay-text">Wedding Moment</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <!-- Corporate Gallery Tab -->
             <div id="corporate-gallery-content" class="gallery-tab-content">
-                <div class="empty-content">
-                    <i class="fas fa-building"></i>
-                    <h3>Coming Soon</h3>
-                    <p>Corporate event photos will be coming soon. Stay tuned!</p>
+                <div class="section-header">
+                    <h2><span class="gold">Corporate</span> Gallery</h2>
+                    <p>Explore our impactful corporate event moments</p>
+                </div>
+                <div class="gallery-grid">
+                    <div class="gallery-item" data-category="corporate"
+                        style="background-image: url('static/Images/Corporate%20Events/corporate%20event1.jpeg'); background-size: cover; background-position: center;">
+                        <div class="gallery-overlay">
+                            <div class="overlay-content">
+                                <p class="overlay-text">Corporate Event</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="corporate"
+                        style="background-image: url('static/Images/Corporate%20Events/Screenshot_20260422_181748_ChatGPT.jpg'); background-size: cover; background-position: center;">
+                        <div class="gallery-overlay">
+                            <div class="overlay-content">
+                                <p class="overlay-text">Corporate Event</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="corporate"
+                        style="background-image: url('static/Images/Corporate%20Events/Screenshot_20260422_181815_ChatGPT.jpg'); background-size: cover; background-position: center;">
+                        <div class="gallery-overlay">
+                            <div class="overlay-content">
+                                <p class="overlay-text">Corporate Event</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="corporate"
+                        style="background-image: url('static/Images/Corporate%20Events/Screenshot_20260422_181827_ChatGPT.jpg'); background-size: cover; background-position: center;">
+                        <div class="gallery-overlay">
+                            <div class="overlay-content">
+                                <p class="overlay-text">Corporate Event</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="corporate"
+                        style="background-image: url('static/Images/Corporate%20Events/Screenshot_20260422_181850_ChatGPT.jpg'); background-size: cover; background-position: center;">
+                        <div class="gallery-overlay">
+                            <div class="overlay-content">
+                                <p class="overlay-text">Corporate Event</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="corporate"
+                        style="background-image: url('static/Images/Corporate%20Events/Screenshot_20260422_181944_ChatGPT.jpg'); background-size: cover; background-position: center;">
+                        <div class="gallery-overlay">
+                            <div class="overlay-content">
+                                <p class="overlay-text">Corporate Event</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="corporate"
+                        style="background-image: url('static/Images/Corporate%20Events/Screenshot_20260422_182226_ChatGPT.jpg'); background-size: cover; background-position: center;">
+                        <div class="gallery-overlay">
+                            <div class="overlay-content">
+                                <p class="overlay-text">Corporate Event</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="corporate"
+                        style="background-image: url('static/Images/Corporate%20Events/Screenshot_20260422_182242_ChatGPT.jpg'); background-size: cover; background-position: center;">
+                        <div class="gallery-overlay">
+                            <div class="overlay-content">
+                                <p class="overlay-text">Corporate Event</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="corporate"
+                        style="background-image: url('static/Images/Corporate%20Events/Screenshot_20260422_182346_ChatGPT.jpg'); background-size: cover; background-position: center;">
+                        <div class="gallery-overlay">
+                            <div class="overlay-content">
+                                <p class="overlay-text">Corporate Event</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <!-- Birthday Gallery Tab -->
             <div id="birthday-gallery-content" class="gallery-tab-content">
-                <div class="empty-content">
-                    <i class="fas fa-birthday-cake"></i>
-                    <h3>Coming Soon</h3>
-                    <p>Birthday celebration photos will be coming soon. Stay tuned!</p>
+                <div class="section-header">
+                    <h2><span class="gold">Birthday</span> Gallery</h2>
+                    <p>Explore our joyful birthday celebration moments</p>
+                </div>
+                <div class="gallery-grid">
+                    <div class="gallery-item" data-category="birthdays"
+                        style="background-image: url('static/Images/Birthday/enhanced_1.jpg'); background-size: cover; background-position: center;">
+                        <div class="gallery-overlay">
+                            <div class="overlay-content">
+                                <p class="overlay-text">Birthday Moment</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="birthdays"
+                        style="background-image: url('static/Images/Birthday/enhanced_2.jpg'); background-size: cover; background-position: center;">
+                        <div class="gallery-overlay">
+                            <div class="overlay-content">
+                                <p class="overlay-text">Birthday Moment</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="birthdays"
+                        style="background-image: url('static/Images/Birthday/enhanced_3.jpg'); background-size: cover; background-position: center;">
+                        <div class="gallery-overlay">
+                            <div class="overlay-content">
+                                <p class="overlay-text">Birthday Moment</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="birthdays"
+                        style="background-image: url('static/Images/Birthday/enhanced_4.jpg'); background-size: cover; background-position: center;">
+                        <div class="gallery-overlay">
+                            <div class="overlay-content">
+                                <p class="overlay-text">Birthday Moment</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="birthdays"
+                        style="background-image: url('static/Images/Birthday/enhanced_5.jpg'); background-size: cover; background-position: center;">
+                        <div class="gallery-overlay">
+                            <div class="overlay-content">
+                                <p class="overlay-text">Birthday Moment</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="birthdays"
+                        style="background-image: url('static/Images/Birthday/enhanced_6.jpg'); background-size: cover; background-position: center;">
+                        <div class="gallery-overlay">
+                            <div class="overlay-content">
+                                <p class="overlay-text">Birthday Moment</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="birthdays"
+                        style="background-image: url('static/Images/Birthday/IMG-20230303-WA0051.jpg'); background-size: cover; background-position: center;">
+                        <div class="gallery-overlay">
+                            <div class="overlay-content">
+                                <p class="overlay-text">Birthday Moment</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="birthdays"
+                        style="background-image: url('static/Images/Birthday/IMG-20230303-WA0052.jpg'); background-size: cover; background-position: center;">
+                        <div class="gallery-overlay">
+                            <div class="overlay-content">
+                                <p class="overlay-text">Birthday Moment</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="birthdays"
+                        style="background-image: url('static/Images/Birthday/IMG-20230303-WA0053.jpg'); background-size: cover; background-position: center;">
+                        <div class="gallery-overlay">
+                            <div class="overlay-content">
+                                <p class="overlay-text">Birthday Moment</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="birthdays"
+                        style="background-image: url('static/Images/Birthday/pexels-fliqaindia-19962115.jpg'); background-size: cover; background-position: center;">
+                        <div class="gallery-overlay">
+                            <div class="overlay-content">
+                                <p class="overlay-text">Birthday Moment</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="birthdays"
+                        style="background-image: url('static/Images/Birthday/pexels-richard-roy-148034709-10483776.jpg'); background-size: cover; background-position: center;">
+                        <div class="gallery-overlay">
+                            <div class="overlay-content">
+                                <p class="overlay-text">Birthday Moment</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="birthdays"
+                        style="background-image: url('static/Images/Birthday/pexels-suresh-photography-922908746-32827358.jpg'); background-size: cover; background-position: center;">
+                        <div class="gallery-overlay">
+                            <div class="overlay-content">
+                                <p class="overlay-text">Birthday Moment</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <!-- Decor Gallery Tab -->
             <div id="decor-gallery-content" class="gallery-tab-content">
-                <div class="empty-content">
-                    <i class="fas fa-palette"></i>
-                    <h3>Coming Soon</h3>
-                    <p>Decor & design photos will be coming soon. Stay tuned!</p>
+                <div class="section-header">
+                    <h2><span class="gold">Decor & Design</span> Gallery</h2>
+                    <p>Explore our artistic designs and stunning visuals</p>
+                </div>
+                <div class="gallery-grid">
+                    <div class="gallery-item" data-category="decor" style="background-image: url('static/Images/Decor%20&%20Design/20211121_201853.jpg'); background-size: cover; background-position: center;">
+                        <div class="gallery-overlay"><div class="overlay-content"><p class="overlay-text">Decor & Design</p></div></div>
+                    </div>
+                    <div class="gallery-item" data-category="decor" style="background-image: url('static/Images/Decor%20&%20Design/20211122_164932.jpg'); background-size: cover; background-position: center;">
+                        <div class="gallery-overlay"><div class="overlay-content"><p class="overlay-text">Decor & Design</p></div></div>
+                    </div>
+                    <div class="gallery-item" data-category="decor" style="background-image: url('static/Images/Decor%20&%20Design/FB_IMG_1631706032782.jpg'); background-size: cover; background-position: center;">
+                        <div class="gallery-overlay"><div class="overlay-content"><p class="overlay-text">Decor & Design</p></div></div>
+                    </div>
+                    <div class="gallery-item" data-category="decor" style="background-image: url('static/Images/Decor%20&%20Design/FB_IMG_1631706071462.jpg'); background-size: cover; background-position: center;">
+                        <div class="gallery-overlay"><div class="overlay-content"><p class="overlay-text">Decor & Design</p></div></div>
+                    </div>
+                    <div class="gallery-item" data-category="decor" style="background-image: url('static/Images/Decor%20&%20Design/FB_IMG_1770890920042.jpg'); background-size: cover; background-position: center;">
+                        <div class="gallery-overlay"><div class="overlay-content"><p class="overlay-text">Decor & Design</p></div></div>
+                    </div>
+                    <div class="gallery-item" data-category="decor" style="background-image: url('static/Images/Decor%20&%20Design/FB_IMG_1770890938956.jpg'); background-size: cover; background-position: center;">
+                        <div class="gallery-overlay"><div class="overlay-content"><p class="overlay-text">Decor & Design</p></div></div>
+                    </div>
+                    <div class="gallery-item" data-category="decor" style="background-image: url('static/Images/Decor%20&%20Design/IMG-20220207-WA0022.jpg'); background-size: cover; background-position: center;">
+                        <div class="gallery-overlay"><div class="overlay-content"><p class="overlay-text">Decor & Design</p></div></div>
+                    </div>
+                    <div class="gallery-item" data-category="decor" style="background-image: url('static/Images/Decor%20&%20Design/IMG-20220207-WA0024.jpg'); background-size: cover; background-position: center;">
+                        <div class="gallery-overlay"><div class="overlay-content"><p class="overlay-text">Decor & Design</p></div></div>
+                    </div>
+                    <div class="gallery-item" data-category="decor" style="background-image: url('static/Images/Decor%20&%20Design/IMG-20220207-WA0025.jpg'); background-size: cover; background-position: center;">
+                        <div class="gallery-overlay"><div class="overlay-content"><p class="overlay-text">Decor & Design</p></div></div>
+                    </div>
+                    <div class="gallery-item" data-category="decor" style="background-image: url('static/Images/Decor%20&%20Design/IMG-20220210-WA0003.jpg'); background-size: cover; background-position: center;">
+                        <div class="gallery-overlay"><div class="overlay-content"><p class="overlay-text">Decor & Design</p></div></div>
+                    </div>
+                    <div class="gallery-item" data-category="decor" style="background-image: url('static/Images/Decor%20&%20Design/IMG-20220210-WA0004.jpg'); background-size: cover; background-position: center;">
+                        <div class="gallery-overlay"><div class="overlay-content"><p class="overlay-text">Decor & Design</p></div></div>
+                    </div>
+                    <div class="gallery-item" data-category="decor" style="background-image: url('static/Images/Decor%20&%20Design/IMG-20220210-WA0005.jpg'); background-size: cover; background-position: center;">
+                        <div class="gallery-overlay"><div class="overlay-content"><p class="overlay-text">Decor & Design</p></div></div>
+                    </div>
                 </div>
             </div>
 
@@ -803,4 +1184,5 @@
     <script src="static/photos-loader.js"></script>
     <script src="static/script.js"></script>
 </body>
+
 </html>

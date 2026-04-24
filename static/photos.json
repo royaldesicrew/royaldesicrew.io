@@ -111,6 +111,90 @@
       "caption": "Event Highlights",
       "category": "celebration",
       "date": "2026-04-06"
+    },
+    {
+      "id": 17,
+      "url": "static/Images/Decor%20&%20Design/20211121_201853.jpg",
+      "caption": "Decor & Design",
+      "category": "decor",
+      "date": "2026-04-24"
+    },
+    {
+      "id": 18,
+      "url": "static/Images/Decor%20&%20Design/20211122_164932.jpg",
+      "caption": "Decor & Design",
+      "category": "decor",
+      "date": "2026-04-24"
+    },
+    {
+      "id": 19,
+      "url": "static/Images/Decor%20&%20Design/FB_IMG_1631706032782.jpg",
+      "caption": "Decor & Design",
+      "category": "decor",
+      "date": "2026-04-24"
+    },
+    {
+      "id": 20,
+      "url": "static/Images/Decor%20&%20Design/FB_IMG_1631706071462.jpg",
+      "caption": "Decor & Design",
+      "category": "decor",
+      "date": "2026-04-24"
+    },
+    {
+      "id": 21,
+      "url": "static/Images/Decor%20&%20Design/FB_IMG_1770890920042.jpg",
+      "caption": "Decor & Design",
+      "category": "decor",
+      "date": "2026-04-24"
+    },
+    {
+      "id": 22,
+      "url": "static/Images/Decor%20&%20Design/FB_IMG_1770890938956.jpg",
+      "caption": "Decor & Design",
+      "category": "decor",
+      "date": "2026-04-24"
+    },
+    {
+      "id": 23,
+      "url": "static/Images/Decor%20&%20Design/IMG-20220207-WA0022.jpg",
+      "caption": "Decor & Design",
+      "category": "decor",
+      "date": "2026-04-24"
+    },
+    {
+      "id": 24,
+      "url": "static/Images/Decor%20&%20Design/IMG-20220207-WA0024.jpg",
+      "caption": "Decor & Design",
+      "category": "decor",
+      "date": "2026-04-24"
+    },
+    {
+      "id": 25,
+      "url": "static/Images/Decor%20&%20Design/IMG-20220207-WA0025.jpg",
+      "caption": "Decor & Design",
+      "category": "decor",
+      "date": "2026-04-24"
+    },
+    {
+      "id": 26,
+      "url": "static/Images/Decor%20&%20Design/IMG-20220210-WA0003.jpg",
+      "caption": "Decor & Design",
+      "category": "decor",
+      "date": "2026-04-24"
+    },
+    {
+      "id": 27,
+      "url": "static/Images/Decor%20&%20Design/IMG-20220210-WA0004.jpg",
+      "caption": "Decor & Design",
+      "category": "decor",
+      "date": "2026-04-24"
+    },
+    {
+      "id": 28,
+      "url": "static/Images/Decor%20&%20Design/IMG-20220210-WA0005.jpg",
+      "caption": "Decor & Design",
+      "category": "decor",
+      "date": "2026-04-24"
     }
   ]
 }
