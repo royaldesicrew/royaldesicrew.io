@@ -1,0 +1,22 @@
+{
+  "name": "royal-desi-crew-monorepo",
+  "version": "1.0.0",
+  "description": "Royal Desi Crew - Admin Panel, Backend API, and Website",
+  "private": true,
+  "scripts": {
+    "start": "concurrently \"npm run backend\" \"npm run admin\"",
+    "backend": "cd backend && npm start",
+    "admin": "cd admin && npm start",
+    "backend:dev": "cd backend && npm run dev",
+    "test": "cd backend && node scripts/testAdminPortal.js",
+    "seed": "cd backend && node scripts/seedDatabase.js",
+    "migrate:photos": "cd backend && node scripts/migratePhotos.js",
+    "update:admin": "cd backend && node scripts/updateAdminCredentials.js",
+    "check:admin": "cd backend && node scripts/checkAdminCredentials.js",
+    "trouble": "cd backend && node scripts/troublelogin.js"
+  },
+  "dependencies": {
+    "concurrently": "^8.2.1"
+  },
+  "devDependencies": {}
+}

@@ -1,11 +1,7 @@
-// ===== EmailJS Configuration =====
-// Your EmailJS credentials
-const EMAILJS_SERVICE_ID = "service_b8hukgl";
-const EMAILJS_BOOKING_TEMPLATE = "template_c5e065c";
-const EMAILJS_CONSULTATION_TEMPLATE = "template_hx4pwb6";
-const ADMIN_EMAIL = "royaldesicrew@gmail.com";
-const EMAILJS_PUBLIC_KEY = "ZbITBo3U3lGnGZVXi";
-// ===== End EmailJS Configuration =====
+// Email Solutions:
+// - User notifications: Resend (API endpoint in backend)
+// - Admin notifications: FormSubmit.co (form submissions)
+// - API keys configured in backend/.env.local
 
 // Background Image Carousel for Hero Section
 const slides = [
@@ -274,144 +270,100 @@ document.addEventListener('keydown', function(event) {
     }
 });
 
-// Handle booking form submission
+// Generic form handler for all three forms
+async function handleFormSubmit(e, formType) {
+    e.preventDefault();
+    
+    const form = e.target;
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = 'Sending...';
+    submitBtn.disabled = true;
+    
+    try {
+        // Support both name="" and user_name="" formats
+        const customerName = (form.querySelector('[name="name"]') || form.querySelector('[name="user_name"]')).value;
+        const customerEmail = (form.querySelector('[name="email"]') || form.querySelector('[name="user_email"]')).value;
+        const customerPhone = (form.querySelector('[name="phone"]') || form.querySelector('[name="user_phone"]')).value;
+        const eventType = form.querySelector('[name="event_type"]').value;
+        const customerMessage = form.querySelector('[name="message"]').value;
+        
+        const packageSelect = form.querySelector('[name="package"]');
+        const packageType = packageSelect ? packageSelect.value : '';
+
+        const payload = {
+            name: customerName,
+            email: customerEmail,
+            phone: customerPhone,
+            event_type: eventType,
+            package_type: packageType,
+            message: customerMessage,
+            form_type: formType,
+            _captcha: "false" // Disable FormSubmit captcha
+        };
+
+        console.log(`📧 Sending ${formType}...`);
+        
+        // 1. Send Admin Notification via FormSubmit.co
+        const adminResponse = await fetch('https://formsubmit.co/ajax/royaldesicrew@gmail.com', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                ...payload,
+                _subject: `New ${formType} from ${customerName}`
+            })
+        });
+
+        if (!adminResponse.ok) {
+            throw new Error('Failed to send admin notification');
+        }
+
+        // 2. Send User Confirmation via Backend (Resend API)
+        try {
+            const result = await EmailsAPI.sendInquiry(payload);
+            if (!result.success) {
+                console.warn('Backend user confirmation failed:', result.error);
+            }
+        } catch (backendError) {
+            console.warn('Could not connect to backend for user confirmation:', backendError);
+        }
+        
+        console.log('✅ Form submitted successfully!');
+        showSuccessModal('✓ Inquiry Sent Successfully!', 'Thank you for your inquiry.\nWe will contact you within 24 hours.');
+        form.reset();
+        
+        if (typeof closeBookingModal === 'function') closeBookingModal();
+        if (typeof closeConsultationModal === 'function') closeConsultationModal();
+        
+    } catch (error) {
+        console.error('❌ Error:', error);
+        showSuccessModal('⚠️ Error Sending Inquiry', error.message || 'Please try again or contact us directly at +91 9614028424.');
+    } finally {
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
+    // 1. Booking Form
     const modalForm = document.getElementById('modalContactForm');
     if (modalForm) {
-        modalForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Show loading state
-            const submitBtn = this.querySelector('button[type="submit"]');
-            const originalText = submitBtn.textContent;
-            submitBtn.textContent = 'Sending...';
-            submitBtn.disabled = true;
-            
-            console.log('📧 Sending booking form via EmailJS API...');
-            
-            // Get all form values
-            const customerName = this.querySelector('input[name="name"]').value;
-            const customerEmail = this.querySelector('input[name="email"]').value;
-            const customerPhone = this.querySelector('input[name="phone"]').value;
-            const eventType = this.querySelector('select[name="event_type"]').value;
-            const packageType = this.querySelector('select[name="package"]').value;
-            const customerMessage = this.querySelector('textarea[name="message"]').value;
-            
-            // Create formatted message for ADMIN with all details
-            const adminMessage = `
-CUSTOMER DETAILS:
-Name: ${customerName}
-Email: ${customerEmail}
-Phone: ${customerPhone}
-Event Type: ${eventType}
-Package: ${packageType}
+        modalForm.addEventListener('submit', (e) => handleFormSubmit(e, 'booking'));
+    }
+    
+    // 2. Consultation Form
+    const consultationForm = document.getElementById('consultationForm');
+    if (consultationForm) {
+        consultationForm.addEventListener('submit', (e) => handleFormSubmit(e, 'consultation'));
+    }
 
-EVENT VISION:
-${customerMessage}
-            `.trim();
-            
-            // Prepare email data for EmailJS API - SEND TO ADMIN
-            const emailData = {
-                service_id: EMAILJS_SERVICE_ID,
-                template_id: EMAILJS_BOOKING_TEMPLATE,
-                user_id: EMAILJS_PUBLIC_KEY,
-                template_params: {
-                    admin_email: ADMIN_EMAIL,
-                    name: customerName,
-                    email: customerEmail,
-                    phone: customerPhone,
-                    event_type: eventType,
-                    package: packageType,
-                    message: adminMessage
-                }
-            };
-            
-            // Prepare confirmation email for CUSTOMER - Professional & Formal
-            const formalCustomerMessage = `
-Dear ${customerName},
-
-Thank you for choosing Royal Desi Crew for your upcoming event! We are honored that you have entrusted us with creating an unforgettable experience.
-
-We have successfully received your booking inquiry and appreciate the details you have shared with us:
-
-Event Type: ${eventType}
-Package Selected: ${packageType}
-
-Our team is reviewing your requirements right now, and we will contact you within 24 hours to:
-✓ Confirm all event details
-✓ Discuss pricing and packages
-✓ Answer any questions you may have
-✓ Begin planning your perfect event
-
-At Royal Desi Crew, your satisfaction is our top priority. With 500+ successfully executed events since 2017, we are confident in delivering excellence for your special occasion.
-
-We look forward to collaborating with you and bringing your vision to life!
-
-Warm regards,
-
-Royal Desi Crew
-Premium Event Management & Production
-📞 +91 9614028424
-📧 royaldesicrew@gmail.com
-
-P.S. If you have any urgent questions before we contact you, feel free to reach out directly. We're here to help!
-            `.trim();
-            
-            const customerEmailData = {
-                service_id: EMAILJS_SERVICE_ID,
-                template_id: EMAILJS_BOOKING_TEMPLATE,
-                user_id: EMAILJS_PUBLIC_KEY,
-                template_params: {
-                    admin_email: customerEmail,  // Send to customer
-                    name: customerName,
-                    email: customerEmail,
-                    phone: customerPhone,
-                    event_type: eventType,
-                    package: packageType,
-                    message: formalCustomerMessage
-                }
-            };
-            
-            console.log('Admin Email Data:', emailData);
-            console.log('Customer Email Data:', customerEmailData);
-            
-            // Send both emails in parallel
-            Promise.all([
-                fetch('https://api.emailjs.com/api/v1.0/email/send', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(emailData)
-                }).then(response => {
-                    console.log('Admin email response status:', response.status);
-                    if (response.status === 200) return { success: true };
-                    return response.json();
-                }),
-                
-                fetch('https://api.emailjs.com/api/v1.0/email/send', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(customerEmailData)
-                }).then(response => {
-                    console.log('Customer email response status:', response.status);
-                    if (response.status === 200) return { success: true };
-                    return response.json();
-                })
-            ])
-            .then(results => {
-                console.log('✓ Both emails sent successfully!', results);
-                showSuccessModal('✓ Book Successfully!', 'Thank you for your booking.\nWe will contact you within 24 hours.');
-                modalForm.reset();
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-                closeBookingModal();
-            })
-            .catch(error => {
-                console.error('❌ Complete error details:', error);
-                alert('Error: ' + error.message + '\n\nPlease contact us directly at +91 9614028424.');
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-            });
-        });
+    // 3. Main Contact Form
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => handleFormSubmit(e, 'contact'));
     }
 });
 
@@ -496,141 +448,7 @@ document.addEventListener('keydown', function(event) {
     }
 });
 
-// Handle consultation form submission
-document.addEventListener('DOMContentLoaded', function() {
-    const consultationForm = document.getElementById('consultationForm');
-    if (consultationForm) {
-        consultationForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Show loading state
-            const submitBtn = this.querySelector('button[type="submit"]');
-            const originalText = submitBtn.textContent;
-            submitBtn.textContent = 'Scheduling...';
-            submitBtn.disabled = true;
-            
-            console.log('📧 Sending consultation form via EmailJS API...');
-            
-            // Get all form values
-            const customerName = this.querySelector('input[name="name"]').value;
-            const customerEmail = this.querySelector('input[name="email"]').value;
-            const customerPhone = this.querySelector('input[name="phone"]').value;
-            const eventType = this.querySelector('select[name="event_type"]').value;
-            const customerMessage = this.querySelector('textarea[name="message"]').value;
-            
-            // Create formatted message for ADMIN with all details
-            const adminMessage = `
-CONSULTATION REQUEST DETAILS:
-Name: ${customerName}
-Email: ${customerEmail}
-Phone: ${customerPhone}
-Event Type: ${eventType}
-
-EVENT VISION:
-${customerMessage}
-            `.trim();
-            
-            // Prepare email data for EmailJS API - SEND TO ADMIN
-            const emailData = {
-                service_id: EMAILJS_SERVICE_ID,
-                template_id: EMAILJS_CONSULTATION_TEMPLATE,
-                user_id: EMAILJS_PUBLIC_KEY,
-                template_params: {
-                    admin_email: ADMIN_EMAIL,
-                    name: customerName,
-                    email: customerEmail,
-                    phone: customerPhone,
-                    event_type: eventType,
-                    message: adminMessage
-                }
-            };
-            
-            // Prepare confirmation email for CUSTOMER - Professional & Formal
-            const formalCustomerMessage = `
-Dear ${customerName},
-
-Thank you for your interest in Royal Desi Crew! We are delighted that you have chosen to schedule a consultation with us.
-
-We have successfully received your consultation request for:
-Event Type: ${eventType}
-
-Our team is incredibly excited to learn more about your vision and help bring it to life. We will contact you within 24 hours to:
-✓ Confirm your preferred consultation time
-✓ Discuss your event vision in detail
-✓ Explore customized package options
-✓ Address any questions or special requirements
-✓ Begin the journey of creating your unforgettable event
-
-As a company dedicated to excellence, we take pride in understanding our clients' unique needs and delivering exceptional results. With 500+ successfully executed events since 2017, you can be confident that you're in expert hands.
-
-We look forward to our conversation and the opportunity to work with you!
-
-Best regards,
-
-Royal Desi Crew
-Premium Event Management & Production
-📞 +91 9614028424
-📧 royaldesicrew@gmail.com
-
-P.S. If you'd like to reach out before our scheduled call, please don't hesitate to contact us. We're here to support your vision!
-            `.trim();
-            
-            const customerEmailData = {
-                service_id: EMAILJS_SERVICE_ID,
-                template_id: EMAILJS_CONSULTATION_TEMPLATE,
-                user_id: EMAILJS_PUBLIC_KEY,
-                template_params: {
-                    admin_email: customerEmail,  // Send to customer
-                    name: customerName,
-                    email: customerEmail,
-                    phone: customerPhone,
-                    event_type: eventType,
-                    message: formalCustomerMessage
-                }
-            };
-            
-            console.log('Admin Email Data:', emailData);
-            console.log('Customer Email Data:', customerEmailData);
-            
-            // Send both emails in parallel
-            Promise.all([
-                fetch('https://api.emailjs.com/api/v1.0/email/send', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(emailData)
-                }).then(response => {
-                    console.log('Admin email response status:', response.status);
-                    if (response.status === 200) return { success: true };
-                    return response.json();
-                }),
-                
-                fetch('https://api.emailjs.com/api/v1.0/email/send', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(customerEmailData)
-                }).then(response => {
-                    console.log('Customer email response status:', response.status);
-                    if (response.status === 200) return { success: true };
-                    return response.json();
-                })
-            ])
-            .then(results => {
-                console.log('✓ Both emails sent successfully!', results);
-                showSuccessModal('✓ Submit Successfully!', 'Thank you for scheduling your consultation.\nWe will reach out within 24 hours.');
-                consultationForm.reset();
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-                closeConsultationModal();
-            })
-            .catch(error => {
-                console.error('❌ Complete error details:', error);
-                alert('Error: ' + error.message + '\n\nPlease contact us directly at +91 9614028424.');
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-            });
-        });
-    }
-});
+// Handle consultation form submission handled by the unified handleFormSubmit logic
 
 // ===== Gallery Modal Functionality =====
 
@@ -950,8 +768,8 @@ document.addEventListener('change', function(event) {
     }
 });
 
-// Initialize wedding gallery on page load
-document.addEventListener('DOMContentLoaded', function() {
+// Initialize dynamic content on page load
+document.addEventListener('DOMContentLoaded', async function() {
     // Show wedding gallery and hide empty states by default
     const mainGallery = document.getElementById('mainGallery');
     if (mainGallery) {
@@ -960,4 +778,63 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.empty-gallery-state').forEach(state => {
         state.style.display = 'none';
     });
+
+    // Load dynamic photos from backend
+    try {
+        await photosLoader.loadPhotos();
+        updateSignatureMomentsFromAPI();
+        populateHomeGallery();
+    } catch (error) {
+        console.warn('Could not load dynamic content:', error);
+    }
 });
+
+// Update "Signature Moments" cards with first photo from each category from API
+function updateSignatureMomentsFromAPI() {
+    const categories = [
+        { key: 'weddings', card: '.wedding-card' },
+        { key: 'corporate', card: '.corporate-card' },
+        { key: 'birthdays', card: '.birthday-card' },
+        { key: 'decor', card: '.decor-card' }
+    ];
+
+    categories.forEach(cat => {
+        const photos = photosLoader.filterByCategory(cat.key);
+        if (photos.length > 0) {
+            const firstPhoto = photos[0];
+            const card = document.querySelector(cat.card);
+            if (card) {
+                const momentImage = card.querySelector('.moment-image');
+                if (momentImage) {
+                    momentImage.style.backgroundImage = `url('${firstPhoto.url}')`;
+                }
+            }
+        }
+    });
+
+    // Reset filter
+    photosLoader.filterByCategory('all');
+}
+
+// Populate the main gallery on home page from API
+function populateHomeGallery() {
+    const mainGallery = document.getElementById('mainGallery');
+    if (!mainGallery) return;
+
+    const photos = photosLoader.getFilteredPhotos().slice(0, 16); // Show first 16
+    if (photos.length === 0) return;
+
+    mainGallery.innerHTML = photos.map((photo, index) => {
+        const isLarge = index % 3 === 0 || index % 7 === 0;
+        return `
+            <div class="gallery-item ${isLarge ? 'large' : ''}" data-category="${photo.category}" 
+                 style="background-image: url('${photo.url}'); background-size: cover; background-position: center;">
+                <div class="gallery-overlay">
+                    <div class="overlay-content">
+                        <p class="overlay-text">${photo.title || 'Wedding Moment'}</p>
+                    </div>
+                </div>
+            </div>
+        `;
+    }).join('');
+}
