@@ -549,7 +549,8 @@ let questionnaireState = {
     serviceType: '',
     guestsCount: null,
     preferences: [],
-    budget: null
+    budget: null,
+    selectedPackage: '12-15'  // Default to Gold package
 };
 
 function openQuestionnaire(serviceType) {
@@ -558,6 +559,7 @@ function openQuestionnaire(serviceType) {
     questionnaireState.guestsCount = null;
     questionnaireState.preferences = [];
     questionnaireState.budget = null;
+    questionnaireState.selectedPackage = '12-15';
     
     const modal = document.getElementById('questionnaireModal');
     if (modal) {
@@ -591,8 +593,104 @@ function goToStep(stepNumber) {
         questionnaireState.currentStep = stepNumber;
     }
     
+    // Update budget range when going to step 2 (budget question)
+    if (stepNumber === 2) {
+        updateBudgetRangeByService();
+    }
+    
+    // Display package recommendation when going to step 3
+    if (stepNumber === 3) {
+        displayPackageRecommendation();
+    }
+    
     // Update body scroll
     document.body.style.overflow = 'hidden';
+}
+
+function updateBudgetRangeByService() {
+    const slider = document.getElementById('budgetSlider');
+    const budgetMin = document.getElementById('budgetMin');
+    const budgetMax = document.getElementById('budgetMax');
+    
+    let min, max, defaultValue;
+    
+    // Wedding has 2L to 50L range
+    if (questionnaireState.serviceType.includes('Wedding')) {
+        min = 2;
+        max = 50;
+        defaultValue = 15;
+        if (budgetMin && budgetMax) {
+            budgetMin.textContent = '₹2L';
+            budgetMax.textContent = '₹50L';
+        }
+    } else {
+        // All other services: 0.25 (25k) to 10 (10L)
+        min = 0.25;
+        max = 10;
+        defaultValue = 3;
+        if (budgetMin && budgetMax) {
+            budgetMin.textContent = '₹25K';
+            budgetMax.textContent = '₹10L';
+        }
+    }
+    
+    if (slider) {
+        slider.min = min;
+        slider.max = max;
+        slider.value = defaultValue;
+    }
+    
+    // Update display
+    updateBudgetDisplay();
+}
+
+function updateBudgetDisplay() {
+    const slider = document.getElementById('budgetSlider');
+    const budgetValue = document.getElementById('budgetValue');
+    const budgetUnit = document.getElementById('budgetUnit');
+    
+    if (slider && budgetValue) {
+        const value = parseFloat(slider.value);
+        let displayValue, packageKey;
+        
+        // Wedding budget range (2L to 50L)
+        if (questionnaireState.serviceType.includes('Wedding')) {
+            const intValue = parseInt(slider.value);
+            displayValue = intValue;
+            if (budgetUnit) budgetUnit.textContent = 'Lakhs';
+            
+            // Map slider value to package key for wedding
+            if (intValue >= 2 && intValue <= 7) {
+                packageKey = '5-7';
+            } else if (intValue >= 8 && intValue <= 19) {
+                packageKey = '12-15';
+            } else if (intValue >= 20 && intValue <= 50) {
+                packageKey = '20-35';
+            }
+        } else {
+            // Other services budget range (25K to 10L)
+            if (value <= 1) {
+                displayValue = (value * 100).toFixed(0); // Convert to K
+                if (budgetUnit) budgetUnit.textContent = 'K';
+            } else {
+                displayValue = value.toFixed(1); // Show in Lakhs
+                if (budgetUnit) budgetUnit.textContent = 'Lakhs';
+            }
+            
+            // Map to standard package ranges
+            if (value >= 0.25 && value <= 2) {
+                packageKey = 'basic';
+            } else if (value > 2 && value <= 5) {
+                packageKey = 'standard';
+            } else if (value > 5 && value <= 10) {
+                packageKey = 'premium';
+            }
+        }
+        
+        budgetValue.textContent = displayValue;
+        questionnaireState.budget = slider.value;
+        questionnaireState.selectedPackage = packageKey || '12-15';
+    }
 }
 
 function selectGuests(count) {
@@ -602,10 +700,10 @@ function selectGuests(count) {
     document.querySelectorAll('.guest-btn').forEach(btn => {
         btn.classList.remove('active');
         const btnCount = parseInt(btn.textContent);
-        if ((count === 50 && btn.textContent.includes('Up to 50')) ||
-            (count === 100 && btn.textContent.includes('50-100')) ||
+        if ((count === 100 && btn.textContent.includes('Up to 100')) ||
             (count === 250 && btn.textContent.includes('100-250')) ||
-            (count === 500 && btn.textContent.includes('250+'))) {
+            (count === 500 && btn.textContent.includes('500')) && !btn.textContent.includes('500+') ||
+            (count === 1000 && btn.textContent.includes('500+'))) {
             btn.classList.add('active');
         }
     });
@@ -683,41 +781,232 @@ function getPackageRecommendation(budget) {
 }
 
 function displayPackageRecommendation() {
-    const package = getPackageRecommendation(questionnaireState.budget);
+    let packages;
+    let recommendedPackageKey;
+    let recommendedPackageName;
     
-    document.getElementById('packageName').textContent = package.name;
-    document.getElementById('packageDesc').textContent = package.desc;
-    document.getElementById('packagePrice').textContent = package.price;
+    // Different packages for wedding vs other services
+    if (questionnaireState.serviceType.includes('Wedding')) {
+        packages = {
+            'basic': {
+                name: '💎 BASIC',
+                desc: 'Essential planning services',
+                features: [
+                    'Basic Event Planning & Coordination',
+                    'Venue Liaison & Setup',
+                    'Simple Décor Setup',
+                    'Photography (2-4 hours)',
+                    'Sound & Lighting System',
+                    'Professional Team Support'
+                ],
+                price: 'Below ₹5 Lakhs'
+            },
+            '5-7': {
+                name: '💎 SILVER',
+                desc: 'Perfect for intimate gatherings with essential services',
+                features: [
+                    'Basic Event Planning & Coordination',
+                    'Venue Liaison & Setup',
+                    'Professional Basic Décor',
+                    'Photography (4-6 hours)',
+                    'Sound & Lighting System',
+                    'Professional Team Support'
+                ],
+                price: '₹5,00,000 - ₹7,00,000'
+            },
+            '12-15': {
+                name: '👑 GOLD',
+                desc: 'Comprehensive planning with premium amenities included',
+                features: [
+                    'Full Event Planning & Coordination',
+                    'Premium Décor & Theme Design',
+                    'Photography & Videography (8 hours)',
+                    'HD Video Editing & Highlights',
+                    'Expert Lighting & Sound System',
+                    'Catering Coordination',
+                    'Guest Management & Flow Coordination',
+                    'Post-Event Photo Albums'
+                ],
+                price: '₹12,00,000 - ₹15,00,000'
+            },
+            '20-35': {
+                name: '✨ PLATINUM',
+                desc: 'Ultimate luxury experience with white-glove service',
+                features: [
+                    'Dedicated Event Manager & Team',
+                    'Luxury Décor & Bespoke Themework',
+                    'Full Day Photography + Videography (12+ hours)',
+                    '4K Professional Video Production',
+                    'Premium Drone Photography & Videography',
+                    'Live Streaming Services',
+                    'Celebrity/Artist Coordination (if applicable)',
+                    'Premium Catering Coordination',
+                    'Professional Guest Flow Management',
+                    'Complete Post-Production with Cinema-Quality Editing',
+                    'Custom Photo & Video Books'
+                ],
+                price: '₹20,00,000 - ₹35,00,000'
+            }
+        };
+        
+        // Determine recommended package for Wedding based on budget
+        if (questionnaireState.budget <= 5) {
+            recommendedPackageKey = 'basic';
+            recommendedPackageName = 'BASIC';
+        } else if (questionnaireState.budget <= 10) {
+            recommendedPackageKey = '5-7';
+            recommendedPackageName = 'SILVER';
+        } else if (questionnaireState.budget <= 15) {
+            recommendedPackageKey = '12-15';
+            recommendedPackageName = 'GOLD';
+        } else {
+            recommendedPackageKey = '20-35';
+            recommendedPackageName = 'PLATINUM';
+        }
+    } else {
+        // For non-wedding services
+        packages = {
+            'basic': {
+                name: '💎 BASIC',
+                desc: 'Essential services for your event',
+                features: [
+                    'Event Planning & Coordination',
+                    'Basic Décor Setup',
+                    'Standard Photography (4-6 hours)',
+                    'Sound & Lighting System',
+                    'Professional Team Support',
+                    'Guest Management Assistance'
+                ],
+                price: '₹25,000 - ₹2,00,000'
+            },
+            'standard': {
+                name: '👑 STANDARD',
+                desc: 'Comprehensive planning with quality amenities',
+                features: [
+                    'Full Event Planning & Coordination',
+                    'Premium Décor & Theme Design',
+                    'Photography & Videography (8 hours)',
+                    'Video Editing & Highlights',
+                    'Expert Lighting & Sound System',
+                    'Catering Coordination',
+                    'Professional Guest Flow Management',
+                    'Post-Event Photo Albums'
+                ],
+                price: '₹2,00,000 - ₹5,00,000'
+            },
+            'premium': {
+                name: '✨ PREMIUM',
+                desc: 'Ultimate luxury experience with all services',
+                features: [
+                    'Dedicated Event Manager & Team',
+                    'Luxury Décor & Bespoke Themework',
+                    'Full Day Photography + Videography (12+ hours)',
+                    '4K Professional Video Production',
+                    'Premium Photography & Videography',
+                    'Live Streaming Services',
+                    'Premium Catering Coordination',
+                    'Professional Guest Flow Management',
+                    'Complete Post-Production with Quality Editing',
+                    'Custom Photo & Video Books'
+                ],
+                price: '₹5,00,000 - ₹10,00,000'
+            }
+        };
+        
+        // Determine recommended package for non-wedding based on budget
+        if (questionnaireState.budget <= 0.25) {
+            recommendedPackageKey = 'basic';
+            recommendedPackageName = 'BASIC';
+        } else if (questionnaireState.budget <= 2) {
+            recommendedPackageKey = 'basic';
+            recommendedPackageName = 'BASIC';
+        } else if (questionnaireState.budget <= 5) {
+            recommendedPackageKey = 'standard';
+            recommendedPackageName = 'STANDARD';
+        } else {
+            recommendedPackageKey = 'premium';
+            recommendedPackageName = 'PREMIUM';
+        }
+    }
     
-    const features = document.getElementById('packageFeatures');
-    features.innerHTML = '';
+    // Update recommendation text
+    const recommendationText = document.getElementById('recommendationText');
+    if (recommendationText) {
+        recommendationText.textContent = `Based on your budget of ₹${questionnaireState.budget} Lakh, we recommend the ${recommendedPackageName} Package.`;
+    }
     
-    package.features.forEach(feature => {
-        const li = document.createElement('li');
-        li.textContent = feature;
-        features.appendChild(li);
+    // Pre-select the recommended package
+    questionnaireState.selectedPackage = recommendedPackageKey;
+    
+    const packagesGrid = document.getElementById('packagesGrid');
+    packagesGrid.innerHTML = '';
+    
+    // Only display the recommended package
+    const package = packages[recommendedPackageKey];
+    const packageCard = document.createElement('div');
+    packageCard.className = `package-card featured selected`;
+    packageCard.onclick = () => selectPackage(recommendedPackageKey, packageCard);
+    
+    let badgeHTML = '<div class="package-badge-card">RECOMMENDED FOR YOU</div>';
+    
+    packageCard.innerHTML = `
+        ${badgeHTML}
+        <h3>${package.name}</h3>
+    `;
+    
+    packagesGrid.appendChild(packageCard);
+}
+
+function selectPackage(budgetKey, element) {
+    questionnaireState.selectedPackage = budgetKey;
+    
+    // Remove selected class from all cards
+    document.querySelectorAll('.package-card').forEach(card => {
+        card.classList.remove('selected');
     });
+    
+    // Add selected class to clicked card
+    element.classList.add('selected');
 }
 
 function connectViaWhatsApp() {
-    const package = getPackageRecommendation(questionnaireState.budget);
+    let packageName = 'Standard';
+    
+    if (questionnaireState.serviceType.includes('Wedding')) {
+        const weddingPackages = {
+            '5-7': 'SILVER',
+            '12-15': 'GOLD',
+            '20-35': 'PLATINUM'
+        };
+        packageName = weddingPackages[questionnaireState.selectedPackage] || 'GOLD';
+    } else {
+        const otherPackages = {
+            'basic': 'BASIC',
+            'standard': 'STANDARD',
+            'premium': 'PREMIUM'
+        };
+        packageName = otherPackages[questionnaireState.selectedPackage] || 'STANDARD';
+    }
+    
     const preferencesText = questionnaireState.preferences.length > 0 
         ? questionnaireState.preferences.join(', ')
         : 'Standard Services';
     
-    const budgetMap = {
-        '5-7': '₹5-7 Lakhs (Standard)',
-        '12-15': '₹12-15 Lakhs (Premium)',
-        '20-35': '₹20-35 Lakhs (Luxury)'
-    };
+    // Format budget display
+    let budgetDisplay = '';
+    if (questionnaireState.budget && questionnaireState.budget > 0) {
+        budgetDisplay = `₹${questionnaireState.budget} Lakhs`;
+    } else {
+        budgetDisplay = 'Not specified';
+    }
     
     const message = `Hi Royal Desi Crew! I'm interested in planning my ${questionnaireState.serviceType}. 
 
 Estimated Guests: ${questionnaireState.guestsCount || 'Not specified'}
-Budget Range: ${budgetMap[questionnaireState.budget] || 'Not specified'}
+Budget Range: ${budgetDisplay}
 Preferences: ${preferencesText}
 
-I'm interested in the ${package.name.split('PACKAGE')[0].trim()} package.
+I'm interested in the ${packageName} package.
 
 Can you provide more details and confirm availability?`;
 
@@ -727,7 +1016,7 @@ Can you provide more details and confirm availability?`;
     closeQuestionnaire();
     window.open(whatsappURL, '_blank');
     
-    console.log('Connected via WhatsApp with package recommendation');
+    console.log('Connected via WhatsApp with package:', selectedPackage.name);
 }
 
 // Close questionnaire modal when clicking outside
@@ -765,6 +1054,23 @@ document.addEventListener('change', function(event) {
             questionnaireState.preferences.push(checkbox.value);
         });
         console.log('Updated preferences:', questionnaireState.preferences);
+    }
+    
+    // Handle Select All checkbox
+    if (event.target.id === 'selectAllPreferences') {
+        const isChecked = event.target.checked;
+        document.querySelectorAll('input[name="preferences"]').forEach(checkbox => {
+            checkbox.checked = isChecked;
+        });
+        
+        // Update preferences array
+        questionnaireState.preferences = [];
+        if (isChecked) {
+            document.querySelectorAll('input[name="preferences"]').forEach(checkbox => {
+                questionnaireState.preferences.push(checkbox.value);
+            });
+        }
+        console.log('Select All - Updated preferences:', questionnaireState.preferences);
     }
 });
 

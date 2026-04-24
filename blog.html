@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royal Desi Crew - Blog</title>
+    <link rel="stylesheet" href="static/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400;700;800&family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        .blog-header {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a1a 100%);
+            padding: 80px 20px 60px;
+            text-align: center;
+            margin-top: 85px;
+        }
+
+        .blog-header h1 {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 48px;
+            color: #D4AF37;
+            font-weight: 800;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .blog-header p {
+            font-family: 'Poppins', sans-serif;
+            color: #e0e0e0;
+            font-size: 16px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .blog-container {
+            max-width: 1000px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .blog-posts {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+
+        .blog-post {
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.8) 0%, rgba(42, 42, 26, 0.8) 100%);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 10px;
+            padding: 40px;
+            transition: all 0.3s ease;
+        }
+
+        .blog-post:hover {
+            border-color: rgba(212, 175, 55, 0.6);
+            box-shadow: 0 8px 32px rgba(212, 175, 55, 0.1);
+        }
+
+        .blog-post-date {
+            font-family: 'Poppins', sans-serif;
+            color: #D4AF37;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        .blog-post-title {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 32px;
+            color: #e0e0e0;
+            margin-bottom: 15px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        .blog-post-excerpt {
+            font-family: 'Poppins', sans-serif;
+            color: #b0b0b0;
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        .blog-post-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .blog-category {
+            font-family: 'Poppins', sans-serif;
+            color: #D4AF37;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .read-more {
+            color: #D4AF37;
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .read-more:hover {
+            gap: 12px;
+        }
+
+        .read-more i {
+            font-size: 12px;
+        }
+
+        .blog-back-btn {
+            display: inline-block;
+            margin-bottom: 40px;
+            padding: 12px 30px;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid #D4AF37;
+            color: #D4AF37;
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .blog-back-btn:hover {
+            background: #D4AF37;
+            color: #0a0a0a;
+        }
+
+        @media (max-width: 768px) {
+            .blog-header {
+                padding: 60px 20px 40px;
+                margin-top: 75px;
+            }
+
+            .blog-header h1 {
+                font-size: 36px;
+            }
+
+            .blog-post {
+                padding: 25px;
+            }
+
+            .blog-post-title {
+                font-size: 24px;
+            }
+
+            .blog-post-excerpt {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container container-logo">
+            <a href="index.html" class="logo">
+                <img src="static/Images/logo.png" alt="Royal Desi Crew Logo" class="logo-img">
+            </a>
+        </div>
+        <div class="container container-nav">
+            <nav class="nav" id="nav-menu">
+                <a href="index.html#home">Home</a>
+                <a href="index.html#services">Services</a>
+                <a href="index.html#gallery">Our Work</a>
+                <a href="index.html#packages">Pricing</a>
+                <a href="index.html#about">About</a>
+                <a href="blog.html" class="active">Blog</a>
+                <button class="nav-book-btn" onclick="window.opener.openBookingModal(); window.close();">Book Now</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Blog Header -->
+    <div class="blog-header">
+        <h1>Royal Desi Crew Blog</h1>
+        <p>Insights, tips, and stories from India's premier event management company</p>
+    </div>
+
+    <!-- Blog Container -->
+    <div class="blog-container">
+        <a href="index.html" class="blog-back-btn">← Back to Home</a>
+
+        <div class="blog-posts">
+            <!-- Blog Post 1 -->
+            <div class="blog-post">
+                <div class="blog-post-date">April 22, 2026</div>
+                <h2 class="blog-post-title">The Art of Luxury Wedding Planning in India</h2>
+                <p class="blog-post-excerpt">
+                    Discover the essential elements that make a luxury wedding truly unforgettable. From venue selection to intricate décor details, learn how Royal Desi Crew transforms dreams into reality. Our comprehensive guide covers everything you need to know about planning an upscale wedding that reflects your personal style and cultural heritage.
+                </p>
+                <div class="blog-post-footer">
+                    <span class="blog-category">Weddings</span>
+                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Blog Post 2 -->
+            <div class="blog-post">
+                <div class="blog-post-date">April 18, 2026</div>
+                <h2 class="blog-post-title">Corporate Events That Leave a Lasting Impression</h2>
+                <p class="blog-post-excerpt">
+                    Corporate events are more than just business gatherings – they're opportunities to strengthen relationships and create memorable experiences. Learn how to organize corporate functions that impress clients, motivate employees, and enhance your brand image. Our experts share proven strategies for managing large-scale corporate celebrations.
+                </p>
+                <div class="blog-post-footer">
+                    <span class="blog-category">Corporate</span>
+                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Blog Post 3 -->
+            <div class="blog-post">
+                <div class="blog-post-date">April 15, 2026</div>
+                <h2 class="blog-post-title">Budget-Friendly Tips for Premium Event Planning</h2>
+                <p class="blog-post-excerpt">
+                    Think luxury events are out of your budget? Think again! Royal Desi Crew shares insider tips on how to create stunning, high-end events without breaking the bank. From smart vendor partnerships to creative decoration ideas, discover how to maximize impact while optimizing your budget for any celebration.
+                </p>
+                <div class="blog-post-footer">
+                    <span class="blog-category">Planning Tips</span>
+                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Blog Post 4 -->
+            <div class="blog-post">
+                <div class="blog-post-date">April 10, 2026</div>
+                <h2 class="blog-post-title">Theme-Based Events: Creating Magical Experiences</h2>
+                <p class="blog-post-excerpt">
+                    Transform your celebration into an immersive experience with carefully curated themes. Whether it's a Bollywood extravaganza, vintage elegance, or contemporary chic, discover how theme-based events can captivate your guests. Explore our portfolio of theme events and get inspired for your next celebration.
+                </p>
+                <div class="blog-post-footer">
+                    <span class="blog-category">Entertainment</span>
+                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Blog Post 5 -->
+            <div class="blog-post">
+                <div class="blog-post-date">April 5, 2026</div>
+                <h2 class="blog-post-title">The Latest Trends in Luxury Event Décor</h2>
+                <p class="blog-post-excerpt">
+                    Stay ahead of the curve with the latest trends in event decoration. From minimalist elegance to maximalist opulence, explore the current design movements shaping the event industry. Learn how to blend traditional Indian aesthetics with contemporary design principles to create unforgettable visual experiences.
+                </p>
+                <div class="blog-post-footer">
+                    <span class="blog-category">Design Trends</span>
+                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#services">Services</a></li>
+                    <li><a href="index.html#packages">Packages</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p>Email: info@royaldesicrew.com</p>
+                <p>Phone: +91-XXXX-XXXX-XX</p>
+            </div>
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/invites/contact/?utm_source=ig_contact_invite&utm_medium=copy_link&utm_content=qsk0zbe" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.whatsapp.com" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Royal Desi Crew. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="static/script.js"></script>
+</body>
+</html>
