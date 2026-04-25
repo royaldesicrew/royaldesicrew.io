@@ -452,16 +452,16 @@ document.addEventListener('keydown', function(event) {
 
 // ===== Gallery Modal Functionality =====
 
+let currentPhotoId = null;
+
 function openGalleryModal(category = 'weddings') {
     console.log('🎬 openGalleryModal called with category:', category);
     const galleryModal = document.getElementById('galleryModal');
-    console.log('Gallery modal element:', galleryModal);
     
     if (galleryModal) {
-        showGalleryByCategory(category);
+        renderGalleryByCategory(category);
         galleryModal.classList.add('show');
-        console.log('✅ Modal show class added, classes:', galleryModal.className);
-        // Prevent body scroll when modal is open
+        galleryModal.style.display = 'flex';
         document.body.style.overflow = 'hidden';
     } else {
         console.error('❌ Gallery modal element not found!');
@@ -472,75 +472,152 @@ function closeGalleryModal() {
     const galleryModal = document.getElementById('galleryModal');
     if (galleryModal) {
         galleryModal.classList.remove('show');
-        // Re-enable body scroll
+        galleryModal.style.display = 'none';
         document.body.style.overflow = 'auto';
     }
 }
 
 function goToGalleryFilter(category) {
-    // Open gallery modal with specified category
     openGalleryModal(category);
 }
 
-function showGalleryByCategory(category) {
-    // Hide all gallery tabs
-    document.querySelectorAll('.gallery-tab-content').forEach(tab => {
-        tab.classList.remove('active');
-    });
+async function renderGalleryByCategory(category) {
+    const mainGallery = document.getElementById('mainGallery');
+    const titleEl = document.getElementById('galleryModalTitle');
+    const descEl = document.getElementById('galleryModalDesc');
+    
+    if (!mainGallery) return;
 
-    // Remove hidden class from all gallery items (in case they were hidden by old code)
-    const allItems = document.querySelectorAll('#mainGallery .gallery-item');
-    console.log(`📸 Found ${allItems.length} gallery items, removing hidden class...`);
-    allItems.forEach(item => {
-        item.classList.remove('hidden');
-    });
+    // Update titles based on category
+    const titles = {
+        'weddings': { title: 'Luxury <span class="gold">Wedding</span> Gallery', desc: 'Capturing your eternal love stories' },
+        'corporate': { title: 'Premium <span class="gold">Corporate</span> Events', desc: 'Professional moments that define brands' },
+        'birthdays': { title: 'Joyful <span class="gold">Birthday</span> Celebrations', desc: 'Making every year more magical' },
+        'decor': { title: 'Exquisite <span class="gold">Decor & Design</span>', desc: 'Artistic visions brought to life' },
+        'all': { title: 'Our <span class="gold">Signature</span> Portfolio', desc: 'Explore our diverse range of premium events' }
+    };
 
-    // Show the requested category
-    if (category === 'weddings') {
-        const weddingTab = document.getElementById('wedding-gallery-content');
-        if (weddingTab) {
-            weddingTab.classList.add('active');
-            const visibleItems = weddingTab.querySelectorAll('.gallery-item');
-            console.log(`✅ Wedding gallery showing ${visibleItems.length} photos`);
-        }
-    } else if (category === 'corporate') {
-        const corporateTab = document.getElementById('corporate-gallery-content');
-        if (corporateTab) corporateTab.classList.add('active');
-    } else if (category === 'birthdays') {
-        const birthdayTab = document.getElementById('birthday-gallery-content');
-        if (birthdayTab) birthdayTab.classList.add('active');
-    } else if (category === 'decor') {
-        const decorTab = document.getElementById('decor-gallery-content');
-        if (decorTab) decorTab.classList.add('active');
+    const info = titles[category] || titles['all'];
+    if (titleEl) titleEl.innerHTML = info.title;
+    if (descEl) descEl.textContent = info.desc;
+
+    // Show loading state
+    mainGallery.innerHTML = `
+        <div class="loading-spinner" style="grid-column: 1/-1; text-align: center; padding: 50px;">
+            <i class="fas fa-spinner fa-spin" style="font-size: 40px; color: var(--gold); margin-bottom: 15px;"></i>
+            <p>Fetching magical moments...</p>
+        </div>
+    `;
+
+    // Ensure photos are loaded
+    if (photosLoader.getAllPhotos().length === 0) {
+        await photosLoader.loadPhotos();
     }
 
-    console.log('Gallery modal showing category:', category);
+    const photos = photosLoader.filterByCategory(category);
+
+    if (photos.length === 0) {
+        mainGallery.innerHTML = `
+            <div class="empty-gallery-state" style="grid-column: 1/-1;">
+                <div class="empty-content">
+                    <i class="fas fa-camera-retro"></i>
+                    <h3>Coming Soon</h3>
+                    <p>We're currently curating the best moments for this category. Stay tuned!</p>
+                </div>
+            </div>
+        `;
+        return;
+    }
+
+    mainGallery.innerHTML = photos.map((photo, index) => `
+        <div class="gallery-item" data-id="${photo.id}" style="animation-delay: ${index * 0.1}s" onclick="openLightbox('${photo.id}')">
+            <div class="gallery-item-image" style="background-image: url('${photo.url}');">
+                <div class="gallery-overlay">
+                    <div class="overlay-content">
+                        <p class="overlay-text">${photo.title || 'Event Moment'}</p>
+                        <span class="overlay-btn"><i class="fas fa-expand"></i> View Full Size</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `).join('');
 }
 
-function filterGallery(category) {
-    const items = document.querySelectorAll('#mainGallery .gallery-item');
-    const buttons = document.querySelectorAll('.filter-btn');
-    
-    // Update active button
-    buttons.forEach(btn => {
-        if (btn.dataset.filter === category) {
-            btn.classList.add('active');
-        } else {
-            btn.classList.remove('active');
-        }
-    });
-    
-    // Show/hide items based on category
-    items.forEach(item => {
-        if (category === 'all' || item.dataset.category === category) {
-            item.classList.remove('hidden');
-        } else {
-            item.classList.add('hidden');
-        }
-    });
-    
-    console.log('Gallery filtered by category:', category);
+// ===== Lightbox Functionality =====
+
+function openLightbox(photoId) {
+    currentPhotoId = photoId;
+    const photo = photosLoader.getPhotoById(photoId);
+    if (!photo) return;
+
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightboxImage');
+    const lightboxCaption = document.getElementById('lightboxCaption');
+    const lightboxCounter = document.getElementById('lightboxCounter');
+
+    if (lightbox && lightboxImage) {
+        lightboxImage.src = photo.url;
+        lightboxImage.alt = photo.title || 'Event Photo';
+        if (lightboxCaption) lightboxCaption.textContent = photo.title || photo.description || 'Royal Desi Crew Moment';
+        
+        const currentIndex = photosLoader.getPhotoIndex(photoId) + 1;
+        const total = photosLoader.getTotalPhotos();
+        if (lightboxCounter) lightboxCounter.textContent = `${currentIndex} / ${total}`;
+
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
 }
+
+function closeLightbox() {
+    const lightbox = document.getElementById('lightbox');
+    if (lightbox) {
+        lightbox.classList.remove('active');
+        if (!document.getElementById('galleryModal').classList.contains('show')) {
+            document.body.style.overflow = 'auto';
+        }
+    }
+    currentPhotoId = null;
+}
+
+function nextPhoto() {
+    if (!currentPhotoId) return;
+    const photo = photosLoader.getNextPhoto(currentPhotoId);
+    if (photo) openLightbox(photo.id);
+}
+
+function previousPhoto() {
+    if (!currentPhotoId) return;
+    const photo = photosLoader.getPreviousPhoto(currentPhotoId);
+    if (photo) openLightbox(photo.id);
+}
+
+// Setup Lightbox Event Listeners
+document.addEventListener('DOMContentLoaded', () => {
+    const closeBtn = document.getElementById('closeLightbox');
+    const nextBtn = document.getElementById('nextPhoto');
+    const prevBtn = document.getElementById('prevPhoto');
+    const lightbox = document.getElementById('lightbox');
+
+    if (closeBtn) closeBtn.onclick = closeLightbox;
+    if (nextBtn) nextBtn.onclick = nextPhoto;
+    if (prevBtn) prevBtn.onclick = previousPhoto;
+
+    if (lightbox) {
+        lightbox.onclick = (e) => {
+            if (e.target === lightbox || e.target.classList.contains('lightbox-image-container')) {
+                closeLightbox();
+            }
+        };
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (!lightbox || !lightbox.classList.contains('active')) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowRight') nextPhoto();
+        if (e.key === 'ArrowLeft') previousPhoto();
+    });
+});
 
 // ===== Questionnaire Modal Functionality =====
 

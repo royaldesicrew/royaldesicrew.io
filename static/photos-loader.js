@@ -7,6 +7,8 @@ class PhotosLoader {
         this.baseUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
             ? 'http://localhost:5000'
             : 'https://backend-six-theta-99.vercel.app';
+    }
+
     // Load photos from API (MongoDB), fallback to JSON
     async loadPhotos() {
         try {
