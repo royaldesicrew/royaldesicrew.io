@@ -1,21 +1,33 @@
-// API Configuration
-const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-  ? 'http://localhost:5000/api'
-  : 'https://backend-six-theta-99.vercel.app/api';
+const API_BASE_URL = 'https://backend-two-umber-54.vercel.app/api';
+// const API_BASE_URL = 'http://localhost:5000/api'; // Local development fallback
 
 console.log('🌐 API Base URL:', API_BASE_URL);
 
 // Photos API Integration
 class PhotosAPI {
   static async getAll() {
-    console.log('📸 Fetching photos from:', `${API_BASE_URL}/photos`);
+    console.log('📸 Attempting to fetch photos from:', `${API_BASE_URL}/photos`);
     try {
-      const response = await fetch(`${API_BASE_URL}/photos`);
+      const response = await fetch(`${API_BASE_URL}/photos`, {
+        method: 'GET',
+        headers: { 'Accept': 'application/json' },
+        mode: 'cors'
+      });
+      
+      console.log('📡 Response status:', response.status, response.statusText);
+      
       if (!response.ok) {
         console.warn('⚠️ Backend response not OK, status:', response.status);
-        throw new Error(`Failed to fetch photos: ${response.status}`);
+        throw new Error(`Failed to fetch photos: ${response.status} ${response.statusText}`);
       }
+      
       const data = await response.json();
+      
+      if (!data.success) {
+        console.warn('⚠️ API returned success:false', data);
+        throw new Error(data.error || 'API returned failure');
+      }
+
       console.log('✅ Photos fetched successfully:', data.photos ? data.photos.length : 0, 'photos found');
       return data.photos || [];
     } catch (error) {

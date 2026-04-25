@@ -74,14 +74,14 @@ function renderGallery() {
     }
 
     galleryGrid.innerHTML = photos.map(photo => `
-        <div class="gallery-item" data-id="${photo.id}" onclick="openLightbox(${photo.id})">
+        <div class="gallery-item" data-id="${photo.id}" onclick="openLightbox('${photo.id}')">
             <div class="gallery-item-image" style="background-image: url('${photo.url}');">
                 <div class="gallery-item-overlay">
                     <i class="fas fa-expand"></i>
                 </div>
             </div>
             <div class="gallery-item-caption">
-                <p>${photo.caption}</p>
+                <p>${photo.title || photo.caption}</p>
             </div>
         </div>
     `).join('');

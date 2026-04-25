@@ -28,7 +28,7 @@ I have updated the codebase to be fully compatible with Vercel deployment. Here 
    - `CLOUDINARY_API_KEY`: Your Cloudinary key.
    - `CLOUDINARY_API_SECRET`: Your Cloudinary secret.
    - `RESEND_API_KEY`: Your Resend API key for emails.
-4. Note the deployed URL: `https://backend-six-theta-99.vercel.app`.
+4. Note the deployed URL: `https://backend-two-umber-54.vercel.app`.
 
 ### 2. Deploy the Admin Panel
 1. Import the `backend/admin` directory as a new project.

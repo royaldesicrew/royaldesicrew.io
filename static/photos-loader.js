@@ -4,9 +4,8 @@ class PhotosLoader {
         this.photos = [];
         this.filteredPhotos = [];
         this.currentFilter = 'all';
-        this.baseUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-            ? 'http://localhost:5000'
-            : 'https://backend-six-theta-99.vercel.app';
+        this.baseUrl = 'https://backend-two-umber-54.vercel.app/api';
+        // this.baseUrl = 'http://localhost:5000'; // Local development fallback
     }
 
     // Load photos from API (MongoDB), fallback to JSON
@@ -16,15 +15,24 @@ class PhotosLoader {
             if (photos && photos.length > 0) {
                 // If it's from API, map it
                 if (photos[0]._id || photos[0].url.startsWith('http')) {
-                    this.photos = photos.map(photo => ({
-                        id: photo._id || photo.id,
-                        title: photo.title || photo.caption,
-                        url: photo.url,
-                        description: photo.description,
-                        category: this.normalizeCategory(photo.category),
-                        views: photo.views || 0,
-                        uploadedAt: photo.createdAt
-                    }));
+                    this.photos = photos.map(photo => {
+                        const rawUrl = photo.url || '';
+                        // Prepend backend URL if the path is relative
+                        const finalUrl = rawUrl.startsWith('http') || rawUrl.startsWith('data:')
+                            ? rawUrl 
+                            : `${this.baseUrl.replace('/api', '')}${rawUrl.startsWith('/') ? '' : '/'}${rawUrl}`;
+
+                        return {
+                            id: photo._id || photo.id,
+                            title: photo.title || photo.caption || 'Royal Desi Crew Moment',
+                            caption: photo.caption || photo.title || 'Royal Desi Crew Moment', // For gallery-script.js compatibility
+                            url: finalUrl,
+                            description: photo.description || '',
+                            category: this.normalizeCategory(photo.category),
+                            views: photo.views || 0,
+                            uploadedAt: photo.createdAt
+                        };
+                    });
                     this.filteredPhotos = this.photos;
                     console.log('✅ Loaded photos via PhotosAPI', this.photos);
                     return this.photos;
