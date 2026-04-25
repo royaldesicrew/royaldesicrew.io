@@ -485,8 +485,21 @@ async function renderGalleryByCategory(category) {
     const mainGallery = document.getElementById('mainGallery');
     const titleEl = document.getElementById('galleryModalTitle');
     const descEl = document.getElementById('galleryModalDesc');
+    const modalFilters = document.getElementById('modalFilters');
     
     if (!mainGallery) return;
+
+    // Update active state of filter buttons
+    if (modalFilters) {
+        modalFilters.querySelectorAll('.filter-btn').forEach(btn => {
+            const btnOnClick = btn.getAttribute('onclick');
+            if (btnOnClick && btnOnClick.includes(`'${category}'`)) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+    }
 
     // Update titles based on category
     const titles = {
@@ -504,7 +517,7 @@ async function renderGalleryByCategory(category) {
     // Show loading state
     mainGallery.innerHTML = `
         <div class="loading-spinner" style="grid-column: 1/-1; text-align: center; padding: 50px;">
-            <i class="fas fa-spinner fa-spin" style="font-size: 40px; color: var(--gold); margin-bottom: 15px;"></i>
+            <i class="fas fa-spinner fa-spin" style="font-size: 40px; color: #d4af37; margin-bottom: 15px;"></i>
             <p>Fetching magical moments...</p>
         </div>
     `;

@@ -843,6 +843,14 @@
                     <p id="galleryModalDesc">Explore our finest event moments</p>
                 </div>
                 
+                <div class="gallery-filters" id="modalFilters">
+                    <button class="filter-btn active" onclick="renderGalleryByCategory('all')">All</button>
+                    <button class="filter-btn" onclick="renderGalleryByCategory('weddings')">Weddings</button>
+                    <button class="filter-btn" onclick="renderGalleryByCategory('corporate')">Corporate</button>
+                    <button class="filter-btn" onclick="renderGalleryByCategory('birthdays')">Birthdays</button>
+                    <button class="filter-btn" onclick="renderGalleryByCategory('decor')">Decor</button>
+                </div>
+                
                 <div class="gallery-grid" id="mainGallery">
                     <!-- Photos will be loaded dynamically here -->
                     <div class="loading-spinner">

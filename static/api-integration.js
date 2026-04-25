@@ -1,20 +1,26 @@
 // API Configuration
 const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
   ? 'http://localhost:5000/api'
-  : 'https://backend-six-theta-99.vercel.app/api'; // Updated to your Vercel backend
+  : 'https://backend-six-theta-99.vercel.app/api';
 
+console.log('🌐 API Base URL:', API_BASE_URL);
 
 // Photos API Integration
 class PhotosAPI {
   static async getAll() {
+    console.log('📸 Fetching photos from:', `${API_BASE_URL}/photos`);
     try {
       const response = await fetch(`${API_BASE_URL}/photos`);
-      if (!response.ok) throw new Error('Failed to fetch photos');
+      if (!response.ok) {
+        console.warn('⚠️ Backend response not OK, status:', response.status);
+        throw new Error(`Failed to fetch photos: ${response.status}`);
+      }
       const data = await response.json();
+      console.log('✅ Photos fetched successfully:', data.photos ? data.photos.length : 0, 'photos found');
       return data.photos || [];
     } catch (error) {
-      console.error('Error fetching photos:', error);
-      // Fallback to static photos
+      console.error('❌ Error fetching photos from backend:', error);
+      console.log('🔄 Falling back to static photos.json');
       return await this.getStaticPhotos();
     }
   }

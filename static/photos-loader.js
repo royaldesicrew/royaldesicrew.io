@@ -53,13 +53,36 @@ class PhotosLoader {
 
     // Normalize category names for filtering
     normalizeCategory(category) {
+        if (!category) return 'gallery';
+        
+        const cat = category.toLowerCase().trim();
+        
+        // Map exact backend names from admin panel to frontend keys
         const categoryMap = {
-            'Luxury Weddings': 'weddings',
-            'Corporate Events': 'corporate',
-            'Birthday Celebrations': 'birthdays',
-            'Decor and Design': 'decor'
+            'luxury wedding': 'weddings',
+            'luxury weddings': 'weddings',
+            'wedding': 'weddings',
+            'weddings': 'weddings',
+            'corporate events': 'corporate',
+            'corporate': 'corporate',
+            'birthday celebrations': 'birthdays',
+            'birthday': 'birthdays',
+            'birthdays': 'birthdays',
+            'decor and design': 'decor',
+            'decor': 'decor',
+            'design': 'decor',
+            'background images': 'gallery'
         };
-        return categoryMap[category] || category;
+        
+        // Check map first, then fall back to includes
+        if (categoryMap[cat]) return categoryMap[cat];
+        
+        if (cat.includes('wedding')) return 'weddings';
+        if (cat.includes('corporate')) return 'corporate';
+        if (cat.includes('birthday')) return 'birthdays';
+        if (cat.includes('decor') || cat.includes('design')) return 'decor';
+        
+        return 'gallery';
     }
 
     // Get all photos
