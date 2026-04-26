@@ -162,15 +162,27 @@
                 font-size: 14px;
             }
         }
+
+        /* TV View */
+        @media (min-width: 2000px) {
+            .blog-container { max-width: 1600px; }
+            .blog-header h1 { font-size: 80px; }
+            .blog-header p { font-size: 24px; max-width: 1000px; }
+            .blog-post-title { font-size: 48px; }
+            .blog-post-excerpt { font-size: 20px; }
+            .blog-category, .blog-post-date { font-size: 16px; }
+        }
     </style>
 </head>
 <body>
     <!-- Header -->
     <header class="header">
         <div class="container container-logo">
-            <a href="index.html" class="logo">
-                <img src="static/Images/logo.png" alt="Royal Desi Crew Logo" class="logo-img">
-            </a>
+            <div class="logo-section">
+                <a href="index.html" class="logo">
+                    <img src="static/Images/logo.png" alt="Royal Desi Crew Logo" class="logo-img">
+                </a>
+            </div>
         </div>
         <div class="container container-nav">
             <nav class="nav" id="nav-menu">
@@ -180,8 +192,14 @@
                 <a href="index.html#packages">Pricing</a>
                 <a href="index.html#about">About</a>
                 <a href="blog.html" class="active">Blog</a>
-                <button class="nav-book-btn" onclick="window.opener.openBookingModal(); window.close();">Book Now</button>
+                <button class="nav-book-btn" onclick="window.location.href='index.html#contact'">Book Now</button>
             </nav>
+            <!-- Hamburger Menu -->
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
     </header>
 
@@ -204,36 +222,6 @@
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>Quick Links</h4>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="index.html#services">Services</a></li>
-                    <li><a href="index.html#packages">Packages</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>Contact Us</h4>
-                <p>Email: info@royaldesicrew.com</p>
-                <p>Phone: +91-XXXX-XXXX-XX</p>
-            </div>
-            <div class="footer-section">
-                <h4>Follow Us</h4>
-                <div class="social-links">
-                    <a href="https://www.instagram.com/invites/contact/?utm_source=ig_contact_invite&utm_medium=copy_link&utm_content=qsk0zbe" target="_blank"><i class="fab fa-instagram"></i></a>
-                    <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
-                    <a href="https://www.whatsapp.com" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 Royal Desi Crew. All rights reserved.</p>
-        </div>
-    </footer>
 
     <!-- Scripts -->
     <script src="static/api-integration.js"></script>

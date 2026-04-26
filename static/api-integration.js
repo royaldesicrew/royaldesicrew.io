@@ -52,13 +52,38 @@ class PhotosAPI {
 // Blogs API Integration
 class BlogsAPI {
   static async getAll() {
+    console.log('📝 Attempting to fetch blogs from:', `${API_BASE_URL}/blogs`);
     try {
-      const response = await fetch(`${API_BASE_URL}/blogs`);
-      if (!response.ok) throw new Error('Failed to fetch blogs');
+      const response = await fetch(`${API_BASE_URL}/blogs`, {
+        method: 'GET',
+        headers: { 'Accept': 'application/json' }
+      });
+      
+      console.log('📡 Blogs Response status:', response.status, response.statusText);
+      
+      if (!response.ok) {
+        console.warn('⚠️ Blogs API response not OK, status:', response.status);
+        throw new Error(`Failed to fetch blogs: ${response.status} ${response.statusText}`);
+      }
+      
+      const data = await response.json();
+      console.log('✅ Blogs fetched successfully:', data.blogs ? data.blogs.length : 0, 'blogs found');
+      return data.blogs || [];
+    } catch (error) {
+      console.error('❌ Error fetching blogs:', error);
+      console.log('🔄 Falling back to static blogs.json (if available)');
+      return await this.getStaticBlogs();
+    }
+  }
+
+  static async getStaticBlogs() {
+    try {
+      const response = await fetch('static/blogs.json');
+      if (!response.ok) return [];
       const data = await response.json();
       return data.blogs || [];
     } catch (error) {
-      console.error('Error fetching blogs:', error);
+      console.error('Error loading static blogs:', error);
       return [];
     }
   }

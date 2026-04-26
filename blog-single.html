@@ -73,15 +73,25 @@
                 padding: 20px;
             }
         }
+
+        /* TV View */
+        @media (min-width: 2000px) {
+            .blog-container { max-width: 1400px; }
+            .blog-post-title { font-size: 60px !important; }
+            .blog-full-content { padding: 80px; font-size: 24px; }
+            .blog-post-date { font-size: 20px; }
+        }
     </style>
 </head>
 <body>
     <!-- Header -->
     <header class="header">
         <div class="container container-logo">
-            <a href="index.html" class="logo">
-                <img src="static/Images/logo.png" alt="Royal Desi Crew Logo" class="logo-img">
-            </a>
+            <div class="logo-section">
+                <a href="index.html" class="logo">
+                    <img src="static/Images/logo.png" alt="Royal Desi Crew Logo" class="logo-img">
+                </a>
+            </div>
         </div>
         <div class="container container-nav">
             <nav class="nav" id="nav-menu">
@@ -92,6 +102,12 @@
                 <a href="index.html#about">About</a>
                 <a href="blog.html" class="active">Blog</a>
             </nav>
+            <!-- Hamburger Menu -->
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
     </header>
 
@@ -107,25 +123,6 @@
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>Quick Links</h4>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>Contact</h4>
-                <p>Email: info@royaldesicrew.com</p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 Royal Desi Crew. All rights reserved.</p>
-        </div>
-    </footer>
 
     <!-- Scripts -->
     <script src="static/api-integration.js"></script>

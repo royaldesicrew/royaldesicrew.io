@@ -1,0 +1,28 @@
+{
+  "blogs": [
+    {
+      "_id": "static-1",
+      "title": "Royal Desi Crew - Welcome",
+      "content": "Welcome to Royal Desi Crew! Discover the finest desi photography and culture. We specialize in capturing the essence of luxury weddings, corporate events, and vibrant celebrations across India.",
+      "author": "Royal Desi Crew",
+      "image": "static/Images/Background.png",
+      "createdAt": "2026-04-21T10:00:00.000Z"
+    },
+    {
+      "_id": "static-2",
+      "title": "Photography Tips for Desi Events",
+      "content": "Learn the best practices for capturing beautiful moments during desi celebrations and events. From lighting tips to capturing candid emotions, we share our secrets for perfect event photography.",
+      "author": "Royal Desi Crew",
+      "image": "static/Images/COllection/wedding-couple.jpeg",
+      "createdAt": "2026-04-22T14:30:00.000Z"
+    },
+    {
+      "_id": "static-3",
+      "title": "Behind the Scenes: Our Latest Shoots",
+      "content": "Get an exclusive look at how we capture stunning images for our portfolio. Our team works tirelessly to ensure every detail is perfect, from the initial setup to the final edit.",
+      "author": "Royal Desi Crew",
+      "image": "static/Images/COllection/corporate.jpeg",
+      "createdAt": "2026-04-23T09:15:00.000Z"
+    }
+  ]
+}

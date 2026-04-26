@@ -534,3 +534,15 @@
         font-size: 1.8rem;
     }
 }
+
+/* TV View for Gallery Page */
+@media (min-width: 2000px) {
+    .container { max-width: 2000px; }
+    .gallery-hero-content h1 { font-size: 6rem; }
+    .gallery-hero-content p { font-size: 2rem; }
+    .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(450px, 1fr)); }
+    .gallery-item-image { height: 400px; }
+    .filter-btn { padding: 15px 40px; font-size: 1.5rem; }
+    .footer-section h3 { font-size: 2rem; }
+    .footer-section p, .footer-section li { font-size: 1.2rem; }
+}
