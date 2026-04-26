@@ -332,7 +332,7 @@ async function handleFormSubmit(e, formType) {
         }
         
         console.log('✅ Form submitted successfully!');
-        showSuccessModal('✓ Inquiry Sent Successfully!', 'Thank you for your inquiry.\nWe will contact you within 24 hours.');
+        showSuccessModal('Inquiry Sent Successfully!', 'Thank you for your inquiry.\nWe will contact you within 24 hours.');
         form.reset();
         
         if (typeof closeBookingModal === 'function') closeBookingModal();

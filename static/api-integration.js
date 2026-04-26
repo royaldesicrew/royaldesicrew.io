@@ -53,12 +53,19 @@ class PhotosAPI {
 class BlogsAPI {
   static async getAll() {
     console.log('📝 Attempting to fetch blogs from:', `${API_BASE_URL}/blogs`);
+    
+    // Create a timeout controller
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
+
     try {
       const response = await fetch(`${API_BASE_URL}/blogs`, {
         method: 'GET',
-        headers: { 'Accept': 'application/json' }
+        headers: { 'Accept': 'application/json' },
+        signal: controller.signal
       });
       
+      clearTimeout(timeoutId);
       console.log('📡 Blogs Response status:', response.status, response.statusText);
       
       if (!response.ok) {
@@ -68,10 +75,23 @@ class BlogsAPI {
       
       const data = await response.json();
       console.log('✅ Blogs fetched successfully:', data.blogs ? data.blogs.length : 0, 'blogs found');
-      return data.blogs || [];
+      
+      // If backend returns empty array, try falling back to static content if you want
+      if (!data.blogs || data.blogs.length === 0) {
+        console.log('🔄 Backend returned 0 blogs, checking static fallback...');
+        const staticBlogs = await this.getStaticBlogs();
+        return staticBlogs.length > 0 ? staticBlogs : [];
+      }
+      
+      return data.blogs;
     } catch (error) {
-      console.error('❌ Error fetching blogs:', error);
-      console.log('🔄 Falling back to static blogs.json (if available)');
+      clearTimeout(timeoutId);
+      if (error.name === 'AbortError') {
+        console.error('❌ Blogs API request timed out after 5s');
+      } else {
+        console.error('❌ Error fetching blogs:', error);
+      }
+      console.log('🔄 Falling back to static blogs.json');
       return await this.getStaticBlogs();
     }
   }
