@@ -119,12 +119,11 @@
                     </select>
                     <select name="package" required>
                         <option value="">Select Package</option>
-                        <option value="Silver Package – Basic Planning">Silver Package – Basic Planning</option>
-                        <option value="Gold Package – Full Planning + Decor">Gold Package – Full Planning + Decor
-                        </option>
-                        <option value="Platinum Package – Luxury Experience">Platinum Package – Luxury Experience
-                        </option>
-                        <option value="Custom Package">Custom Package</option>
+                        <option value="Basic">Basic Package</option>
+                        <option value="Silver">Silver Package</option>
+                        <option value="Gold">Gold Package</option>
+                        <option value="Platinum">Platinum Package</option>
+                        <option value="Not Sure">I'm not sure yet</option>
                     </select>
                     <textarea name="message" placeholder="Tell us about your event..." rows="5" required></textarea>
                     <button type="submit" class="btn btn-primary">Send Inquiry</button>
@@ -152,6 +151,14 @@
                         <option value="Anniversary">Anniversary</option>
                         <option value="Baby Shower">Baby Shower</option>
                         <option value="Other">Other</option>
+                    </select>
+                    <select name="package" required>
+                        <option value="">Which package interest you?</option>
+                        <option value="Basic">Basic Package</option>
+                        <option value="Silver">Silver Package</option>
+                        <option value="Gold">Gold Package</option>
+                        <option value="Platinum">Platinum Package</option>
+                        <option value="Not Sure">I'm not sure yet</option>
                     </select>
                     <textarea name="message" placeholder="Tell us about your event vision..." rows="4"
                         required></textarea>
@@ -246,7 +253,7 @@
                 <p class="form-subtitle" id="recommendationText">Based on your budget, we recommend the Gold Package.
                 </p>
 
-                <div class="packages-grid" id="packagesGrid">
+                <div class="packages-grid" id="packagesGrid" style="display: flex; justify-content: center; grid-template-columns: none; margin: 20px 0;">
                     <!-- Packages will be populated by JavaScript -->
                 </div>
 
@@ -294,7 +301,7 @@
                     <h3>🏢 Corporate Event Experiences</h3>
                     <p>Make your brand stand out with seamless, high-impact corporate events designed to impress
                         clients, teams, and stakeholders.</p>
-                    <button type="button" class="btn-outline" onclick="openQuestionnaire('Corporate Event')">Get
+                    <button type="button" class="btn-outline" onclick="openQuestionnaire('Corporate Event Experiences')">Get
                         Corporate Quote</button>
                     <div class="service-trust-line">500+ Events Delivered | Trusted Since 2017 | Customized Packages
                         Available</div>
@@ -307,7 +314,7 @@
                     <h3>🎉 Private Celebrations & Parties</h3>
                     <p>From birthdays to anniversaries, we turn your special moments into unforgettable celebrations
                         filled with style, energy, and joy.</p>
-                    <button type="button" class="btn-outline" onclick="openQuestionnaire('Private Celebration')">Start
+                    <button type="button" class="btn-outline" onclick="openQuestionnaire('Private Celebrations & Parties')">Start
                         Planning</button>
                     <div class="service-trust-line">500+ Events Delivered | Trusted Since 2017 | Customized Packages
                         Available</div>
@@ -320,7 +327,7 @@
                     <h3>🎨 Theme-Based Event Design</h3>
                     <p>We create electrifying live experiences with professional production, artist coordination, and
                         crowd-engaging performances.</p>
-                    <button type="button" class="btn-outline" onclick="openQuestionnaire('Theme-Based Event')">Book Your
+                    <button type="button" class="btn-outline" onclick="openQuestionnaire('Theme-Based Event Design')">Book Your
                         Show</button>
                     <div class="service-trust-line">500+ Events Delivered | Trusted Since 2017 | Customized Packages
                         Available</div>
@@ -333,7 +340,7 @@
                     <h3>🧒 Kids Birthday Experiences</h3>
                     <p>Bring star power to your event with access to top artists, performers, and celebrity appearances
                         managed end-to-end.</p>
-                    <button type="button" class="btn-outline" onclick="openQuestionnaire('Kids Birthday')">Book an
+                    <button type="button" class="btn-outline" onclick="openQuestionnaire('Kids Birthday Experiences')">Book an
                         Artist</button>
                     <div class="service-trust-line">500+ Events Delivered | Trusted Since 2017 | Customized Packages
                         Available</div>
@@ -346,7 +353,7 @@
                     <h3>👶 Elegant Baby Shower Celebrations</h3>
                     <p>From stage design to lighting and sound, we handle every technical detail to deliver a flawless
                         and visually stunning event.</p>
-                    <button type="button" class="btn-outline" onclick="openQuestionnaire('Baby Shower')">Explore
+                    <button type="button" class="btn-outline" onclick="openQuestionnaire('Elegant Baby Shower Celebrations')">Explore
                         Production</button>
                     <div class="service-trust-line">500+ Events Delivered | Trusted Since 2017 | Customized Packages
                         Available</div>
@@ -360,7 +367,7 @@
                     <p>From stage design to lighting and sound, we handle every technical detail to deliver a flawless
                         and visually stunning event.</p>
                     <button type="button" class="btn-outline"
-                        onclick="openQuestionnaire('Anniversary Celebration')">Explore Production</button>
+                        onclick="openQuestionnaire('Anniversary Celebrations')">Explore Production</button>
                     <div class="service-trust-line">500+ Events Delivered | Trusted Since 2017 | Customized Packages
                         Available</div>
                 </div>
@@ -372,7 +379,7 @@
                     <h3>🎓 School & Institutional Events</h3>
                     <p>From stage design to lighting and sound, we handle every technical detail to deliver a flawless
                         and visually stunning event.</p>
-                    <button type="button" class="btn-outline" onclick="openQuestionnaire('School Event')">Explore
+                    <button type="button" class="btn-outline" onclick="openQuestionnaire('School & Institutional Events')">Explore
                         Production</button>
                     <div class="service-trust-line">500+ Events Delivered | Trusted Since 2017 | Customized Packages
                         Available</div>
@@ -386,7 +393,7 @@
                     <p>From stage design to lighting and sound, we handle every technical detail to deliver a flawless
                         and visually stunning event.</p>
                     <button type="button" class="btn-outline"
-                        onclick="openQuestionnaire('Retirement Celebration')">Explore Production</button>
+                        onclick="openQuestionnaire('Retirement & Milestone Celebrations')">Explore Production</button>
                     <div class="service-trust-line">500+ Events Delivered | Trusted Since 2017 | Customized Packages
                         Available</div>
                 </div>
@@ -529,10 +536,9 @@
             <div class="packages-grid">
                 <!-- Basic Package -->
                 <div class="package-card">
-                    <div class="package-tier-icon">🌟</div>
+                    <div class="package-tier-icon"><i class="fas fa-star"></i></div>
                     <div class="package-header">
                         <h3>Basic Package</h3>
-                        <p class="package-price">Below ₹5 Lakhs</p>
                     </div>
                     <ul class="package-features">
                         <li><i class="fas fa-check"></i> Event Concept</li>
@@ -541,16 +547,13 @@
                         <li><i class="fas fa-check"></i> Simple Setup</li>
                         <li><i class="fas fa-check"></i> Event Coordination</li>
                     </ul>
-                    <button class="btn-outline" onclick="openWhatsAppPackage('Basic Package – Starter Option')">Select
-                        Package</button>
                 </div>
 
                 <!-- Silver Package -->
                 <div class="package-card">
-                    <div class="package-tier-icon">🥈</div>
+                    <div class="package-tier-icon"><i class="fas fa-medal"></i></div>
                     <div class="package-header">
                         <h3>Silver Package</h3>
-                        <p class="package-price">Upto ₹10 Lakhs</p>
                     </div>
                     <ul class="package-features">
                         <li><i class="fas fa-check"></i> Event Concept & Planning</li>
@@ -559,16 +562,13 @@
                         <li><i class="fas fa-check"></i> Basic Decoration Setup</li>
                         <li><i class="fas fa-check"></i> Day-of Coordination</li>
                     </ul>
-                    <button class="btn-outline" onclick="openWhatsAppPackage('Silver Package – Basic Planning')">Select
-                        Package</button>
                 </div>
 
                 <!-- Gold Package -->
                 <div class="package-card featured">
-                    <div class="package-tier-icon">👑</div>
+                    <div class="package-tier-icon"><i class="fas fa-crown"></i></div>
                     <div class="package-header">
                         <h3>Gold Package</h3>
-                        <p class="package-price">Upto ₹15 Lakhs</p>
                     </div>
                     <ul class="package-features">
                         <li><i class="fas fa-check"></i> Complete Event Planning</li>
@@ -578,16 +578,13 @@
                         <li><i class="fas fa-check"></i> Photography Coordination</li>
                         <li><i class="fas fa-check"></i> Professional Day-of Management</li>
                     </ul>
-                    <button class="btn-outline"
-                        onclick="openWhatsAppPackage('Gold Package – Full Planning + Decor')">Select Package</button>
                 </div>
 
                 <!-- Platinum Package -->
                 <div class="package-card">
-                    <div class="package-tier-icon">💎</div>
+                    <div class="package-tier-icon"><i class="fas fa-gem"></i></div>
                     <div class="package-header">
                         <h3>Platinum Package</h3>
-                        <p class="package-price">Upto ₹30 Lakhs</p>
                     </div>
                     <ul class="package-features">
                         <li><i class="fas fa-check"></i> Exclusive Luxury Planning</li>
@@ -598,8 +595,6 @@
                         <li><i class="fas fa-check"></i> Dedicated Event Manager</li>
                         <li><i class="fas fa-check"></i> Premium Post-Event Services</li>
                     </ul>
-                    <button class="btn-outline"
-                        onclick="openWhatsAppPackage('Platinum Package – Luxury Experience')">Select Package</button>
                 </div>
             </div>
         </div>
@@ -607,74 +602,108 @@
 
     <section class="about" id="about">
         <div class="container">
-            <div class="about-content">
-                <div class="about-text">
-                    <h2>About <span class="gold">Royal Desi Crew</span></h2>
-                    <div class="about-intro">
-                        <p>We Don't Just Plan Events - We Create Unforgettable Experiences</p>
+            <div class="section-header">
+                <h2>About <span class="gold">Royal Desi Crew</span></h2>
+            </div>
+            <div class="about-grid">
+                <!-- Left Column: Textual Content -->
+                <div class="about-text-content">
+                    <p class="about-tagline">We Don't Just Plan Events — We Create Unforgettable Experiences</p>
+                    <div class="about-description">
                         <p>At Royal Desi Crew Event & Entertainment, we believe every celebration deserves to be extraordinary. From intimate gatherings to grand productions, we bring your vision to life with a seamless, breathtaking experience.</p>
                         <p>Founded with a passion for creativity and precision, Royal Desi Crew has grown into a trusted name in event planning, delivering events that are not just well-executed but deeply memorable.</p>
                     </div>
 
-                    <div class="about-image"
-                        style="background-image: url('static/Images/about-couple.jpeg'); background-size: cover; background-position: center;">
-                    </div>
-
-                    <div class="about-focus">
+                    <!-- What Makes Us Different -->
+                    <div class="about-highlights">
                         <h3>What Makes Us Different</h3>
-                        <div class="about-points">
-                            <div class="about-point">
-                                <p><strong>Tailored for You</strong></p>
-                                <p>Every event is uniquely designed. No templates, no shortcuts. Your vision leads, we bring it to life.</p>
+                        <div class="highlight-grid">
+                            <div class="highlight-item">
+                                <span class="highlight-icon">✨</span>
+                                <div>
+                                    <h4>Tailored for You</h4>
+                                    <p>Every event is uniquely designed. No templates, no shortcuts. Your vision leads, we bring it to life.</p>
+                                </div>
                             </div>
-                            <div class="about-point">
-                                <p><strong>End-to-End Execution</strong></p>
-                                <p>From concept to completion, we handle every detail so you can enjoy your event stress-free.</p>
+                            <div class="highlight-item">
+                                <span class="highlight-icon">🎯</span>
+                                <div>
+                                    <h4>End-to-End Execution</h4>
+                                    <p>From concept to completion, we handle every detail so you can enjoy your event stress-free.</p>
+                                </div>
                             </div>
-                            <div class="about-point">
-                                <p><strong>Creative Excellence</strong></p>
-                                <p>From luxury weddings to high-energy corporate events, we blend design, technology, and storytelling to create impactful experiences.</p>
+                            <div class="highlight-item">
+                                <span class="highlight-icon">🎨</span>
+                                <div>
+                                    <h4>Creative Excellence</h4>
+                                    <p>From luxury weddings to high-energy corporate events, we blend design, technology, and storytelling to create impactful experiences.</p>
+                                </div>
                             </div>
-                            <div class="about-point">
-                                <p><strong>Trusted by Clients</strong></p>
-                                <p>Our growing list of happy clients and successful events reflects our commitment to quality and reliability.</p>
+                            <div class="highlight-item">
+                                <span class="highlight-icon">🤝</span>
+                                <div>
+                                    <h4>Trusted by Clients</h4>
+                                    <p>Our growing list of happy clients and successful events reflects our commitment to quality and reliability.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="about-journey">
+                    <!-- Our Impact -->
+                    <div class="about-impact">
+                        <h3>📊 Our Impact</h3>
+                        <div class="impact-grid">
+                            <div class="impact-item">
+                                <span class="impact-icon">🎉</span>
+                                <div class="impact-info">
+                                    <span class="impact-number">500+</span>
+                                    <span class="impact-label">Events Delivered</span>
+                                </div>
+                            </div>
+                            <div class="impact-item">
+                                <span class="impact-icon">👥</span>
+                                <div class="impact-info">
+                                    <span class="impact-number">100+</span>
+                                    <span class="impact-label">Happy Clients</span>
+                                </div>
+                            </div>
+                            <div class="impact-item">
+                                <span class="impact-icon">⭐</span>
+                                <div class="impact-info">
+                                    <span class="impact-number">4.9</span>
+                                    <span class="impact-label">Average Rating</span>
+                                </div>
+                            </div>
+                            <div class="impact-item">
+                                <span class="impact-icon">📍</span>
+                                <div class="impact-info">
+                                    <span class="impact-number">Serving</span>
+                                    <span class="impact-label">Across India</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Visuals & Journey -->
+                <div class="about-visual-content">
+                    <div class="about-image-wrapper">
+                        <div class="main-about-img" style="background-image: url('static/Images/about-couple.jpeg');"></div>
+                        <div class="experience-floating-badge">
+                            <i class="fas fa-award"></i>
+                            <div>
+                                <span>9+ Years</span>
+                                <p>Of Excellence</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="about-journey-box">
                         <h3>Our Journey</h3>
                         <p>What started as a passion for creating beautiful celebrations has evolved into a full-service event experience brand. Over the years, we've successfully executed a wide range of events like weddings, corporate gatherings, private parties, and large-scale productions.</p>
-                    </div>
-
-                    <div class="about-stats">
-                        <div class="stat">
-                            <i class="fas fa-trophy"></i>
-                            <div class="stat-content">
-                                <div class="stat-number">500+</div>
-                                <div class="stat-label">Events Delivered</div>
-                            </div>
-                        </div>
-                        <div class="stat">
-                            <i class="fas fa-users"></i>
-                            <div class="stat-content">
-                                <div class="stat-number">100+</div>
-                                <div class="stat-label">Happy Clients</div>
-                            </div>
-                        </div>
-                        <div class="stat">
-                            <i class="fas fa-star"></i>
-                            <div class="stat-content">
-                                <div class="stat-number">4.9</div>
-                                <div class="stat-label">Average Client Rating</div>
-                            </div>
-                        </div>
-                        <div class="stat">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <div class="stat-content">
-                                <div class="stat-number">Serving</div>
-                                <div class="stat-label">Across India</div>
-                            </div>
+                        <div class="journey-goal">
+                            <span class="goal-icon">👉</span>
+                            <p>To create moments that people remember for a lifetime.</p>
                         </div>
                     </div>
                 </div>
@@ -762,11 +791,11 @@
                     </select>
                     <select name="package" required>
                         <option value="">Select Package</option>
-                        <option value="Silver Package – Basic Planning">Silver Package – Basic Planning</option>
-                        <option value="Gold Package – Full Planning + Decor">Gold Package – Full Planning + Decor
-                        </option>
-                        <option value="Platinum Package – Luxury Experience">Platinum Package – Luxury Experience
-                        </option>
+                        <option value="Basic">Basic Package</option>
+                        <option value="Silver">Silver Package</option>
+                        <option value="Gold">Gold Package</option>
+                        <option value="Platinum">Platinum Package</option>
+                        <option value="Not Sure">I'm not sure yet</option>
                     </select>
                     <textarea name="message" placeholder="Tell us about your event..." rows="5" required></textarea>
                     <button type="submit" class="btn btn-primary">Send Inquiry</button>

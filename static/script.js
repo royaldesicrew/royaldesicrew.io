@@ -653,6 +653,13 @@ function openQuestionnaire(serviceType) {
     
     const modal = document.getElementById('questionnaireModal');
     if (modal) {
+        // Update title and subtitle to make it feel dedicated
+        const titleEl = modal.querySelector('h2');
+        const subtitleEl = modal.querySelector('.form-subtitle');
+        
+        if (titleEl) titleEl.textContent = `Plan Your ${serviceType}`;
+        if (subtitleEl) subtitleEl.textContent = `Tell us about your ${serviceType.toLowerCase()} vision`;
+        
         modal.style.display = 'flex';
         modal.classList.add('show');
         document.body.style.overflow = 'hidden';
@@ -683,8 +690,8 @@ function goToStep(stepNumber) {
         questionnaireState.currentStep = stepNumber;
     }
     
-    // Update budget range when going to step 2 (budget question)
-    if (stepNumber === 2) {
+    // Update budget range when in step 1 (budget question is here)
+    if (stepNumber === 1) {
         updateBudgetRangeByService();
     }
     
@@ -727,6 +734,7 @@ function updateBudgetRangeByService() {
     if (slider) {
         slider.min = min;
         slider.max = max;
+        slider.step = questionnaireState.serviceType.includes('Wedding') ? "1" : "0.25";
         slider.value = defaultValue;
     }
     
@@ -879,7 +887,7 @@ function displayPackageRecommendation() {
     if (questionnaireState.serviceType.includes('Wedding')) {
         packages = {
             'basic': {
-                name: '💎 BASIC',
+                name: '💎 Basic',
                 desc: 'Essential planning services',
                 features: [
                     'Basic Event Planning & Coordination',
@@ -892,7 +900,7 @@ function displayPackageRecommendation() {
                 price: 'Below ₹5 Lakhs'
             },
             '5-7': {
-                name: '💎 SILVER',
+                name: '💎 Silver',
                 desc: 'Perfect for intimate gatherings with essential services',
                 features: [
                     'Basic Event Planning & Coordination',
@@ -905,7 +913,7 @@ function displayPackageRecommendation() {
                 price: '₹5,00,000 - ₹7,00,000'
             },
             '12-15': {
-                name: '👑 GOLD',
+                name: '👑 Gold',
                 desc: 'Comprehensive planning with premium amenities included',
                 features: [
                     'Full Event Planning & Coordination',
@@ -920,7 +928,7 @@ function displayPackageRecommendation() {
                 price: '₹12,00,000 - ₹15,00,000'
             },
             '20-35': {
-                name: '✨ PLATINUM',
+                name: '✨ Platinum',
                 desc: 'Ultimate luxury experience with white-glove service',
                 features: [
                     'Dedicated Event Manager & Team',
@@ -942,22 +950,22 @@ function displayPackageRecommendation() {
         // Determine recommended package for Wedding based on budget
         if (questionnaireState.budget <= 5) {
             recommendedPackageKey = 'basic';
-            recommendedPackageName = 'BASIC';
+            recommendedPackageName = 'Basic';
         } else if (questionnaireState.budget <= 10) {
             recommendedPackageKey = '5-7';
-            recommendedPackageName = 'SILVER';
+            recommendedPackageName = 'Silver';
         } else if (questionnaireState.budget <= 15) {
             recommendedPackageKey = '12-15';
-            recommendedPackageName = 'GOLD';
+            recommendedPackageName = 'Gold';
         } else {
             recommendedPackageKey = '20-35';
-            recommendedPackageName = 'PLATINUM';
+            recommendedPackageName = 'Platinum';
         }
     } else {
         // For non-wedding services
         packages = {
             'basic': {
-                name: '💎 BASIC',
+                name: '💎 Basic',
                 desc: 'Essential services for your event',
                 features: [
                     'Event Planning & Coordination',
@@ -967,62 +975,84 @@ function displayPackageRecommendation() {
                     'Professional Team Support',
                     'Guest Management Assistance'
                 ],
-                price: '₹25,000 - ₹2,00,000'
+                price: '₹25,000 - ₹1,00,000'
             },
-            'standard': {
-                name: '👑 STANDARD',
-                desc: 'Comprehensive planning with quality amenities',
+            'silver': {
+                name: '🥈 Silver',
+                desc: 'Perfect for intimate gatherings with quality amenities',
                 features: [
                     'Full Event Planning & Coordination',
                     'Premium Décor & Theme Design',
-                    'Photography & Videography (8 hours)',
+                    'Photography & Videography (6-8 hours)',
                     'Video Editing & Highlights',
                     'Expert Lighting & Sound System',
                     'Catering Coordination',
                     'Professional Guest Flow Management',
                     'Post-Event Photo Albums'
                 ],
-                price: '₹2,00,000 - ₹5,00,000'
+                price: '₹1,00,000 - ₹3,00,000'
             },
-            'premium': {
-                name: '✨ PREMIUM',
-                desc: 'Ultimate luxury experience with all services',
+            'gold': {
+                name: '👑 Gold',
+                desc: 'Comprehensive planning with premium amenities',
                 features: [
                     'Dedicated Event Manager & Team',
                     'Luxury Décor & Bespoke Themework',
-                    'Full Day Photography + Videography (12+ hours)',
-                    '4K Professional Video Production',
-                    'Premium Photography & Videography',
-                    'Live Streaming Services',
-                    'Premium Catering Coordination',
-                    'Professional Guest Flow Management',
-                    'Complete Post-Production with Quality Editing',
-                    'Custom Photo & Video Books'
+                    'Full Day Photography + Videography (10 hours)',
+                    '4K Professional Video Highlights',
+                    'Premium Sound & Lighting Production',
+                    'Catering Management',
+                    'Advanced Guest Management',
+                    'Custom Photo Albums'
                 ],
-                price: '₹5,00,000 - ₹10,00,000'
+                price: '₹3,00,000 - ₹6,00,000'
+            },
+            'platinum': {
+                name: '✨ Platinum',
+                desc: 'Ultimate luxury experience with all premium services',
+                features: [
+                    'Dedicated Senior Event Architect',
+                    'Grand Luxury Décor & Signature Design',
+                    'Full Event Coverage (Photography & 4K Cinematography)',
+                    'Drone Photography & Videography',
+                    'Premium Entertainment Coordination',
+                    'VIP Guest Concierge Services',
+                    'Professional Lighting & Stage Production',
+                    'Live Streaming Services',
+                    'Premium Post-Production Services',
+                    'Custom Hardcover Photo & Video Books'
+                ],
+                price: '₹6,00,000 - ₹10,00,000'
             }
         };
         
         // Determine recommended package for non-wedding based on budget
-        if (questionnaireState.budget <= 0.25) {
+        const budgetValue = parseFloat(questionnaireState.budget);
+        if (budgetValue <= 1.0) {
             recommendedPackageKey = 'basic';
-            recommendedPackageName = 'BASIC';
-        } else if (questionnaireState.budget <= 2) {
-            recommendedPackageKey = 'basic';
-            recommendedPackageName = 'BASIC';
-        } else if (questionnaireState.budget <= 5) {
-            recommendedPackageKey = 'standard';
-            recommendedPackageName = 'STANDARD';
+            recommendedPackageName = 'Basic';
+        } else if (budgetValue <= 3.0) {
+            recommendedPackageKey = 'silver';
+            recommendedPackageName = 'Silver';
+        } else if (budgetValue <= 6.0) {
+            recommendedPackageKey = 'gold';
+            recommendedPackageName = 'Gold';
         } else {
-            recommendedPackageKey = 'premium';
-            recommendedPackageName = 'PREMIUM';
+            recommendedPackageKey = 'platinum';
+            recommendedPackageName = 'Platinum';
         }
     }
     
     // Update recommendation text
     const recommendationText = document.getElementById('recommendationText');
     if (recommendationText) {
-        recommendationText.textContent = `Based on your budget of ₹${questionnaireState.budget} Lakh, we recommend the ${recommendedPackageName} Package.`;
+        let budgetDisplay = '';
+        if (questionnaireState.budget < 1) {
+            budgetDisplay = (questionnaireState.budget * 100).toFixed(0) + 'K';
+        } else {
+            budgetDisplay = questionnaireState.budget + ' Lakh';
+        }
+        recommendationText.textContent = `Based on your budget of ₹${budgetDisplay}, we recommend the ${recommendedPackageName} Package.`;
     }
     
     // Pre-select the recommended package
@@ -1037,11 +1067,29 @@ function displayPackageRecommendation() {
     packageCard.className = `package-card featured selected`;
     packageCard.onclick = () => selectPackage(recommendedPackageKey, packageCard);
     
-    let badgeHTML = '<div class="package-badge-card">RECOMMENDED FOR YOU</div>';
+    // Icon mapping
+    const iconMap = {
+        'Basic': '<i class="fas fa-star"></i>',
+        'Silver': '<i class="fas fa-medal"></i>',
+        'Gold': '<i class="fas fa-crown"></i>',
+        'Platinum': '<i class="fas fa-gem"></i>'
+    };
+    const icon = iconMap[recommendedPackageName] || '<i class="fas fa-star"></i>';
+    const displayName = recommendedPackageName;
+    
+    // Build features HTML
+    const featuresHTML = package.features.map(feature => `
+        <li><i class="fas fa-check"></i> ${feature}</li>
+    `).join('');
     
     packageCard.innerHTML = `
-        ${badgeHTML}
-        <h3>${package.name}</h3>
+        <div class="package-tier-icon">${icon}</div>
+        <div class="package-header">
+            <h3>${displayName} Package</h3>
+        </div>
+        <ul class="package-features">
+            ${featuresHTML}
+        </ul>
     `;
     
     packagesGrid.appendChild(packageCard);
@@ -1072,10 +1120,11 @@ function connectViaWhatsApp() {
     } else {
         const otherPackages = {
             'basic': 'BASIC',
-            'standard': 'STANDARD',
-            'premium': 'PREMIUM'
+            'silver': 'SILVER',
+            'gold': 'GOLD',
+            'platinum': 'PLATINUM'
         };
-        packageName = otherPackages[questionnaireState.selectedPackage] || 'STANDARD';
+        packageName = otherPackages[questionnaireState.selectedPackage] || 'BASIC';
     }
     
     const preferencesText = questionnaireState.preferences.length > 0 
